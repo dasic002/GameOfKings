@@ -1,131 +1,291 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Game of Kings
 
-Welcome USER_NAME,
+**Kings** is a fun (and addictive) card game. Using this project to develop my skills in Javascript, currently as a single player VS Robot players.
+The objective of the game is to score as low as possible, with Kings being worth zero points, the remainder as their numerical value (Jacks and Queens capped at 10pts).
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+**How is it played:**<br>
+**Set up**<br>
+1) Cards shuffled, each player is dealt 4 cards face down, remaining deck placed in the centre as a draw stack and the top card is turned over for the discard stack.
+2) Typically, players will arrange their 4 cards in a 2 x 2 formation in front of them. This helps with the memory aspect of the game.
+3) Without looking at their hand, the players can opt to shuffle their cards around in their 2 x 2 formation in the hope it may reveal the larger value cards in the next step.
+3) Before play begins, the dealer counts down "3, 2, 1!" where on "1" players can look at the bottom 2 cards only of their hand for about 1 second, no further shuffling is allowed from this point.
 
-You can safely delete this README.md file or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **June 18, 2024**
+**Playing the game**
+1) The player to the left of the dealer goes first.
+2) On each player's turn, the player may knock on the table to indicate they are locking in their hand, indicating this is the last round and the player believes they have the lowest scoring hand on the table.
+2) Knowing only the bottom 2 cards of their hand, the player must choose to either draw the top card from the discard stack (since it is visible and may be significantly lower than just seen in their hand) or take a chance and pick from the draw stack. Once they see the card they have picked, they can choose whether to swap with any of the ones in their hand or to discard it.
 
-## Gitpod Reminders
+<!-- portfolio site for myself. It will showcase some of my work as a Product Design Engineer/Industrial Designer to prospective clients and/or employers. Visitors will be able to learn a little about my background, see examples of my work, find my contact details and visit my linkedIn profile, company's instagram and etsy store.
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+The business goals of this website are:
+- Build brand awareness
+- Intrigue visitors with the projects undertaken and make them want to look into the challenges overcome
+- Bring in revenue through increased contact from prospective clients looking to collaborate -->
 
-`python3 -m http.server`
+<!-- [View the deployed website here](https://dasic002.github.io/Carlos-Da-Silva-Folio/index.html) -->
 
-A blue button should appear to click: _Make Public_,
+<!-- ![Responsive design mockup](documentation/ResponsiveDesign.PNG) -->
 
-Another blue button should appear to click: _Open Browser_.
 
-To run a backend Python file, type `python3 app.py` if your Python file is named `app.py`, of course.
+<!-- ## UX - User Experience
 
-A blue button should appear to click: _Make Public_,
+### User stories
 
-Another blue button should appear to click: _Open Browser_.
+As a **Client** or **Employer**, I need to see some of Carlos' work to feel assured he has the skillset I'm looking for to contribute in my projects. Would also need an easy way to reach out to Carlos to discuss my project.
 
-By Default, Gitpod gives you superuser security privileges. Therefore, you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+As a **Recruiter**, I need to see Carlos' employment history, ideally via LinkedIn or downloadable CV and be able to get in touch with him.
 
-To log into the Heroku toolbelt CLI:
+### Strategy
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+Build a simple and sophisticated looking website that showcases enough of my work in a seamless and intuitive format that encourages the visitor to reach out.
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you, so do not share it. If you accidentally make it public, you can create a new one with _Regenerate API Key_.
+### Scope
 
-### Connecting your Mongo database
+I want to give the visitor, be a prospective Client/Employer or Recruiter a brief example of projects I've taken part of and my skillset. Leaving them wanting to explore my profiles and get in touch with me.
 
-- **Connect to Mongo CLI on a IDE**
-- navigate to your MongoDB Clusters Sandbox
-- click **"Connect"** button
-- select **"Connect with the MongoDB shell"**
-- select **"I have the mongo shell installed"**
-- choose **mongosh (2.0 or later)** for : **"Select your mongo shell version"**
-- choose option: **"Run your connection string in your command line"**
-- in the terminal, paste the copied code `mongo "mongodb+srv://<CLUSTER-NAME>.mongodb.net/<DBname>" --apiVersion 1 --username <USERNAME>`
-  - replace all `<angle-bracket>` keys with your own data
-- enter password _(will not echo **\*\*\*\*** on screen)_
+### Structure
 
-------
+Simply 3 sections in one single page:
 
-## Release History
+  1) **Welcome/introduction**
+    Welcoming the visitor with a friendly face and brief introduction to me.
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+  2) **Projects**
+    A short description of projects I've undertaken with a photo of each.
 
-**June 18, 2024,** Add Mongo back into template
+  3) **Contact Us**
+    A contact form and other platforms available for the visitor to choose from in how to reach out.
 
-**June 14, 2024,** Temporarily remove Mongo until the key issue is resolved
+### Skeleton
 
-**May 28 2024:** Fix Mongo and Links installs
+[Landing Page](documentation/Folio-landing_page.jpg)
 
-**April 26 2024:** Update node version to 16
+[Welcome section](documentation/Folio-welcome_section.jpg)
 
-**September 20 2023:** Update Python version to 3.9.17.
+[Project snippets](documentation/Folio-project_snippet_section.jpg)
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+[Footer](documentation/Folio-footer_section.jpg)
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+[Projects page](documentation/Folio-Projects_page.jpg) (planned feature only)
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+[Contact us page](documentation/Folio-ContactUs_Page.jpg) (planned feature only)
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+### Surface
+#### Colour theme
+For the minimalistic modern style, a monochromatic palette composed of virtually full Black and light greys with simply and dark red colour for an accent. This palette was used to create a comfortable viewing experience and draw more attention to the subject elements, namely my work and how to get hold of me.
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+![Colour theme produced using Adobe Color tool](documentation/adobe-color_folio-theme.PNG)
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+<!-- #### Typography -->
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+## Technologies
+- Languages used:
+  - [HTML5](https://en.wikipedia.org/wiki/HTML5)
+  - [CSS3](https://en.wikipedia.org/wiki/CSS)
+- [GitPod](https://www.gitpod.io/) - Cloud-based IDE to edit code and Git version control.
+- [Github](https://github.com/) - to store and publish the project.
+- [Google Fonts](https://fonts.google.com/) - to import fonts "Comfortaa" and "Dosis" into the website's CSS.
+- [Font Awesome](https://fontawesome.com/) - to import icons for more recognizable action buttons. It has been used in:
+  - The expandable Nav bar on narrow displays.
+  - The X icon in expandable projects section.
+  - The clear and submit form.
+  - The contact platforms in the footer.
+- [FavIcon generator](https://favicon.io/) - used to create the favicons to embed on our site.
+- [Am I Responsive](https://ui.dev/amiresponsive) - to visualise the website in various display sizes.
+- [Adobe Color](https://color.adobe.com/create/color-wheel) - to generate the colour palette and Accessibility tools checking for contrast for legibility and colour-blind viewing.
+- [Tiny PNG](https://tinypng.com/) - to compress images for faster page loading.
+- [W3C HTML Validator](https://validator.w3.org/) - to validate the HTML code.
+- [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) - to validate the CSS code.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+## Features 
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+### Existing Features
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+- __Navigation Bar__
+  - The navigation bar sits across the top of the page, it is fixed in position so no matter where the visitor has scrolled down to it is always available.
+  - The links included **Home**, **Projects** and **Contact us** navigate to sections of the page, rather than to separate pages.
+  - Aligned to the top left corner, on narrow displays it features as an expandable "burger" icon menu.<br>
+  ![Navigation on Mobile - collapsed](documentation/Feat-navCollapsed.PNG) ![Navigation on Mobile - expanded](documentation/Feat-navExpanded.PNG)
+  - On wider displays, the navigation bar expands to display the links at all times.<br>
+  ![Navigation on wider displays](documentation/Feat-navFixed.PNG)
+  - The virtually white text over the fading black background remains contrasting enough to be legible and giving the sophisticated touch to the site.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+- __The landing page - Welcome__
+  - The landing page consists of photograph of myself with my name as text overlay.
+  - On mobile displays, the very next division below contains a message welcoming the visitor to my portfolio and stating my profession and location to help the visitor quickly identify the sites intent.<br>
+  ![Welcome section mobile](documentation/Feat-WelcomeMobile.PNG)
+  - On displays wider than 600px, the division with the welcome message becomes a floating bubble next to my photo, so there is not too much redundant empty space in the welcome section.<br>
+  ![Welcome section desktop](documentation/Feat-WelcomeDesktop.PNG)
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+- __Projects Section__
+  - This section contains a photo and brief given to 4 projects I have worked on, that compose the portfolio.
+  - On mobile displays, each project is seen as a short wide section that displays the clipped image in the background with a smoked overlay and title in white text. This is to reduce the need to scroll through a lot of info on a small display before reaching the contact form and footer. Also, provides focus on the project being viewed. On tapping the project title, the section expands to expose the project image, the description of the project below and a closing icon on the top right corner. The visitor does not need to use the closing icon to expand the next project, they can tap the other project title to expand it and it will close the other.<br>
+  ![Project section collapsed](documentation/Feat-ProjMobileCollapsed.PNG)  **>**  ![Project section expanded](documentation/Feat-ProjMobileExpanded.PNG)
+  - For displays 600px wide and greater, the projects are displayed as image to the left and text to the right, getting rid of the collapsible sections. On a display of that size the content is not too long to be able to scroll through easily.<br>
+  ![Project section on 600px wide](documentation/Feat-Proj600pxWd.PNG)
+  - For displays 1500px wide and greater, the projects are displayed across the whole width of the view port, following a format of images in a row and description below. This makes use of the available space to maintain a comfortable reading experience of the website, as a whole viewport wide section per project would seem redundant for the content and harder to follow.<br>
+  ![Project section on 1500px wide](documentation/Feat-Proj1500pxWd.PNG) 
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+- __Contact us form__
+  - The contact form offers a means for the visitor to get in touch with myself directly from the website, prompting the visitor to introduce themselves and to describe what project they may be looking to collaborate on. 
+  - The form collects First name, Surname, email address, phone number (not a required field) and body of text for a message.
+  - It includes two buttons replaced with icons, reset form shown as an eraser icon, whilst the submit button is a paper airplane icon.<br>
+  ![Contact form](documentation/Feat-ContactForm.PNG)
 
-------
+- __The Footer__ 
+  - The footer contains links to my company's instagram page, my personal Linkedin profile, my company's whatsapp contact and etsy shop.
+  - Should the visitor prefer to contact outside of the form, they are welcome to reach out via these means.<br>
+  ![Footer links](documentation/Feat-Footer.PNG)
 
-## FAQ about the uptime script
+- __Error 404 Page__
+  - A page in keeping with the style of the main page of the site to indicate the visitor as stumbles upon an non-existent URL of our site and to point them back to our homepage.<br>
+  ![Error 404 page](documentation/Feat-404_page.PNG)
 
-**Why have you added this script?**
+### Features Left to Implement
+- Navigation hamburger icon to change to a cross when expanded to give a visual clue on how to close the menu.
+- Make the navigation menu collapse on clicking a link that redirects to section on page.
+- Create a projects page that includes a lot more detail on the projects described in the project section. When a visitor expands a project there could be a link for "More >>" which redirects to the section in the projects page that shows more information.
+- A "thank you" message to replace the contact form when the form gets submitted successfully and that the form contents get forwarded to my email address to contact back.
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
 
-**How will this affect me?**
+## Testing 
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+### Validator Testing 
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+- HTML
+  - No errors were returned when passing through the official [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fdasic002.github.io%2FCarlos-Da-Silva-Folio%2Findex.html)<br>
+  ![HTML valid screenshot](documentation/Test-HTML_Valid.PNG)
+- CSS
+  - No errors were found when passing through the official [(Jigsaw) validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fdasic002.github.io%2FCarlos-Da-Silva-Folio%2Findex.html&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)<br>
+  ![CSS valid screenshot](documentation/Test-CSS_valid.PNG) 
+- Accessibility
+  - Running the site through lighthouse analysis confirms the colours and fonts used legible and accessible on either:
+    - Mobile:<br>
+  ![Lighthouse mobile analysis](documentation/Lighthouse_analysis-Mobile.PNG)
+ 
+    - Desktop:<br>
+  ![Lighthouse desktop analysis](documentation/Lighthouse_analysis-Desktop.PNG)
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+  - Running the site through [WAVE accessibility tool](https://wave.webaim.org/report#/https://dasic002.github.io/Carlos-Da-Silva-Folio/index.html) showed no obvious errors after some improvements were made.<br>
+  ![Wave accessibility evaluation results](documentation/Test-wave-accessibility.PNG)
 
-**So….?**
+### Manual Testing
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+#### Devices and browsers used
+- iPhone 12 Pro - iOS 17.4.1
+  - Safari (v17.4.1)
+  - Chrome (v126)
+  - Google (v319)
 
-**Can I opt out?**
+- iPad Pro (12.9 inch - 4th Gen) - iPadOS 17.4.1
+  - Safari (v17.4.1)
+  - Chrome (v125)
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+- Dell Precision 3510 laptop - Windows 10 Pro (2H22)
+  - Chrome (v125)
+  - Firefox (v126)
+  - Microsoft Edge (v125)
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+#### Manual testing checklist
 
-**Anything more?**
+| Feature | Action | Expected Behaviour | Pass/Fail | Notes |
+|-|-|-|-|-|
+|Google fonts|Loading the page|Google fonts load|PASS|
+|Font awesome icons|Loading the page|Icons appear as intended|PASS|
+|Images|Loading the page|images appear as intended|PASS|
+|content text |Loading the page|text appears as intended|PASS|
+|Nav bar appearance|Loading the page|Nav bar appears as expected, collapsed hamburger icon for narrow displays, expanded along the width for medium and wider displays.|PASS|
+|nav bar hamburger icon|Click Hamburger icon|hamburger icon expands to reveal nav menu|PASS|
+|Nav link - Home|Click link "Home"|link navigates to welcome section / landing page|PASS|
+|Nav link - Projects|Click link "Projects"|link navigates to projects section of site|PASS|
+|nav link - Contact Us|Click link "Contact Us"|link navigates to contact us section|PASS|
+|Projects - mobile|Click to expand|Project div expands to reveal image and project brief.|PASS|
+|Projects - mobile|Click others to expand|Previously expanded project closes when other expands.|PASS|
+|Projects - mobile|Click X icon to close|Current expanded project closes.|PASS|
+|Projects - 600px wide|page load|Projects are expanded with text to the side of the image.|PASS|
+|Projects - 1500px wide|page load|Projects are expanded with text below images and lined up in a row across the width of the page.|PASS|
+|Contact form - visual|page load|Contact form maintains intended appearance, with no additional controls.|PASS|
+|Contact form|Submit form without entering First name|Form prompts user to fill in field.|PASS|
+|Contact form|Submit form without entering Surname|Form prompts user to fill in field.|PASS|
+|Contact form|Submit form without entering email|Form prompts user to enter an email address in field.|PASS|
+|Contact form|Submit form without entering an "@" sign in the email field|Form prompts user to enter an email address in field.|PASS|
+|Contact form|Submit form without entering a message in the textarea field|Form prompts user to fill in field.|PASS|
+|Contact form|Submit form upon entering valid data|Page loads CI's formdump with data received.|PASS|
+|Contact form|Click on eraser icon|Form fields are cleared.|PASS|
+|Footer - hover|hover the cursor over link icons|Icons should be surrounded with black circular background|PASS|
+|Footer - links|Click Instagram icon|Opens Studio Silva's instagram page on new tab.|PASS|
+|Footer - links|Click Linked in icon|Opens Carlos Da Silva's Linked In profile|PASS|
+|Footer - links|Click Whatsapp icon|Opens Studio Silva's WhatsApp contact|PASS|
+|Footer - links|Click Etsy icon|Opens Carlos' Etsy page|PASS|
+|Error 404 page|Enter non-existing URL for the site|Calls up custom 404.html|PASS|
+|Error 404 page|on page loading|Footer is fixed at the bottom of the display, there is no length to scroll unless content is longer than viewport height.|PASS|
+|Error 404 page|Click on the Home button|Brings viewer back to main page|PASS|
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
 
----
 
-Happy coding!
+
+### Unfixed Bugs
+
+- __Nav Bar - turning fully black on expanding__<br>
+The intended look was to have this floating hamburger icon that when clicked the menu expands with a black to clear gradient from the top. The checkbox input to toggle open the menu works, but does not seem to accept addressing the whole header section to create this effect. The current compromise created is to have a permanent black to clear gradient from the top that extends as high as the section is, i.e.: when collapsed it is only as high as necessary for the hamburger icon and has high as the list menu when it is expanded. 
+
+- __Nav Bar - using section IDs on nav list__<br>
+Using Section IDs for the navigation of the site means the menu does not toggle off on clicking them. Tried using the label element to wrap the anchors to trigger the checkbox that expands the nav menu:
+  - wrapping the visible text of the anchor with the label toggles the checkbox, but does not navigate to their section at the same time.
+  - wrapping the anchor with the label, navigates but does toggle the checkbox.
+
+  Seems this requires some javascript to do this. Even the alternative of having the hamburger/bars icon replaced with a X icon when the menu is expanded seems to require javascript.
+
+
+## Deployment
+
+The site was deployed to GitHub pages following the steps outlined below:
+- Log in to GitHub and navigate to the Github Repository.
+- On the Repository page, select the settings icon just above the Repository title.
+- In the sidebar to the left, select "Pages" under the "Code and automation" section.
+- Under **Source**, select the "Deploy from a branch" from the dropdown menu, then under **Root** select "Main branch" from that dropdown menu.
+- Make sure the "/root" is selected for the folder and click Save.
+
+The page will be automatically refreshed and a link to the deployed site will be available on a ribbon display just at the top of the GitHub Pages webpage.
+
+The deployed page can be found [here.](https://dasic002.github.io/Carlos-Da-Silva-Folio/index.html)
+
+
+## Credits 
+
+### Content 
+- Icons used in the footer and nav bar were sourced from [Font Awesome](https://fontawesome.com/)
+- Fonts used in the whole site sourced from [Google fonts](https://fonts.google.com/)
+- All text written by developer
+
+### Media
+- Photo used in welcome section taken by Model bookings studio, paid for rights by the developer.
+- All other images taken/generated by the developer.
+
+### Code
+- CSS and HTML code for the nav bar in the header was originally taken from the [Love Running walkthrough project](https://github.com/dasic002/Love-Running), then CSS was altered for the intended look.
+- CSS and HTML code for the function of expanding and collapsing of project snippets sourced from [Web mdn docs references for the pseudo :checked](https://developer.mozilla.org/en-US/docs/Web/CSS/:checked).
+- Guidance on how to increase the general font-size viewed on the page as display goes beyond 4K resolution. [Learnt about html{font-size: ;} function here](https://developer.mozilla.org/en-US/docs/Web/CSS/font-size)
+- Guidance on how to prevent the contact form text area from being resized. [Learnt about textarea{resize: none;} function here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea)
+- Guidance on using background function for the images under a division. [background shorthand](https://developer.mozilla.org/en-US/docs/Web/CSS/background)
+
+### Acknowledgement
+- My mentor Brian Macharia for his insight, guidance and words of encouragement. -->
+
+<!--## Other General Project Advice
+
+ Below you will find a couple of extra tips that may be helpful when completing your project. Remember that each of these projects will become part of your final portfolio so it’s important to allow enough time to showcase your best work! 
+
+- One of the most basic elements of keeping a healthy commit history is with the commit message. When getting started with your project, read through [this article](https://chris.beams.io/posts/git-commit/) by Chris Beams on How to Write  a Git Commit Message 
+  - Make sure to keep the messages in the imperative mood 
+
+- When naming the files in your project directory, make sure to consider meaningful naming of files, point to specific names and sections of content.
+  - For example, instead of naming an image used ‘image1.png’ consider naming it ‘landing_page_img.png’. This will ensure that there are clear file paths kept. 
+
+- Do some extra research on good and bad coding practices, there are a handful of useful articles to read, consider reviewing the following list when getting started:
+  - [Writing Your Best Code](https://learn.shayhowe.com/html-css/writing-your-best-code/)
+  - [HTML & CSS Coding Best Practices](https://medium.com/@inceptiondj.info/html-css-coding-best-practice-fadb9870a00f)
+  - [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html#General)
+
+Getting started with your Portfolio Projects can be daunting, planning your project can make it a lot easier to tackle, take small steps to reach the final outcome and enjoy the process!  -->
