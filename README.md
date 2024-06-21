@@ -1,17 +1,19 @@
 # Game of Kings
 
-**Kings** is a fun (and addictive) card game. Using this project to develop my skills in Javascript, currently as a single player VS Robot players.
+**Kings** is a simple, fun (and addictive) card game suitable for all ages. Exercises the player's memory and strategy skills. 
+This project will develop my skills in Javascript, currently building it as a single player VS Robot players.
+
 The objective of the game is to score as low as possible, with Kings being worth zero points, the remainder as their numerical value (Jacks and Queens capped at 10pts).
 
 **How is it played:**<br>
 **Set up**<br>
-1) Cards shuffled, each player is dealt 4 cards face down, remaining deck placed in the centre as a draw stack and the top card is turned over for the discard stack.
+1) Cards shuffled, each player is dealt 4 cards face down, remaining deck placed in the centre as a draw stack and the top card is turned over to form the discard stack.
 2) Typically, players will arrange their 4 cards in a 2 x 2 formation in front of them. This helps with the memory aspect of the game.
 3) Without looking at their hand, the players can opt to shuffle their cards around in their 2 x 2 formation in the hope it may reveal the larger value cards in the next step.
 4) Before play begins, the dealer counts down "3, 2, 1!" where on "1" players can look at the bottom 2 cards only of their hand for about 1 second, no further shuffling is allowed from this point.
 
 **Playing the game**
-1) Typically, the player to the left of the dealer goes first and taking turns clockwise.
+1) Typically, the player to the left of the dealer goes first, taking turns clockwise.
 2) Knowing only the bottom 2 cards of their hand, the player must choose to either draw the top card from the discard stack (since it is visible and may be significantly lower than just seen in their hand) or take a chance and pick from the draw stack. Once they see the card they have picked, they can choose whether to swap with any of the ones in their hand or to discard it.
 3) Before moving on to the next player, the current player may knock on the table to indicate they are locking in their hand, indicating this is the last round for everyone else as this player believes they have the lowest scoring hand on the table.
 4) Each player takes a turn by choosing to pick a card from either stack and deciding whether to swap with another from their hand or not.
@@ -25,39 +27,35 @@ The objective of the game is to score as low as possible, with Kings being worth
   - If the knocking player had 2x kings, 1x 3 and 1x 4. This totals to 7 in that round.
   - Should another player on this round score 7 points or lower, the knocking player's score doubles to 14.
 
-  
 
-<!-- portfolio site for myself. It will showcase some of my work as a Product Design Engineer/Industrial Designer to prospective clients and/or employers. Visitors will be able to learn a little about my background, see examples of my work, find my contact details and visit my linkedIn profile, company's instagram and etsy store.
-
-The business goals of this website are:
-- Build brand awareness
-- Intrigue visitors with the projects undertaken and make them want to look into the challenges overcome
-- Bring in revenue through increased contact from prospective clients looking to collaborate -->
+The goals of this website are:
+- To entertain visitors
+- Potentially adding multiplayer features later to enable friends to compete remotely.
 
 <!-- [View the deployed website here](https://dasic002.github.io/Carlos-Da-Silva-Folio/index.html) -->
 
 <!-- ![Responsive design mockup](documentation/ResponsiveDesign.PNG) -->
 
 
-<!-- ## UX - User Experience
+## UX - User Experience
 
 ### User stories
 
-As a **Client** or **Employer**, I need to see some of Carlos' work to feel assured he has the skillset I'm looking for to contribute in my projects. Would also need an easy way to reach out to Carlos to discuss my project.
+<!-- As a **Client** or **Employer**, I need to see some of Carlos' work to feel assured he has the skillset I'm looking for to contribute in my projects. Would also need an easy way to reach out to Carlos to discuss my project.
 
-As a **Recruiter**, I need to see Carlos' employment history, ideally via LinkedIn or downloadable CV and be able to get in touch with him.
+As a **Recruiter**, I need to see Carlos' employment history, ideally via LinkedIn or downloadable CV and be able to get in touch with him. -->
 
 ### Strategy
 
-Build a simple and sophisticated looking website that showcases enough of my work in a seamless and intuitive format that encourages the visitor to reach out.
+<!-- Build a simple and sophisticated looking website that showcases enough of my work in a seamless and intuitive format that encourages the visitor to reach out. -->
 
 ### Scope
 
-I want to give the visitor, be a prospective Client/Employer or Recruiter a brief example of projects I've taken part of and my skillset. Leaving them wanting to explore my profiles and get in touch with me.
+<!-- I want to give the visitor, be a prospective Client/Employer or Recruiter a brief example of projects I've taken part of and my skillset. Leaving them wanting to explore my profiles and get in touch with me. -->
 
 ### Structure
 
-Simply 3 sections in one single page:
+<!-- Simply 3 sections in one single page:
 
   1) **Welcome/introduction**
     Welcoming the visitor with a friendly face and brief introduction to me.
@@ -66,11 +64,11 @@ Simply 3 sections in one single page:
     A short description of projects I've undertaken with a photo of each.
 
   3) **Contact Us**
-    A contact form and other platforms available for the visitor to choose from in how to reach out.
+    A contact form and other platforms available for the visitor to choose from in how to reach out. -->
 
 ### Skeleton
 
-[Landing Page](documentation/Folio-landing_page.jpg)
+<!-- [Landing Page](documentation/Folio-landing_page.jpg)
 
 [Welcome section](documentation/Folio-welcome_section.jpg)
 
@@ -80,18 +78,18 @@ Simply 3 sections in one single page:
 
 [Projects page](documentation/Folio-Projects_page.jpg) (planned feature only)
 
-[Contact us page](documentation/Folio-ContactUs_Page.jpg) (planned feature only)
+[Contact us page](documentation/Folio-ContactUs_Page.jpg) (planned feature only) -->
 
 ### Surface
 #### Colour theme
-For the minimalistic modern style, a monochromatic palette composed of virtually full Black and light greys with simply and dark red colour for an accent. This palette was used to create a comfortable viewing experience and draw more attention to the subject elements, namely my work and how to get hold of me.
+<!-- For the minimalistic modern style, a monochromatic palette composed of virtually full Black and light greys with simply and dark red colour for an accent. This palette was used to create a comfortable viewing experience and draw more attention to the subject elements, namely my work and how to get hold of me.
 
-![Colour theme produced using Adobe Color tool](documentation/adobe-color_folio-theme.PNG)
+![Colour theme produced using Adobe Color tool](documentation/adobe-color_folio-theme.PNG) -->
 
 <!-- #### Typography -->
 
 ## Technologies
-- Languages used:
+<!-- - Languages used:
   - [HTML5](https://en.wikipedia.org/wiki/HTML5)
   - [CSS3](https://en.wikipedia.org/wiki/CSS)
 - [GitPod](https://www.gitpod.io/) - Cloud-based IDE to edit code and Git version control.
@@ -107,14 +105,14 @@ For the minimalistic modern style, a monochromatic palette composed of virtually
 - [Adobe Color](https://color.adobe.com/create/color-wheel) - to generate the colour palette and Accessibility tools checking for contrast for legibility and colour-blind viewing.
 - [Tiny PNG](https://tinypng.com/) - to compress images for faster page loading.
 - [W3C HTML Validator](https://validator.w3.org/) - to validate the HTML code.
-- [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) - to validate the CSS code.
+- [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) - to validate the CSS code. -->
 
 
 ## Features 
 
 ### Existing Features
 
-- __Navigation Bar__
+<!-- - __Navigation Bar__
   - The navigation bar sits across the top of the page, it is fixed in position so no matter where the visitor has scrolled down to it is always available.
   - The links included **Home**, **Projects** and **Contact us** navigate to sections of the page, rather than to separate pages.
   - Aligned to the top left corner, on narrow displays it features as an expandable "burger" icon menu.<br>
@@ -153,19 +151,19 @@ For the minimalistic modern style, a monochromatic palette composed of virtually
 - __Error 404 Page__
   - A page in keeping with the style of the main page of the site to indicate the visitor as stumbles upon an non-existent URL of our site and to point them back to our homepage.<br>
   ![Error 404 page](documentation/Feat-404_page.PNG)
-
+ -->
 ### Features Left to Implement
-- Navigation hamburger icon to change to a cross when expanded to give a visual clue on how to close the menu.
+<!-- - Navigation hamburger icon to change to a cross when expanded to give a visual clue on how to close the menu.
 - Make the navigation menu collapse on clicking a link that redirects to section on page.
 - Create a projects page that includes a lot more detail on the projects described in the project section. When a visitor expands a project there could be a link for "More >>" which redirects to the section in the projects page that shows more information.
-- A "thank you" message to replace the contact form when the form gets submitted successfully and that the form contents get forwarded to my email address to contact back.
+- A "thank you" message to replace the contact form when the form gets submitted successfully and that the form contents get forwarded to my email address to contact back. -->
 
 
 ## Testing 
 
 ### Validator Testing 
 
-- HTML
+<!-- - HTML
   - No errors were returned when passing through the official [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fdasic002.github.io%2FCarlos-Da-Silva-Folio%2Findex.html)<br>
   ![HTML valid screenshot](documentation/Test-HTML_Valid.PNG)
 - CSS
@@ -180,12 +178,12 @@ For the minimalistic modern style, a monochromatic palette composed of virtually
   ![Lighthouse desktop analysis](documentation/Lighthouse_analysis-Desktop.PNG)
 
   - Running the site through [WAVE accessibility tool](https://wave.webaim.org/report#/https://dasic002.github.io/Carlos-Da-Silva-Folio/index.html) showed no obvious errors after some improvements were made.<br>
-  ![Wave accessibility evaluation results](documentation/Test-wave-accessibility.PNG)
+  ![Wave accessibility evaluation results](documentation/Test-wave-accessibility.PNG) -->
 
 ### Manual Testing
 
 #### Devices and browsers used
-- iPhone 12 Pro - iOS 17.4.1
+<!-- - iPhone 12 Pro - iOS 17.4.1
   - Safari (v17.4.1)
   - Chrome (v126)
   - Google (v319)
@@ -197,11 +195,11 @@ For the minimalistic modern style, a monochromatic palette composed of virtually
 - Dell Precision 3510 laptop - Windows 10 Pro (2H22)
   - Chrome (v125)
   - Firefox (v126)
-  - Microsoft Edge (v125)
+  - Microsoft Edge (v125) -->
 
 #### Manual testing checklist
 
-| Feature | Action | Expected Behaviour | Pass/Fail | Notes |
+<!-- | Feature | Action | Expected Behaviour | Pass/Fail | Notes |
 |-|-|-|-|-|
 |Google fonts|Loading the page|Google fonts load|PASS|
 |Font awesome icons|Loading the page|Icons appear as intended|PASS|
@@ -234,12 +232,12 @@ For the minimalistic modern style, a monochromatic palette composed of virtually
 |Error 404 page|on page loading|Footer is fixed at the bottom of the display, there is no length to scroll unless content is longer than viewport height.|PASS|
 |Error 404 page|Click on the Home button|Brings viewer back to main page|PASS|
 
-
+ -->
 
 
 ### Unfixed Bugs
 
-- __Nav Bar - turning fully black on expanding__<br>
+<!-- - __Nav Bar - turning fully black on expanding__<br>
 The intended look was to have this floating hamburger icon that when clicked the menu expands with a black to clear gradient from the top. The checkbox input to toggle open the menu works, but does not seem to accept addressing the whole header section to create this effect. The current compromise created is to have a permanent black to clear gradient from the top that extends as high as the section is, i.e.: when collapsed it is only as high as necessary for the hamburger icon and has high as the list menu when it is expanded. 
 
 - __Nav Bar - using section IDs on nav list__<br>
@@ -247,12 +245,12 @@ Using Section IDs for the navigation of the site means the menu does not toggle 
   - wrapping the visible text of the anchor with the label toggles the checkbox, but does not navigate to their section at the same time.
   - wrapping the anchor with the label, navigates but does toggle the checkbox.
 
-  Seems this requires some javascript to do this. Even the alternative of having the hamburger/bars icon replaced with a X icon when the menu is expanded seems to require javascript.
+  Seems this requires some javascript to do this. Even the alternative of having the hamburger/bars icon replaced with a X icon when the menu is expanded seems to require javascript. -->
 
 
 ## Deployment
 
-The site was deployed to GitHub pages following the steps outlined below:
+<!-- The site was deployed to GitHub pages following the steps outlined below:
 - Log in to GitHub and navigate to the Github Repository.
 - On the Repository page, select the settings icon just above the Repository title.
 - In the sidebar to the left, select "Pages" under the "Code and automation" section.
@@ -262,28 +260,28 @@ The site was deployed to GitHub pages following the steps outlined below:
 The page will be automatically refreshed and a link to the deployed site will be available on a ribbon display just at the top of the GitHub Pages webpage.
 
 The deployed page can be found [here.](https://dasic002.github.io/Carlos-Da-Silva-Folio/index.html)
-
+ -->
 
 ## Credits 
 
 ### Content 
-- Icons used in the footer and nav bar were sourced from [Font Awesome](https://fontawesome.com/)
+<!-- - Icons used in the footer and nav bar were sourced from [Font Awesome](https://fontawesome.com/)
 - Fonts used in the whole site sourced from [Google fonts](https://fonts.google.com/)
 - All text written by developer
-
+ -->
 ### Media
-- Photo used in welcome section taken by Model bookings studio, paid for rights by the developer.
-- All other images taken/generated by the developer.
+<!-- - Photo used in welcome section taken by Model bookings studio, paid for rights by the developer.
+- All other images taken/generated by the developer. -->
 
 ### Code
-- CSS and HTML code for the nav bar in the header was originally taken from the [Love Running walkthrough project](https://github.com/dasic002/Love-Running), then CSS was altered for the intended look.
+<!-- - CSS and HTML code for the nav bar in the header was originally taken from the [Love Running walkthrough project](https://github.com/dasic002/Love-Running), then CSS was altered for the intended look.
 - CSS and HTML code for the function of expanding and collapsing of project snippets sourced from [Web mdn docs references for the pseudo :checked](https://developer.mozilla.org/en-US/docs/Web/CSS/:checked).
 - Guidance on how to increase the general font-size viewed on the page as display goes beyond 4K resolution. [Learnt about html{font-size: ;} function here](https://developer.mozilla.org/en-US/docs/Web/CSS/font-size)
 - Guidance on how to prevent the contact form text area from being resized. [Learnt about textarea{resize: none;} function here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea)
-- Guidance on using background function for the images under a division. [background shorthand](https://developer.mozilla.org/en-US/docs/Web/CSS/background)
+- Guidance on using background function for the images under a division. [background shorthand](https://developer.mozilla.org/en-US/docs/Web/CSS/background) -->
 
 ### Acknowledgement
-- My mentor Brian Macharia for his insight, guidance and words of encouragement. -->
+<!-- - My mentor Brian Macharia for his insight, guidance and words of encouragement. --> -->
 
 <!--## Other General Project Advice
 
