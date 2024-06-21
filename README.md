@@ -8,12 +8,24 @@ The objective of the game is to score as low as possible, with Kings being worth
 1) Cards shuffled, each player is dealt 4 cards face down, remaining deck placed in the centre as a draw stack and the top card is turned over for the discard stack.
 2) Typically, players will arrange their 4 cards in a 2 x 2 formation in front of them. This helps with the memory aspect of the game.
 3) Without looking at their hand, the players can opt to shuffle their cards around in their 2 x 2 formation in the hope it may reveal the larger value cards in the next step.
-3) Before play begins, the dealer counts down "3, 2, 1!" where on "1" players can look at the bottom 2 cards only of their hand for about 1 second, no further shuffling is allowed from this point.
+4) Before play begins, the dealer counts down "3, 2, 1!" where on "1" players can look at the bottom 2 cards only of their hand for about 1 second, no further shuffling is allowed from this point.
 
 **Playing the game**
-1) The player to the left of the dealer goes first.
-2) On each player's turn, the player may knock on the table to indicate they are locking in their hand, indicating this is the last round and the player believes they have the lowest scoring hand on the table.
+1) Typically, the player to the left of the dealer goes first and taking turns clockwise.
 2) Knowing only the bottom 2 cards of their hand, the player must choose to either draw the top card from the discard stack (since it is visible and may be significantly lower than just seen in their hand) or take a chance and pick from the draw stack. Once they see the card they have picked, they can choose whether to swap with any of the ones in their hand or to discard it.
+3) Before moving on to the next player, the current player may knock on the table to indicate they are locking in their hand, indicating this is the last round for everyone else as this player believes they have the lowest scoring hand on the table.
+4) Each player takes a turn by choosing to pick a card from either stack and deciding whether to swap with another from their hand or not.
+5) Once the last player, the one to the right of the person that locked their hand has picked up a card and decided whether to swap or not, it is time for the locked in player to reveal their hand. Remember, they believe they have the lowest scoring hand on the table, should they not, their points are doubled.
+6) The game goes on in several rounds of the above until one of the players has reached at least 200pts. The winner of the game has the lowest score of the table.
+
+**Other Scenarios**
+- What happens if there are no more cards in the draw stack?
+  - collect all but the top card from the discard stack and shuffle to use this as the new draw stack.
+- Scoring example.
+  - If the knocking player had 2x kings, 1x 3 and 1x 4. This totals to 7 in that round.
+  - Should another player on this round score 7 points or lower, the knocking player's score doubles to 14.
+
+  
 
 <!-- portfolio site for myself. It will showcase some of my work as a Product Design Engineer/Industrial Designer to prospective clients and/or employers. Visitors will be able to learn a little about my background, see examples of my work, find my contact details and visit my linkedIn profile, company's instagram and etsy store.
 
