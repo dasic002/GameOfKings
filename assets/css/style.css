@@ -1,0 +1,84 @@
+/* global styling */
+
+body {
+    background-color: forestgreen;
+    color: whitesmoke;
+    font-family: 'Bree Serif', serif;
+    text-align: center;
+    margin: 0;
+}
+
+/* Heading and Menu button */
+
+.heading {
+    font-size: 1.5rem;
+    display: inline-block;
+    position: relative;
+    z-index: 99;
+    margin-top: 19px;
+}
+
+#menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0 1rem 0.5rem;
+    background-color: #186018;
+}
+
+#menu>h2 {
+    text-align: left;
+    margin-top: 19px;
+    margin-bottom: 0;
+}
+
+#menu-toggle,
+#menu-list {
+    display: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menu-list li,
+#menu-list ul {
+    list-style-type: none;
+    text-align: left;
+    margin: .8rem 0;
+    font-size: 1.2rem;
+}
+
+#menu-list ul {
+    padding: 0 1rem;
+}
+
+#menu-toggle:checked~#menu-list {
+    display: block;
+    background-color: inherit;
+}
+
+
+.player-name,
+.top-cards, 
+.btm-cards, 
+#decks-area {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card,
+.deck {
+    display: inline-block;
+    height: 50px;
+    width: 35px;
+    border-radius: 5px;
+    background-color: #99acf2;
+    text-align: center;
+    align-content: center;
+    margin: 2px 0;
+}
+
+.deck {
+    height: 100px;
+    width: 70px;
+}

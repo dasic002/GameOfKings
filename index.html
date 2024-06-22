@@ -22,10 +22,21 @@
     <!-- div for the menu that will be fixed at the top left corner inline with the heading -->
     <div id="menu">
         <input type="checkbox" id="menu-toggle" name="menu-toggle">
-        <label for="menu-toggle">
-            <i class="fa-solid fa-bars" id="menu-closed"></i>
-            <i class="fa-solid fa-xmark" id="menu-open"></i>
-        </label>
+        <h2><label for="menu-toggle">
+                <i class="fa-solid fa-bars" id="menu-closed"></i>
+                <!-- <i class="fa-solid fa-xmark" id="menu-open"></i> -->
+            </label></h2>
+        <ul id="menu-list">
+            <li>New Game</li>
+            <li>How to Play</li>
+            <li>Settings</li>
+            <ul>
+                <li>Sound: <span id="sound-state">OFF</span></li>
+                <li>Colour theme</li>
+            </ul>
+            <li>Current Scores</li>
+            <li>Credits</li>
+        </ul>
     </div>
 
     <!-- Where the game takes place -->
@@ -117,19 +128,6 @@
             <div class="scores">
                 <span id="scr1">0</span>
             </div>
-        </div>
-        <div id="menu">
-            <ul>
-                <li>New Game</li>
-                <li>How to Play</li>
-                <li>Settings</li>
-                <ul>
-                    <li>Sound: <span id="sound-state">OFF</span></li>
-                    <li>Colour theme</li>
-                </ul>
-                <li>Current Scores</li>
-                <li>Credits</li>
-            </ul>
         </div>
     </div>
 </body>
