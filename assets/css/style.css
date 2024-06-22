@@ -25,6 +25,7 @@ body {
     right: 0;
     padding: 0 1rem 0.5rem;
     background-color: #186018;
+    z-index: 98;
 }
 
 #menu>h2 {
