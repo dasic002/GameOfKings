@@ -22,20 +22,20 @@
     <!-- div for the menu that will be fixed at the top left corner inline with the heading -->
     <div id="menu">
         <input type="checkbox" id="menu-toggle" name="menu-toggle">
-        <h2><label for="menu-toggle">
+        <h2><label for="menu-toggle" class="click" id="menu-hamburger-icon">
                 <i class="fa-solid fa-bars" id="menu-closed"></i>
                 <!-- <i class="fa-solid fa-xmark" id="menu-open"></i> -->
             </label></h2>
         <ul id="menu-list">
-            <li>New Game</li>
-            <li>How to Play</li>
-            <li>Settings</li>
+            <li class="click">New Game</li>
+            <li class="click">How to Play</li>
+            <li class="click">Settings</li>
             <ul>
-                <li>Sound: <span id="sound-state">OFF</span></li>
-                <li>Colour theme</li>
+                <li class="click">Sound: <span id="sound-state">OFF</span></li>
+                <li class="click">Colour theme</li>
             </ul>
-            <li>Current Scores</li>
-            <li>Credits</li>
+            <li class="click">Current Scores</li>
+            <li class="click">Credits</li>
         </ul>
     </div>
 
@@ -88,7 +88,7 @@
         <div id="decks-area">
             <!-- card stack to pick up from -->
             <span>
-                <span class="deck" id="draw-stack">X</span>
+                <span class="deck click" id="draw-stack">X</span>
                 <!-- the line below will indicate when the stack has 2 cards -->
                 <span class="deck" id="draw-stack-1">Y</span>
                 <!-- the line below will indicate when the stack has 3 or more cards -->
@@ -96,7 +96,7 @@
             </span>
             <span>
                 <!-- card stack to discard cards to -->
-                <span class="deck" id="discard-stack">A</span>
+                <span class="deck click" id="discard-stack">A</span>
                 <!-- the line below will indicate when the stack has 2 cards -->
                 <span class="deck" id="discard-stack-1">B</span>
                 <!-- the line below will indicate when the stack has 3 or more cards -->
@@ -130,6 +130,7 @@
             </div>
         </div>
     </div>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>
