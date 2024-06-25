@@ -63,13 +63,18 @@ body {
     background-color: inherit;
 }
 
+.player {
+    display: inline-flex;
+    flex-direction: column;
+    padding: 0 0.5rem;
+}
 
 .player-name,
 .top-cards,
 .btm-cards,
 #decks-area {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 .card,
@@ -82,13 +87,14 @@ body {
     color: black;
     text-align: center;
     align-content: center;
-    margin: .15rem 0.05rem;
+    margin: .15rem;
 }
 
 .deck {
     height: 6.25rem;
     width: 4.38rem;
     font-size: 3rem;
+    margin: 0.5rem;
     box-shadow: .1rem .1rem .1rem .15rem rgba(0, 0, 0, .5);
 }
 
@@ -96,6 +102,10 @@ body {
     background-color: transparent;
     border: .2rem dashed rgba(245, 245, 245, .5);
     box-shadow: none;
+}
+
+#decks-area {
+    padding-bottom: 1rem;
 }
 
 #decks-area>span {
@@ -161,6 +171,14 @@ body {
     align-content: center;
     margin: .2rem 0;
     padding: .3rem;
+}
+
+.prompt {
+    font-size: 3rem;
+}
+
+.hidden {
+    display: none;
 }
 
 /* for scaling font size only by height when display is as wide as 56% of the height or wider */

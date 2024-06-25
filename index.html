@@ -44,44 +44,54 @@
 
         <!-- section that displays other players info (name / cards / scores) -->
         <div id="other-players">
-            <div class="player-name">
-                <span id="p2">PLAYER 2</span>
-                <span id="p3">PLAYER 3</span>
-                <span id="p4">PLAYER 4</span>
-            </div>
-            <div class="top-cards">
-                <span class="player">
+            <span class="player">
+                <span class="player-name">
+                    <span id="p2">PLAYER 2</span>
+                </span>
+                <span class="top-cards">
                     <span class="card" id="p2-c1">X</span>
                     <span class="card" id="p2-c2">X</span>
                 </span>
-                <span class="player">
-                    <span class="card" id="p3-c1">X</span>
-                    <span class="card" id="p3-c2">X</span>
-                </span>
-                <span class="player">
-                    <span class="card" id="p4-c1">X</span>
-                    <span class="card" id="p4-c2">X</span>
-                </span>
-            </div>
-            <div class="btm-cards">
-                <span class="player">
+                <span class="btm-cards">
                     <span class="card" id="p2-c3">X</span>
                     <span class="card" id="p2-c4">X</span>
                 </span>
-                <span class="player">
+                <span class="scores">
+                    <span id="scr2">0</span>
+                </span>
+            </span>
+            <span class="player">
+                <span class="player-name">
+                    <span id="p3">PLAYER 2</span>
+                </span>
+                <span class="top-cards">
+                    <span class="card" id="p3-c1">X</span>
+                    <span class="card" id="p3-c2">X</span>
+                </span>
+                <span class="btm-cards">
                     <span class="card" id="p3-c3">X</span>
                     <span class="card" id="p3-c4">X</span>
                 </span>
-                <span class="player">
+                <span class="scores">
+                    <span id="scr3">0</span>
+                </span>
+            </span>
+            <span class="player">
+                <span class="player-name">
+                    <span id="p4">PLAYER 4</span>
+                </span>
+                <span class="top-cards">
+                    <span class="card" id="p4-c1">X</span>
+                    <span class="card" id="p4-c2">X</span>
+                </span>
+                <span class="btm-cards">
                     <span class="card" id="p4-c3">X</span>
                     <span class="card" id="p4-c4">X</span>
                 </span>
-            </div>
-            <div class="scores">
-                <span id="scr2">0</span>
-                <span id="scr3">0</span>
-                <span id="scr4">0</span>
-            </div>
+                <span class="scores">
+                    <span id="scr4">0</span>
+                </span>
+            </span>
         </div>
 
         <!-- Section for the draw and discard stacks to sit in -->
@@ -106,28 +116,24 @@
 
         <!-- Main or Current player's info -->
         <div id="main-player">
-            <h2 id="top-prompt"></h2>
-            <div class="top-cards">
-                <span class="player">
+            <div class="prompt" id="top-prompt"></div>
+            <span class="player">
+                <span class="top-cards">
                     <span class="card" id="p1-c1">X</span>
                     <span class="card" id="p1-c2">X</span>
                 </span>
-            </div>
-            <div class="btm-cards">
-                <span class="player">
+                <span class="btm-cards">
                     <span class="card" id="p1-c3">X</span>
                     <span class="card" id="p1-c4">X</span>
                 </span>
-            </div>
-            <div class="prompt-space">
-                <h2 id="btm-prompt"></h2>
-            </div>
-            <div class="player-name">
-                <span id="p1">PLAYER 1</span>
-            </div>
-            <div class="scores">
-                <span id="scr1">0</span>
-            </div>
+                <span class="player-name">
+                    <span id="p1">PLAYER 1</span>
+                </span>
+                <span class="scores">
+                    <span id="scr1">0</span>
+                </span>
+            </span>
+            <div class="prompt" id="btm-prompt"></div>
         </div>
     </div>
     <script src="assets/js/script.js"></script>
