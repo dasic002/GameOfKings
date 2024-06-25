@@ -42,8 +42,42 @@
     <!-- Where the game takes place -->
     <div id="game-area">
 
+        <div id="welcome">
+            <h1 id="wlcm-msg">Welcome to Kings</h1>
+            <span class="click btns bg-btns" id="play">PLAY</span>
+        </div>
+        <div class="hidden" id="player-form">
+            <div>
+                <h2>Player Names</h2>
+                <form action="" id="game-setup">
+                    <table>
+                        <tr>
+                            <td><input type="text" id="P1-name" name="P1-name" class="input-field"
+                                    placeholder="Player 1" required></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="P2-name" name="P2-name" class="input-field" placeholder="BOT 1">
+                            </td>
+                            <td><span class="add-bot btns"><i class="fa-solid fa-robot"></i></span></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="P3-name" name="P3-name" class="input-field" placeholder="BOT 2">
+                            </td>
+                            <td><span class="add-bot btns"><i class="fa-solid fa-robot"></i></span></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="P4-name" name="P4-name" class="input-field" placeholder="BOT 3">
+                            </td>
+                            <td><span class="add-bot btns"><i class="fa-solid fa-robot"></i></span></td>
+                        </tr>
+                    </table>
+                </form>
+                <span class="btns bg-btns">Start Game</span>
+            </div>
+        </div>
         <!-- section that displays other players info (name / cards / scores) -->
-        <div id="other-players">
+        <div class="hidden" id="other-players">
             <span class="player">
                 <span class="player-name">
                     <span id="p2">PLAYER 2</span>
@@ -95,7 +129,7 @@
         </div>
 
         <!-- Section for the draw and discard stacks to sit in -->
-        <div id="decks-area">
+        <div class="hidden" id="decks-area">
             <span id="decks">
                 <!-- card stack to pick up from -->
                 <span>
@@ -117,7 +151,7 @@
         </div>
 
         <!-- Main or Current player's info -->
-        <div id="main-player">
+        <div class="hidden" id="main-player">
             <div class="prompt" id="top-prompt"></div>
             <span class="player">
                 <span class="top-cards">
