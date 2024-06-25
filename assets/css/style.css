@@ -58,9 +58,9 @@ body {
     padding: 0 1rem;
 }
 
-#menu-toggle:checked~#menu-list {
-    display: block;
-    background-color: inherit;
+#menu-list li>a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .player {
