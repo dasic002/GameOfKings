@@ -72,7 +72,7 @@ body {
 .player-name,
 .top-cards,
 .btm-cards,
-#decks-area {
+#decks {
     display: flex;
     justify-content: space-around;
 }
@@ -104,11 +104,11 @@ body {
     box-shadow: none;
 }
 
-#decks-area {
+#decks {
     padding-bottom: 1rem;
 }
 
-#decks-area>span {
+#decks>span {
     padding: 1rem;
     display: grid;
     height: 6.25rem;

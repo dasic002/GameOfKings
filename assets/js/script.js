@@ -13,6 +13,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 menu();
             } else if (this.getAttribute('action') === 'how-to-play') {
                 menu();
+            } else if (this.getAttribute('id') === 'sound-state') {
+                let state = this.innerText;
+                state === 'OFF' ? state = 'ON' : state = 'OFF';
+                this.innerHTML = state;
             } else {
                 let item = this.getAttribute('id') === null ? this.innerText : this.getAttribute('id');
                 alert(item);
@@ -44,11 +48,8 @@ function menu() {
 
 function remClass(strg1, term) {
     let idx = strg1.indexOf(term);
-    console.log(idx);
-    console.log(strg1);
     if (idx >= 0) {
         strg1 = strg1.replace(term, '');
     }
-    console.log(strg1);
     return strg1;
 }

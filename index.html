@@ -24,17 +24,18 @@
         <h2><span class="click" id="menu-btn" action="menu">
                 <i class="fa-solid fa-bars"></i>
                 <i class="fa-solid fa-xmark hidden"></i>
-        </span></h2>
+            </span></h2>
         <ul id="menu-list">
             <li><a href="index.html">New Game</a></li>
-            <li class="click" action="how-to-play"><a href="https://www.youtube.com" target="_blank">How to Play</a></li>
+            <li class="click" action="how-to-play"><a href="https://www.youtube.com" target="_blank">How to Play</a>
+            </li>
             <li>Settings</li>
             <ul>
-                <li class="click">Sound: <span id="sound-state">OFF</span></li>
-                <li class="click">Colour theme</li>
+                <li>Sound: <span class="click" id="sound-state">OFF</span></li>
+                <li class="click" action="theme">Colour theme</li>
             </ul>
-            <li class="click">Current Scores</li>
-            <li class="click">Credits</li>
+            <li class="click" action="scores">Current Scores</li>
+            <li class="click" action="credits">Credits</li>
         </ul>
     </div>
 
@@ -95,21 +96,23 @@
 
         <!-- Section for the draw and discard stacks to sit in -->
         <div id="decks-area">
-            <!-- card stack to pick up from -->
-            <span>
-                <span class="deck click" id="draw-stack">X</span>
-                <!-- the line below will indicate when the stack has 2 cards -->
-                <span class="deck" id="draw-stack-1">Y</span>
-                <!-- the line below will indicate when the stack has 3 or more cards -->
-                <span class="deck" id="draw-stack-2">Z</span>
-            </span>
-            <span>
-                <!-- card stack to discard cards to -->
-                <span class="deck click" id="discard-stack">A</span>
-                <!-- the line below will indicate when the stack has 2 cards -->
-                <span class="deck" id="discard-stack-1">B</span>
-                <!-- the line below will indicate when the stack has 3 or more cards -->
-                <span class="deck" id="discard-stack-2">C</span>
+            <span id="decks">
+                <!-- card stack to pick up from -->
+                <span>
+                    <span class="deck click" id="draw-stack">X</span>
+                    <!-- the line below will indicate when the stack has 2 cards -->
+                    <span class="deck" id="draw-stack-1">Y</span>
+                    <!-- the line below will indicate when the stack has 3 or more cards -->
+                    <span class="deck" id="draw-stack-2">Z</span>
+                </span>
+                <span>
+                    <!-- card stack to discard cards to -->
+                    <span class="deck click" id="discard-stack">A</span>
+                    <!-- the line below will indicate when the stack has 2 cards -->
+                    <span class="deck" id="discard-stack-1">B</span>
+                    <!-- the line below will indicate when the stack has 3 or more cards -->
+                    <span class="deck" id="discard-stack-2">C</span>
+                </span>
             </span>
         </div>
 
