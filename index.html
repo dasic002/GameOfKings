@@ -42,13 +42,13 @@
     <!-- Where the game takes place -->
     <div id="game-area">
 
-        <div id="welcome">
-            <h1 id="wlcm-msg">Welcome to Kings</h1>
+        <div class="hidden" id="welcome">
+            <h2 id="wlcm-msg">Welcome to Kings</h2>
             <span class="click btns bg-btns" id="play">PLAY</span>
         </div>
-        <div class="hidden" id="player-form">
+        <div class="" id="player-form">
             <div>
-                <h2>Player Names</h2>
+                <h2 class="title">Player Names</h2>
                 <form action="" id="game-setup">
                     <table>
                         <tr>
@@ -57,19 +57,41 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td><input type="text" id="P2-name" name="P2-name" class="input-field" placeholder="BOT 1">
+                            <td>
+                                <input type="text" class="input-field" id="P2-name" name="P2-name"
+                                    placeholder="BOT 1">
+                                <span class="bot-lvls hidden" id="bot1-lvl">
+                                    <span class="lvl-1">Lvl 1 </span>
+                                    <span class="lvl-2">Lvl 2 </span>
+                                    <span class="lvl-3">Lvl 3</span>
+                                </span>
                             </td>
-                            <td><span class="add-bot btns"><i class="fa-solid fa-robot"></i></span></td>
+                            <td><span class="add-bot btns"><i class="fa-solid fa-robot"></i>
+                                    <i class="fa-solid fa-xmark hidden"></i></span></td>
                         </tr>
                         <tr>
-                            <td><input type="text" id="P3-name" name="P3-name" class="input-field" placeholder="BOT 2">
+                            <td>
+                                <input type="text" class="input-field" id="P3-name" name="P3-name" placeholder="BOT 2">
+                                <span class="bot-lvls hidden" id="bot2-lvl">
+                                    <span class="lvl-1">Lvl 1 </span>
+                                    <span class="lvl-2">Lvl 2 </span>
+                                    <span class="lvl-3">Lvl 3</span>
+                                </span>
                             </td>
-                            <td><span class="add-bot btns"><i class="fa-solid fa-robot"></i></span></td>
+                            <td><span class="add-bot btns"><i class="fa-solid fa-robot"></i>
+                                <i class="fa-solid fa-xmark hidden"></i></span></td>
                         </tr>
                         <tr>
-                            <td><input type="text" id="P4-name" name="P4-name" class="input-field" placeholder="BOT 3">
+                            <td>
+                                <input type="text" class="input-field" id="P4-name" name="P4-name" placeholder="BOT 3">
+                                <span class="bot-lvls hidden" id="bot2-lvl">
+                                    <span class="lvl-1">Lvl 1 </span>
+                                    <span class="lvl-2">Lvl 2 </span>
+                                    <span class="lvl-3">Lvl 3</span>
+                                </span>
                             </td>
-                            <td><span class="add-bot btns"><i class="fa-solid fa-robot"></i></span></td>
+                            <td><span class="add-bot btns"><i class="fa-solid fa-robot"></i>
+                                <i class="fa-solid fa-xmark hidden"></i></span></td>
                         </tr>
                     </table>
                 </form>
