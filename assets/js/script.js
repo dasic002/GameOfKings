@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById('welcome').style.display = 'none';
                 document.getElementById('player-form').style.display = 'block';
             } else if (this.getAttribute('action') === 'next') {
-                if(this.innerText === "Start Game"){
+                if (this.innerText === "Start Game") {
                     let P1 = String(document.getElementById('P1-name').value);
                     let P2 = String(document.getElementById('P2-name').value);
                     let P3 = String(document.getElementById('P3-name').value);
@@ -104,46 +104,65 @@ function menu() {
 }
 
 // function that will manipulate data stored in constants as the game goes on
-function runGame(action, data){
-    if (action === 'new'){
+function runGame(action, data) {
+    if (action === 'new') {
         table('empty');
         document.getElementById('player-form').style.display = 'none';
         document.getElementById('other-players').style.display = 'block';
         document.getElementById('decks-area').style.display = 'block';
         document.getElementById('main-player').style.display = 'block';
+        drawStack('deal');
     }
 }
 
 // manages appearance of cards on the table 
 // 'empty' will display a table with only placeholders for card
 // 'deal' will add a card at a time to the table to mimic dealing out
-function table(action){
-    if(action === 'empty'){
-        let cards;
-        let decks;
-        cards = document.getElementsByClassName('card');
-        decks = document.getElementsByClassName('deck');
-        console.log(cards);
-        console.log(decks);
-        for ( let card of cards){
+function table(action, data) {
+    let cards;
+    let decks;
+    cards = document.getElementsByClassName('card');
+    decks = document.getElementsByClassName('deck');
+    console.log(cards);
+    console.log(decks);
+    if (action === 'empty') {
+        for (let card of cards) {
             let x = card.getAttribute('class');
             x = addClass(x, ' missing-card');
             card.setAttribute('class', x);
             card.innerHTML = '';
         }
-        for ( let card of decks){
+        for (let card of decks) {
             let x = card.getAttribute('class');
             x = addClass(x, ' missing-card');
             card.setAttribute('class', x);
             card.innerHTML = '';
         }
         // alert('will add class "missing" to all card places on the table');
-    }
+    } else if(action === "deal") {}
 }
 
 // will manipulate the cards held in the draw deck, including dealing at the start of the game
 // action of 'deal' will set the draw deck as a fresh deck of cards, shuffle it and return the first 17 cards for players and discard deck
-function drawStack(action, data){
+function drawStack(action, data) {
+    if (action === 'deal') {
+        let freshDeck = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'cx', 'cj', 'cq', 'ck',
+            'd1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'dx', 'dj', 'dq', 'dk',
+            'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'h8', 'h9', 'hx', 'hj', 'hq', 'hk',
+            's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 'sx', 'sj', 'sq', 'sk'
+        ];
+        console.log(freshDeck);
+        freshDeck = shuffle(freshDeck);
+        console.log(freshDeck);
+        drawDeck.push(freshDeck);
+        console.log(drawDeck);
+        // for(let i = 0; i < 3; i++) {
+        //     for(let j = 0; j < 3; j++) {
+        //         let x = turnIndex % 4;
+        //         playerData[x]
+        //     }
+        // }
+    }
 }
 
 // checks that the string contains the term and removes the term
@@ -156,7 +175,7 @@ function remClass(strg1, term) {
 }
 
 // checks that the string contains the term, if it does NOT it adds it, this should reduce runaway errors.
-function addClass(strg1, term){
+function addClass(strg1, term) {
     let idx = strg1.indexOf(term);
     if (idx < 0) {
         strg1 += term;
@@ -165,17 +184,17 @@ function addClass(strg1, term){
 }
 
 // Captures the data for bot players, including the skill level, and presumes standard level 2 bot if the fields are left empty
-function logBot (Pn, strg1){
+function logBot(Pn, strg1) {
     let x;
     let y;
-    if (strg1.includes('_BOT ') === true){
+    if (strg1.includes('_BOT ') === true) {
         x = strg1.indexOf(',');
         // console.log(x);
-        if ( x > 0){
+        if (x > 0) {
             y = strg1.slice(0, x);
             x = parseInt(strg1.slice(x + 1, x + 2));
             // console.log(x);
-            
+
         } else {
             x = 2;
         }
@@ -186,9 +205,20 @@ function logBot (Pn, strg1){
 }
 
 // shifts turns for either play turn or dealer turn. Action must be 'dealer', otherwise assumes play turn is being shifted.
-function shiftTurns (action){
+function shiftTurns(action) {
     let x;
     action === 'dealer' ? x = dealerIndex : x = turnIndex;
     x > 2 ? x = 0 : x++;
     action === 'dealer' ? dealerIndex = x : turnIndex = x;
+}
+
+// function to shuffle any values inside an array, to mimic the shuffling of cards
+function shuffle(data) {
+    let arr = [];
+    do {
+        let x = Math.floor(Math.random() * data.length);
+        x = data.splice(x, 1)[0];
+        arr.push(x);
+    } while (data.length > 0);
+    return arr;
 }

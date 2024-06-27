@@ -178,7 +178,7 @@ body {
 }
 
 .missing-card {
-    background-color: transparent;
+    background-color: forestgreen;
     border: .2rem dashed rgba(245, 245, 245, .5);
     box-shadow: none;
     padding: 0;
