@@ -158,19 +158,20 @@ body {
 .card,
 .deck {
     display: inline-block;
-    height: 3.13rem;
-    width: 2.19rem;
+    height: 2.93rem;
+    width: 1.99rem;
     border-radius: .31rem;
     background-color: whitesmoke;
     color: black;
     text-align: center;
     align-content: center;
     margin: .15rem;
+    padding: .2rem;
 }
 
 .deck {
-    height: 6.25rem;
-    width: 4.38rem;
+    height: 6.05rem;
+    width: 4.18rem;
     font-size: 3rem;
     margin: 0.5rem;
     box-shadow: .1rem .1rem .1rem .15rem rgba(0, 0, 0, .5);
@@ -180,6 +181,7 @@ body {
     background-color: transparent;
     border: .2rem dashed rgba(245, 245, 245, .5);
     box-shadow: none;
+    padding: 0;
 }
 
 #decks {

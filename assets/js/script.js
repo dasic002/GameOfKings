@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                     playerData.push(P1, P2, P3, P4);
                     turnIndex = dealerIndex + 1;
-                    runGame('new',);
+                    runGame('new');
                 }
             } else {
                 let item = this.getAttribute('id') === null ? this.innerText : this.getAttribute('id');
@@ -119,7 +119,25 @@ function runGame(action, data){
 // 'deal' will add a card at a time to the table to mimic dealing out
 function table(action){
     if(action === 'empty'){
-        alert('will add class "missing" to all card places on the table');
+        let cards;
+        let decks;
+        cards = document.getElementsByClassName('card');
+        decks = document.getElementsByClassName('deck');
+        console.log(cards);
+        console.log(decks);
+        for ( let card of cards){
+            let x = card.getAttribute('class');
+            x = addClass(x, ' missing-card');
+            card.setAttribute('class', x);
+            card.innerHTML = '';
+        }
+        for ( let card of decks){
+            let x = card.getAttribute('class');
+            x = addClass(x, ' missing-card');
+            card.setAttribute('class', x);
+            card.innerHTML = '';
+        }
+        // alert('will add class "missing" to all card places on the table');
     }
 }
 
