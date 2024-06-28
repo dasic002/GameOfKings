@@ -39,9 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     let P3 = String(document.getElementById('P3-name').value);
                     let P4 = String(document.getElementById('P4-name').value);
                     P1 === '' ? P1 = ['Player 1', 0] : P1 = [P1, 0];
-                    P2 === '' ? P2 = ['_BOT 2', 2] : P2 = logBot('P2', P2);
-                    P3 === '' ? P3 = ['_BOT 3', 2] : P3 = logBot('P3', P3);
-                    P4 === '' ? P4 = ['_BOT 4', 2] : P4 = logBot('P4', P4);
+                    P2 === '' ? P2 = ['_BOT 2', 2] : P2 = logBot(P2);
+                    P3 === '' ? P3 = ['_BOT 3', 2] : P3 = logBot(P3);
+                    P4 === '' ? P4 = ['_BOT 4', 2] : P4 = logBot(P4);
                     // console.log(P1);
                     // console.log(P2);
                     // console.log(P3);
@@ -123,8 +123,6 @@ function table(action, data) {
     let decks;
     cards = document.getElementsByClassName('card');
     decks = document.getElementsByClassName('deck');
-    console.log(cards);
-    console.log(decks);
     if (action === 'empty') {
         for (let card of cards) {
             let x = card.getAttribute('class');
@@ -138,8 +136,14 @@ function table(action, data) {
             card.setAttribute('class', x);
             card.innerHTML = '';
         }
-        // alert('will add class "missing" to all card places on the table');
-    } else if(action === "deal") {}
+    } else if (action === "deal") {
+        console.log(data);
+        let y = cards[data].getAttribute('class');
+        y = remClass(y, 'missing-card');
+        cards[data].setAttribute('class', y);
+    } else if (action ==='values') {
+            cards[data].innerHTML = playerData[Math.floor(data / 4)].cardHand[data % 4];
+    }
 }
 
 // will manipulate the cards held in the draw deck, including dealing at the start of the game
@@ -154,14 +158,20 @@ function drawStack(action, data) {
         console.log(freshDeck);
         freshDeck = shuffle(freshDeck);
         console.log(freshDeck);
-        drawDeck.push(freshDeck);
+        for (let i = 0; i < freshDeck.length; i++) {
+            drawDeck.push(freshDeck[i]);
+        }
         console.log(drawDeck);
-        // for(let i = 0; i < 3; i++) {
-        //     for(let j = 0; j < 3; j++) {
-        //         let x = turnIndex % 4;
-        //         playerData[x]
-        //     }
-        // }
+        for (let i = 0; i < 4; i++) { // iterate through card hand position
+            for (let j = 0; j < 4; j++) { // iterate through players, so deals card 1 to all players, before card 2
+                let card = drawDeck.pop();
+                playerData[j].cardHand.push(card);
+                console.log(playerData[j].cardHand[i]);
+                let place = i + 4 * j;
+                table('deal', place);
+                table('values', place);
+            }
+        }
     }
 }
 
@@ -184,23 +194,23 @@ function addClass(strg1, term) {
 }
 
 // Captures the data for bot players, including the skill level, and presumes standard level 2 bot if the fields are left empty
-function logBot(Pn, strg1) {
+function logBot(strg1) {
     let x;
     let y;
-    if (strg1.includes('_BOT ') === true) {
+    if (strg1.includes('_BOT ') === true) { // if string starts with '_BOT ' then look for comma
         x = strg1.indexOf(',');
         // console.log(x);
         if (x > 0) {
-            y = strg1.slice(0, x);
-            x = parseInt(strg1.slice(x + 1, x + 2));
+            y = strg1.slice(0, x);  // separate the bot name '_BOT n'
+            x = parseInt(strg1.slice(x + 1, x + 2));  // get number for skill level after comma
             // console.log(x);
 
         } else {
-            x = 2;
+            x = 2;  // else assume skill level of 2
         }
         return strg1 = [y, x];
     } else {
-        return strg1 = [strg1, 0];
+        return strg1 = [strg1, 0]; // if does not contain '_BOT ' then assume the name is human and bot skill level is set to 0
     }
 }
 
