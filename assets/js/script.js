@@ -84,6 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 })
 
+// toggles the navigation menu open and close, including changing the icon from hamburger bars to cross
 function menu() {
     let menu = document.getElementById('menu-list');
     let state = menu.style.display;
@@ -103,7 +104,7 @@ function menu() {
     menuBtn.children[0].setAttribute('class', bars);
 }
 
-// function that will manipulate data stored in constants as the game goes on
+// function that will run the sequence of functions of the game, triggering functions to manipulate data stored in constants
 function runGame(action, data) {
     if (action === 'new') {
         table('empty');
@@ -112,18 +113,43 @@ function runGame(action, data) {
         document.getElementById('decks-area').style.display = 'block';
         document.getElementById('main-player').style.display = 'block';
         drawStack('deal');
+        
+
     }
 }
 
 // manages appearance of cards on the table 
 // 'empty' will display a table with only placeholders for card
-// 'deal' will add a card at a time to the table to mimic dealing out
+// 'deal' will add player names, scores and a card at a time to the table to mimic dealing out
+// 'values' will return the card ID as inner HTML text in the card location
 function table(action, data) {
     let cards;
     let decks;
     cards = document.getElementsByClassName('card');
     decks = document.getElementsByClassName('deck');
+    // get player name elements
+    let p1Name = document.getElementById('p1');
+    let p2Name = document.getElementById('p2');
+    let p3Name = document.getElementById('p3');
+    let p4Name = document.getElementById('p4');
+    // get player score elements
+    let p1Score = document.getElementById('scr1');
+    let p2Score = document.getElementById('scr2');
+    let p3Score = document.getElementById('scr3');
+    let p4Score = document.getElementById('scr4');
+
     if (action === 'empty') {
+        // display players names
+        p1Name.innerHTML = playerData[0].playerName;
+        p2Name.innerHTML = playerData[1].playerName;
+        p3Name.innerHTML = playerData[2].playerName;
+        p4Name.innerHTML = playerData[3].playerName;
+        // display players current scores
+        p1Score.innerHTML = playerData[0].score;
+        p2Score.innerHTML = playerData[1].score;
+        p3Score.innerHTML = playerData[2].score;
+        p4Score.innerHTML = playerData[3].score;
+
         for (let card of cards) {
             let x = card.getAttribute('class');
             x = addClass(x, ' missing-card');
@@ -137,12 +163,35 @@ function table(action, data) {
             card.innerHTML = '';
         }
     } else if (action === "deal") {
-        console.log(data);
-        let y = cards[data].getAttribute('class');
-        y = remClass(y, 'missing-card');
-        cards[data].setAttribute('class', y);
+        // console.log(data);
+        if(data < 16){
+            let y = cards[data].getAttribute('class');
+            y = remClass(y, 'missing-card');
+            cards[data].setAttribute('class', y);
+        } else if(data < 22) {
+            data = data - 16;
+            let y = decks[data].getAttribute('class');
+            y = remClass(y, 'missing-card');
+            decks[data].setAttribute('class', y);
+        } else {
+            alert('action "deal" given data larger than 21!');
+        }
+        
     } else if (action ==='values') {
+        if(data < 16){
             cards[data].innerHTML = playerData[Math.floor(data / 4)].cardHand[data % 4];
+        } else if (data < 19) {
+            data = data - 16;
+            let i = data + 1;
+            decks[data].innerHTML = drawDeck[drawDeck.length - i];
+        } else if (data < 22) {
+            data = data - 16;
+            let i = data - 3;
+            decks[data].innerHTML = discardDeck[i];
+        } else {
+            alert('action "values" given data larger than 21!');
+        }
+            
     }
 }
 
@@ -155,23 +204,49 @@ function drawStack(action, data) {
             'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'h8', 'h9', 'hx', 'hj', 'hq', 'hk',
             's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 'sx', 'sj', 'sq', 'sk'
         ];
-        console.log(freshDeck);
+        let card;
+        // console.log(freshDeck);
         freshDeck = shuffle(freshDeck);
-        console.log(freshDeck);
+        // console.log(freshDeck);
         for (let i = 0; i < freshDeck.length; i++) {
             drawDeck.push(freshDeck[i]);
         }
         console.log(drawDeck);
         for (let i = 0; i < 4; i++) { // iterate through card hand position
             for (let j = 0; j < 4; j++) { // iterate through players, so deals card 1 to all players, before card 2
-                let card = drawDeck.pop();
+                card = drawDeck.pop();
                 playerData[j].cardHand.push(card);
-                console.log(playerData[j].cardHand[i]);
+                // console.log(playerData[j].cardHand[i]);
                 let place = i + 4 * j;
                 table('deal', place);
                 table('values', place);
             }
         }
+        card = drawDeck.pop();
+        discardStack('add', card);
+        // now that the drawDeck array is as it will be to start the game, finish displaying the table setup by displaying 3 cards in discard stack
+        for(let i = 0; i < 3; i++) {
+            table('deal', 16 + i);
+            table('values', 16 + i);
+        }
+        
+    }
+}
+
+// will manipulate cards present in the discard stack
+// 'add' will add the card ID as a string value forwarded as the data
+function discardStack(action, data){
+    if(action === 'add') {
+        discardDeck.push(data);
+        let x = discardDeck.length;
+        x = Math.min(x, 3);
+        console.log(`number of cards in discard deck = ${x}`);
+        // Run through the length of discard stack up to its top 3 cards to illustrate them on the table
+        for(let i = 0; i < x; i++) { 
+            table('deal', 19 + i);
+            table('values', 19 + i);
+        }
+        
     }
 }
 
