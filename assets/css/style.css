@@ -144,7 +144,7 @@ body {
 .player {
     display: inline-flex;
     flex-direction: column;
-    padding: 0 0.5rem;
+    padding: 0 0.25rem;
 }
 
 .player-name,
