@@ -227,11 +227,36 @@ function table(action, data) {
         } else if (data < 19) {
             data = data - 16;
             let i = data + 1;
-            decks[data].innerHTML = drawDeck[drawDeck.length - i];
+            let x = decks[data].getAttribute('class');
+            if (drawDeck.length === 0) {
+                let x = discardStack('donate');
+                drawStack('add', x);
+                decks[data].innerHTML = drawDeck[drawDeck.length - i];
+            }
+
+            if (drawDeck[drawDeck.length - i] === undefined) {
+                decks[data].innerHTML = '';
+                x = addClass(x, ' missing-card');
+                decks[data].setAttribute('class', x);
+            } else {
+                decks[data].innerHTML = drawDeck[drawDeck.length - i];
+                x = remClass(x, ' missing-card');
+                decks[data].setAttribute('class', x);
+            }
+
         } else if (data < 22) {
             data = data - 16;
             let i = data - 3;
-            decks[data].innerHTML = discardDeck[i];
+            let x = decks[data].getAttribute('class');
+            if (discardDeck[i] === undefined) {
+                decks[data].innerHTML = '';
+                x = addClass(x, ' missing-card');
+                decks[data].setAttribute('class', x);
+            } else {
+                decks[data].innerHTML = discardDeck[i];
+                x = remClass(x, ' missing-card');
+                decks[data].setAttribute('class', x);
+            }
         } else {
             alert('action "values" given data larger than 21!');
         }
@@ -261,7 +286,7 @@ function table(action, data) {
 
     } else if (action === 'update') {
         table('playerNames');
-        for (let i = 0; i < 21; i++) {
+        for (let i = 0; i < 22; i++) {
             if (i < 16) {
                 if (i % 4 === 0) {
                     shiftTurns();
@@ -316,6 +341,11 @@ function drawStack(action, data) {
         picked('clear');
         shiftTurns();
         table('update');
+    } else if (action === 'add') {
+        for (let i = 0; i < data.length; i++) {
+            drawDeck.push(data[i]);
+        }
+        console.log(drawDeck);
     }
 }
 
@@ -332,7 +362,11 @@ function discardStack(action, data) {
             table('deal', 19 + i);
             table('values', 19 + i);
         }
-
+    } else if (action === 'donate') {
+        let arr = discardDeck.splice(1);
+        console.log(arr);
+        arr = shuffle(arr);
+        return arr;
     }
 }
 
@@ -442,7 +476,7 @@ function hand(action, data) {
                 hand('open');
             } else {
                 console.log(playerData[turnIndex].cardHand);
-                let b = playerData[turnIndex].cardHand.splice(y, 1);
+                let b = playerData[turnIndex].cardHand.splice(y, 1)[0];
                 playerData[turnIndex].cardHand.splice(y, 0, x);
                 console.log(playerData[turnIndex].cardHand);
                 discardStack('add', b);
