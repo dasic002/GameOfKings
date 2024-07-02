@@ -115,6 +115,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     drawStack('discard');
                     plrPrompt();
                 }
+            } else if (this.getAttribute('id') === 'accept') {
+                let card;
+                if (document.getElementById('p1-c1').innerHTML === discardDeck[0]) {
+                    card = discardDeck.shift();
+                } else if (document.getElementById('p1-c1').innerHTML === drawDeck.slice(-1)[0]) {
+                    card = drawDeck.pop();
+                }
+                console.log(card);
+                pair.push(card);
+                picked('clear');
+                hand('open');
             } else {
                 let item = this.getAttribute('id') === null ? this.innerText : this.getAttribute('id');
                 alert(item);
@@ -346,7 +357,7 @@ function plrPrompt() {
         } else if (humans === false) {
             console.log('no humans but P1!')
             turnIndex = 0;
-            newRound = 1;
+            newRound = 2;
             hand('open');
             newRound--;
         } else {
@@ -384,6 +395,8 @@ function plrPrompt() {
 // 'open' will give the player a chance to swap card positions before the game begins
 // 'close' will go back to table view
 function hand(action, data) {
+    document.getElementById('top-prompt').style.display = 'block';
+    document.getElementById('btm-prompt').style.display = 'block';
     document.getElementById('welcome').style.display = 'none';
     document.getElementById('other-players').style.display = 'none';
     document.getElementById('decks-area').style.display = 'none';
@@ -410,6 +423,7 @@ function hand(action, data) {
             document.getElementById('top-prompt').innerHTML = 'Want to shuffle?';
         } else {
             document.getElementById('top-prompt').innerHTML = 'Pick a card to swap';
+            document.getElementById('btm-prompt').style.display = 'none';
         }
 
     } else if (action === 'swap') {
@@ -427,7 +441,18 @@ function hand(action, data) {
                 pair.splice(0);
                 hand('open');
             } else {
-                alert(pair);
+                console.log(playerData[turnIndex].cardHand);
+                let b = playerData[turnIndex].cardHand.splice(y, 1);
+                playerData[turnIndex].cardHand.splice(y, 0, x);
+                console.log(playerData[turnIndex].cardHand);
+                discardStack('add', b);
+                pair.splice(0);
+                hand('close');
+                shiftTurns();
+                table('update');
+                if (playerData[turnIndex].botSkill === 0) {
+                    plrPrompt();
+                }
             }
 
         }
@@ -435,6 +460,7 @@ function hand(action, data) {
         for (let card of cards) {
             let x = card.getAttribute('class');
             x = remClass(x, ' deck');
+            x = remClass(x, ' selected');
             card.setAttribute('class', x);
         }
         document.getElementById('top-prompt').style.display = 'none';
@@ -477,6 +503,8 @@ function picked(action, data) {
         y = document.getElementById('btm-prompt').getElementsByTagName('i')[1];
         z = addClass(y.getAttribute('class'), ' hidden');
         document.getElementById('btm-prompt').getElementsByTagName('i')[1].setAttribute('class', z);
+
+        x.innerHTML = playerData[turnIndex].cardHand[0];
 
     } else {
         document.getElementById('other-players').style.display = 'none';
