@@ -74,23 +74,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             } else if (this.getAttribute('action') === 'new-hand') {
                 hand('open');
-                newRound--;
             } else if (this.getAttribute('action') === 'done') {
-                if (newRound > 0) {
+                if (newRound > 1) {
                     shiftTurns();
                     plrPrompt();
                 } else {
+                    newRound = 0;
                     hand('close');
                     shiftTurns();
                     table('update');
-                    if (humans === true) {
+                    if (playerData[turnIndex].botSkill === 0) {
                         plrPrompt();
                     }
                 }
             } else if (this.getAttribute('action') === 'to-pick') {
                 hand('close');
                 table('update');
-                // shiftTurns();
             } else if (this.getAttribute('id').includes('p1-c')) {
                 if (this.getAttribute('class').includes('deck')) {
                     let x = this.getAttribute('id').slice(-1);
@@ -252,7 +251,6 @@ function table(action, data) {
     } else if (action === 'update') {
         table('playerNames');
         for (let i = 0; i < 21; i++) {
-            // let j;
             if (i < 16) {
                 if (i % 4 === 0) {
                     shiftTurns();
@@ -273,9 +271,7 @@ function drawStack(action, data) {
             's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 'sx', 'sj', 'sq', 'sk'
         ];
         let card;
-        // console.log(freshDeck);
         freshDeck = shuffle(freshDeck);
-        // console.log(freshDeck);
         for (let i = 0; i < freshDeck.length; i++) {
             drawDeck.push(freshDeck[i]);
         }
@@ -283,7 +279,7 @@ function drawStack(action, data) {
         if (dealerIndex === oldDealerIndex) {
             shiftTurns('dealer');
             turnIndex = dealerIndex;
-            newRound = 4;
+            newRound = 5;
         }
         for (let i = 0; i < 4; i++) { // iterate through card hand position
             for (let j = 0; j < 4; j++) { // iterate through players, so deals card 1 to all players, before card 2
@@ -337,7 +333,7 @@ function plrPrompt() {
         }
 
         if (humans === true && playerData[turnIndex].botSkill === 0) {
-            console.log(`${playerData[turnIndex].playerName} is a human player!`);
+            console.log(`${playerData[turnIndex].playerName} is a human player! on newRound ${newRound}`);
             document.getElementById('wlcm-msg').innerHTML = `${playerData[turnIndex].playerName}`;
             document.getElementById('play').innerHTML = 'READY';
             document.getElementById('play').setAttribute('action', 'new-hand');
@@ -345,7 +341,8 @@ function plrPrompt() {
             document.getElementById('other-players').style.display = 'none';
             document.getElementById('decks-area').style.display = 'none';
             document.getElementById('main-player').style.display = 'none';
-            //newRound--;
+            newRound--;
+            console.log(`newRound deducted ${newRound}`);
         } else if (humans === false) {
             console.log('no humans but P1!')
             turnIndex = 0;
@@ -353,10 +350,13 @@ function plrPrompt() {
             hand('open');
             newRound--;
         } else {
-            console.log(`bot player - turnIndex: ${turnIndex}`)
-            shiftTurns();
+            console.log(`bot player - turnIndex: ${turnIndex} on newRound ${newRound}`);
             newRound--;
-            plrPrompt();
+            console.log(`newRound deducted ${newRound}`);
+            if (newRound > 0) {
+                shiftTurns();
+                plrPrompt();
+            }
         }
 
     } else {
@@ -375,6 +375,7 @@ function plrPrompt() {
             // ; // --- code to highlight bot currently playing;
             // ; // --- code to get bot to make a decision on play;
             // shiftTurns();
+            table('update');
         }
     }
 }
@@ -405,7 +406,7 @@ function hand(action, data) {
         // presents main-player name, score and message
         document.getElementById('p1').innerHTML = playerData[turnIndex].playerName;
         document.getElementById('scr1').innerHTML = playerData[turnIndex].score;
-        if (newRound >= 0) {
+        if (newRound > 0) {
             document.getElementById('top-prompt').innerHTML = 'Want to shuffle?';
         } else {
             document.getElementById('top-prompt').innerHTML = 'Pick a card to swap';
@@ -423,9 +424,12 @@ function hand(action, data) {
                 let b = playerData[turnIndex].cardHand[y];
                 playerData[turnIndex].cardHand.splice(x, 1, b);
                 playerData[turnIndex].cardHand.splice(y, 1, a);
+                pair.splice(0);
+                hand('open');
+            } else {
+                alert(pair);
             }
-            pair.splice(0);
-            hand('open');
+
         }
     } else if (action === 'close') {
         for (let card of cards) {
@@ -444,6 +448,7 @@ function hand(action, data) {
 // to display the picked card front and center for the player to decide whether they are keeping it or discarding it
 // 'draw' when selected from draw deck
 // 'discard' when selected from the discard deck
+// 'clear' will reset the elements back to normal
 function picked(action, data) {
     if (action === 'clear') {
         document.getElementById('other-players').style.display = 'block';
