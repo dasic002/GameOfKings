@@ -13,6 +13,8 @@ let newRound = 0;
 const drawDeck = [];
 // Constant for tracking the discarded deck of cards
 const discardDeck = [];
+// Constant for selected cards to swap
+const pair = [];
 
 // wait for the DOM to finish loading before running the game
 // Get the button elements and add event listeners to them
@@ -80,12 +82,40 @@ document.addEventListener("DOMContentLoaded", function () {
                 } else {
                     hand('close');
                     shiftTurns();
+                    table('update');
                     if (humans === true) {
                         plrPrompt();
                     }
                 }
-
-
+            } else if (this.getAttribute('action') === 'to-pick') {
+                hand('close');
+                table('update');
+                // shiftTurns();
+            } else if (this.getAttribute('id').includes('p1-c')) {
+                if (this.getAttribute('class').includes('deck')) {
+                    let x = this.getAttribute('id').slice(-1);
+                    let y = this.getAttribute('class');
+                    y = addClass(y, ' selected');
+                    this.setAttribute('class', y);
+                    hand('swap', parseInt(x - 1));
+                } else if (this.getAttribute('class').includes('picked')) {
+                    // do nothing
+                } else {
+                    alert('select a deck to pick from first!');
+                }
+            } else if (this.getAttribute('id').includes('-stack')) {
+                if (this.getAttribute('id').includes('draw')) {
+                    picked('draw');
+                } else if (this.getAttribute('id').includes('discard')) {
+                    picked('discard');
+                }
+            } else if (this.getAttribute('id') === 'reject') {
+                if (document.getElementById('p1-c1').innerHTML === discardDeck[0]) {
+                    picked('clear');
+                } else {
+                    drawStack('discard');
+                    plrPrompt();
+                }
             } else {
                 let item = this.getAttribute('id') === null ? this.innerText : this.getAttribute('id');
                 alert(item);
@@ -135,6 +165,7 @@ function runGame(action, data) {
 // 'deal' will add player names, scores and a card at a time to the table to mimic dealing out
 // 'values' will return the card ID as inner HTML text in the card location
 // 'playerNames' looks up the turnIndex and places names and scores in the correct position depending on whose turn it is, 
+// 'update' iterates through playernames and values to update the view for the current player
 // so the current player will always be in the bottom card hand..
 function table(action, data) {
     let cards;
@@ -218,9 +249,15 @@ function table(action, data) {
             }
         }
 
-    } else if (action === 'focus') {
+    } else if (action === 'update') {
         table('playerNames');
-        for (let i = 0; i < 16; i++) {
+        for (let i = 0; i < 21; i++) {
+            // let j;
+            if (i < 16) {
+                if (i % 4 === 0) {
+                    shiftTurns();
+                }
+            }
             table('values', i);
         }
     }
@@ -266,6 +303,12 @@ function drawStack(action, data) {
             table('values', 16 + i);
         }
 
+    } else if (action === 'discard') {
+        let card = drawDeck.pop();
+        discardStack('add', card);
+        picked('clear');
+        shiftTurns();
+        table('update');
     }
 }
 
@@ -273,7 +316,7 @@ function drawStack(action, data) {
 // 'add' will add the card ID as a string value forwarded as the data
 function discardStack(action, data) {
     if (action === 'add') {
-        discardDeck.push(data);
+        discardDeck.unshift(data);
         let x = discardDeck.length;
         x = Math.min(x, 3);
         console.log(`number of cards in discard deck = ${x}`);
@@ -352,6 +395,7 @@ function hand(action, data) {
         for (let card of cards) {
             let x = card.getAttribute('class');
             x = addClass(x, ' deck');
+            x = remClass(x, ' selected');
             card.setAttribute('class', x);
         }
         // for testing, sets the cards ID to the correct position in the player's hand
@@ -366,8 +410,23 @@ function hand(action, data) {
         } else {
             document.getElementById('top-prompt').innerHTML = 'Pick a card to swap';
         }
-        
 
+    } else if (action === 'swap') {
+        pair.push(data);
+        console.log(data);
+        if (pair.length > 1) {
+            let x = pair[0];
+            let y = pair[1];
+            console.log(`we have ${x} and ${y}`);
+            if (Number.isInteger(x)) {
+                let a = playerData[turnIndex].cardHand[x];
+                let b = playerData[turnIndex].cardHand[y];
+                playerData[turnIndex].cardHand.splice(x, 1, b);
+                playerData[turnIndex].cardHand.splice(y, 1, a);
+            }
+            pair.splice(0);
+            hand('open');
+        }
     } else if (action === 'close') {
         for (let card of cards) {
             let x = card.getAttribute('class');
@@ -382,6 +441,76 @@ function hand(action, data) {
     }
 }
 
+// to display the picked card front and center for the player to decide whether they are keeping it or discarding it
+// 'draw' when selected from draw deck
+// 'discard' when selected from the discard deck
+function picked(action, data) {
+    if (action === 'clear') {
+        document.getElementById('other-players').style.display = 'block';
+        document.getElementById('decks-area').style.display = 'block';
+        document.getElementById('top-prompt').style.display = 'none';
+        document.getElementById('btm-prompt').style.display = 'none';
+        document.getElementById('main-player').style.display = 'block';
+        document.getElementById('top-prompt').innerHTML = ``;
+        document.getElementById('p1-c2').style.display = '';
+        document.getElementById('main-player').getElementsByClassName('btm-cards')[0].style.display = '';
+        document.getElementById('main-player').getElementsByClassName('player-name')[0].style.display = '';
+        document.getElementById('main-player').getElementsByClassName('scores')[0].style.display = '';
+
+        let x = document.getElementById('p1-c1');
+        let z = remClass(x.getAttribute('class'), ' picked');
+        document.getElementById('p1-c1').setAttribute('class', z);
+
+        let y = document.getElementById('btm-prompt').getElementsByTagName('span')[0];
+        z = remClass(y.getAttribute('class'), ' hidden');
+        document.getElementById('btm-prompt').getElementsByTagName('span')[0].setAttribute('class', z);
+
+        y = document.getElementById('btm-prompt').getElementsByTagName('i')[0];
+        z = addClass(y.getAttribute('class'), ' hidden');
+        document.getElementById('btm-prompt').getElementsByTagName('i')[0].setAttribute('class', z);
+
+        y = document.getElementById('btm-prompt').getElementsByTagName('i')[1];
+        z = addClass(y.getAttribute('class'), ' hidden');
+        document.getElementById('btm-prompt').getElementsByTagName('i')[1].setAttribute('class', z);
+
+    } else {
+        document.getElementById('other-players').style.display = 'none';
+        document.getElementById('decks-area').style.display = 'none';
+        document.getElementById('top-prompt').style.display = 'block';
+        document.getElementById('btm-prompt').style.display = 'block';
+        document.getElementById('main-player').style.display = 'block';
+        document.getElementById('top-prompt').innerHTML = `${playerData[turnIndex].playerName}<br>Keep this card?`;
+        document.getElementById('p1-c2').style.display = 'none';
+        document.getElementById('main-player').getElementsByClassName('btm-cards')[0].style.display = 'none';
+        document.getElementById('main-player').getElementsByClassName('player-name')[0].style.display = 'none';
+        document.getElementById('main-player').getElementsByClassName('scores')[0].style.display = 'none';
+
+        let x = document.getElementById('p1-c1');
+        let z = addClass(x.getAttribute('class'), ' picked');
+        document.getElementById('p1-c1').setAttribute('class', z);
+
+        let y = document.getElementById('btm-prompt').getElementsByTagName('span')[0];
+        z = addClass(y.getAttribute('class'), ' hidden');
+        document.getElementById('btm-prompt').getElementsByTagName('span')[0].setAttribute('class', z);
+
+        y = document.getElementById('btm-prompt').getElementsByTagName('i')[0];
+        z = remClass(y.getAttribute('class'), ' hidden');
+        document.getElementById('btm-prompt').getElementsByTagName('i')[0].setAttribute('class', z);
+
+        y = document.getElementById('btm-prompt').getElementsByTagName('i')[1];
+        z = remClass(y.getAttribute('class'), ' hidden');
+        document.getElementById('btm-prompt').getElementsByTagName('i')[1].setAttribute('class', z);
+
+        if (action === 'draw') {
+            x.innerHTML = drawDeck.slice(-1)[0];
+        } else if (action === 'discard') {
+            x.innerHTML = discardDeck.slice(0)[0];
+        }
+    }
+
+
+
+}
 
 // checks that the string contains the term and removes the term
 function remClass(strg1, term) {
