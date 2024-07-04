@@ -15,6 +15,13 @@ const drawDeck = [];
 const discardDeck = [];
 // Constant for selected cards to swap
 const pair = [];
+// timed function index, to trigger the correct function specified on a timed action
+// 0 will mean ignore, 1 will deal the cards to the table, 2 will reveal the bottom cards of a hand, 3 will offer the knock button, 4 will reveal knocked hand
+let timedIdx = 0;
+// variable to store the setTimeout function
+let timer;
+// variable to record if and who has knocked, 4 means no one has knocked, 0-3 will match the playerData index and compared to turnIndex
+let knocker = 4;
 
 // wait for the DOM to finish loading before running the game
 // Get the button elements and add event listeners to them
@@ -79,8 +86,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     shiftTurns();
                     plrPrompt();
                 } else {
+                    if (document.getElementById('p1-c1').getAttribute('class').includes('picked')) {
+
+                    }
                     newRound = 0;
                     hand('close');
+                    picked('clear');
                     shiftTurns();
                     table('update');
                     if (playerData[turnIndex].botSkill === 0) {
@@ -97,6 +108,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     y = addClass(y, ' selected');
                     this.setAttribute('class', y);
                     hand('swap', parseInt(x - 1));
+                    if (this.getAttribute('action').includes('swapout')) {
+                        picked('swapout');
+                        timedIdx = 3;
+                        timer = setTimeout(timedFunctions, 1000);
+                    }
                 } else if (this.getAttribute('class').includes('picked')) {
                     // do nothing
                 } else {
@@ -126,6 +142,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 pair.push(card);
                 picked('clear');
                 hand('open');
+                hand('swapout');
+            } else if (this.getAttribute('id') === 'knock' && this.getAttribute('class').includes('no-knock')) {
+                alert(`${playerData[knocker].playerName} has already knocked!`);
+            } else if (this.getAttribute('id') === 'knock') {
+                knocker = turnIndex;
+                timedIdx = 0;
+                let x = this.getAttribute('class');
+                x = addClass(x, ' no-knock');
+                this.setAttribute('class', x);
+                next();
             } else {
                 let item = this.getAttribute('id') === null ? this.innerText : this.getAttribute('id');
                 alert(item);
@@ -135,6 +161,50 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 })
+
+function timedFunctions() {
+    switch (timedIdx) {
+        case (0):
+            clearTimeout(timer);
+            break;
+        case (1):
+            break;
+        case (2):
+            break;
+        case (3):
+            let x = document.getElementById('knock-count');
+            switch (x.innerHTML) {
+                case (''):
+                    x.innerHTML = ' 3';
+                    timer = setTimeout(timedFunctions, 1000);
+                    break;
+                case (' 3'):
+                    x.innerHTML = ' 2';
+                    timer = setTimeout(timedFunctions, 1000);
+                    break;
+                case (' 2'):
+                    x.innerHTML = ' 1';
+                    timer = setTimeout(timedFunctions, 1000);
+                    break;
+                case (' 1'):
+                    x.innerHTML = '';
+                    timedIdx = 0;
+                    next();
+                    break;
+            }
+    }
+}
+
+function next() {
+    // alert('testing timeout');
+    hand('close');
+    picked('clear');
+    shiftTurns();
+    table('update');
+    if (playerData[turnIndex].botSkill === 0) {
+        plrPrompt();
+    }
+}
 
 // toggles the navigation menu open and close, including changing the icon from hamburger bars to cross
 function menu() {
@@ -187,6 +257,12 @@ function table(action, data) {
     let p2Name = document.getElementById('p2');
     let p3Name = document.getElementById('p3');
     let p4Name = document.getElementById('p4');
+    // get player bell icon
+    let pNameGroup = document.getElementsByClassName('player-name');
+    let p1Bell = pNameGroup[3].getElementsByTagName('i')[0];
+    let p2Bell = pNameGroup[0].getElementsByTagName('i')[0];
+    let p3Bell = pNameGroup[1].getElementsByTagName('i')[0];
+    let p4Bell = pNameGroup[2].getElementsByTagName('i')[0];
     // get player score elements
     let p1Score = document.getElementById('scr1');
     let p2Score = document.getElementById('scr2');
@@ -263,24 +339,41 @@ function table(action, data) {
 
     } else if (action === 'playerNames') {
         let x = turnIndex - 1;
+        let y;
         for (let i = 0; i < 4; i++) {
             x > 2 ? x = 0 : x++;
             switch (i) {
                 case (0):
                     p1Name.innerHTML = playerData[x].playerName; // display player names
                     p1Score.innerHTML = playerData[x].score; // display player current score
+                    y = p1Bell.getAttribute('class');
+                    knocker === x ? y = remClass(y, ' hidden') : y = addClass(y, ' hidden');
+                    p1Bell.setAttribute('class', y);
+                    console.log(`main player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
                     continue;
                 case (1):
                     p2Name.innerHTML = playerData[x].playerName;
                     p2Score.innerHTML = playerData[x].score;
+                    y = p2Bell.getAttribute('class');
+                    knocker === x ? y = remClass(y, ' hidden') : y = addClass(y, ' hidden');
+                    p2Bell.setAttribute('class', y);
+                    console.log(`LeftTop player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
                     continue;
                 case (2):
                     p3Name.innerHTML = playerData[x].playerName;
                     p3Score.innerHTML = playerData[x].score;
+                    y = p3Bell.getAttribute('class');
+                    knocker === x ? y = remClass(y, ' hidden') : y = addClass(y, ' hidden');
+                    p3Bell.setAttribute('class', y);
+                    console.log(`centerTop player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
                     continue;
                 case (3):
                     p4Name.innerHTML = playerData[x].playerName;
                     p4Score.innerHTML = playerData[x].score;
+                    y = p4Bell.getAttribute('class');
+                    knocker === x ? y = remClass(y, ' hidden') : y = addClass(y, ' hidden');
+                    p4Bell.setAttribute('class', y);
+                    console.log(`rightTop player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
             }
         }
 
@@ -479,16 +572,24 @@ function hand(action, data) {
                 let b = playerData[turnIndex].cardHand.splice(y, 1)[0];
                 playerData[turnIndex].cardHand.splice(y, 0, x);
                 console.log(playerData[turnIndex].cardHand);
+                pair[1] = b;
                 discardStack('add', b);
-                pair.splice(0);
-                hand('close');
-                shiftTurns();
-                table('update');
-                if (playerData[turnIndex].botSkill === 0) {
-                    plrPrompt();
-                }
+                // pair.splice(0);
+                // hand('close');
+                // shiftTurns();
+                // table('update');
+                // if (playerData[turnIndex].botSkill === 0) {
+                //     plrPrompt();
+                // }
             }
-
+        }
+    } else if (action === 'swapout') {
+        for (let card of cards) {
+            let x = card.getAttribute('action');
+            console.log(x);
+            x = addClass(x, 'swapout');
+            console.log(x);
+            card.setAttribute('action', x);
         }
     } else if (action === 'close') {
         for (let card of cards) {
@@ -524,19 +625,24 @@ function picked(action, data) {
 
         let x = document.getElementById('p1-c1');
         let z = remClass(x.getAttribute('class'), ' picked');
+        z = remClass(z, ' selected');
         document.getElementById('p1-c1').setAttribute('class', z);
 
-        let y = document.getElementById('btm-prompt').getElementsByTagName('span')[0];
-        z = remClass(y.getAttribute('class'), ' hidden');
-        document.getElementById('btm-prompt').getElementsByTagName('span')[0].setAttribute('class', z);
-
-        y = document.getElementById('btm-prompt').getElementsByTagName('i')[0];
+        let y = document.getElementById('done');
         z = addClass(y.getAttribute('class'), ' hidden');
-        document.getElementById('btm-prompt').getElementsByTagName('i')[0].setAttribute('class', z);
+        document.getElementById('done').setAttribute('class', z);
 
-        y = document.getElementById('btm-prompt').getElementsByTagName('i')[1];
+        y = document.getElementById('knock');
         z = addClass(y.getAttribute('class'), ' hidden');
-        document.getElementById('btm-prompt').getElementsByTagName('i')[1].setAttribute('class', z);
+        document.getElementById('knock').setAttribute('class', z);
+
+        y = document.getElementById('reject');
+        z = addClass(y.getAttribute('class'), ' hidden');
+        document.getElementById('reject').setAttribute('class', z);
+
+        y = document.getElementById('accept');
+        z = addClass(y.getAttribute('class'), ' hidden');
+        document.getElementById('accept').setAttribute('class', z);
 
         x.innerHTML = playerData[turnIndex].cardHand[0];
 
@@ -554,24 +660,50 @@ function picked(action, data) {
 
         let x = document.getElementById('p1-c1');
         let z = addClass(x.getAttribute('class'), ' picked');
+        z = remClass(z, ' selected');
         document.getElementById('p1-c1').setAttribute('class', z);
 
-        let y = document.getElementById('btm-prompt').getElementsByTagName('span')[0];
+        let y = document.getElementById('done');
         z = addClass(y.getAttribute('class'), ' hidden');
-        document.getElementById('btm-prompt').getElementsByTagName('span')[0].setAttribute('class', z);
+        document.getElementById('done').setAttribute('class', z);
 
-        y = document.getElementById('btm-prompt').getElementsByTagName('i')[0];
-        z = remClass(y.getAttribute('class'), ' hidden');
-        document.getElementById('btm-prompt').getElementsByTagName('i')[0].setAttribute('class', z);
+        y = document.getElementById('knock');
+        z = addClass(y.getAttribute('class'), ' hidden');
+        document.getElementById('knock').setAttribute('class', z);
 
-        y = document.getElementById('btm-prompt').getElementsByTagName('i')[1];
+        y = document.getElementById('reject');
         z = remClass(y.getAttribute('class'), ' hidden');
-        document.getElementById('btm-prompt').getElementsByTagName('i')[1].setAttribute('class', z);
+        document.getElementById('reject').setAttribute('class', z);
+
+        y = document.getElementById('accept');
+        z = remClass(y.getAttribute('class'), ' hidden');
+        document.getElementById('accept').setAttribute('class', z);
 
         if (action === 'draw') {
             x.innerHTML = drawDeck.slice(-1)[0];
         } else if (action === 'discard') {
             x.innerHTML = discardDeck.slice(0)[0];
+        } else if (action === 'swapout') {
+            x.innerHTML = pair[1];
+            pair.splice(0);
+
+            document.getElementById('top-prompt').innerHTML = `Card being discarded`;
+
+            y = document.getElementById('done');
+            z = addClass(y.getAttribute('class'), ' hidden');
+            document.getElementById('done').setAttribute('class', z);
+
+            y = document.getElementById('knock');
+            z = remClass(y.getAttribute('class'), ' hidden');
+            document.getElementById('knock').setAttribute('class', z);
+
+            y = document.getElementById('reject');
+            z = addClass(y.getAttribute('class'), ' hidden');
+            document.getElementById('reject').setAttribute('class', z);
+
+            y = document.getElementById('accept');
+            z = addClass(y.getAttribute('class'), ' hidden');
+            document.getElementById('accept').setAttribute('class', z);
         }
     }
 

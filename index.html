@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,13 +54,13 @@
                     <table>
                         <tr>
                             <td><input type="text" id="P1-name" name="P1-name" class="input-field"
-                                    placeholder="Player 1" required></td>
+                                    placeholder="Player 1" maxlength="8"></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>
                                 <input type="text" class="input-field" id="P2-name" name="P2-name"
-                                    placeholder="BOT 1">
+                                    placeholder="BOT 1" maxlength="8">
                                 <span class="bot-lvls hidden" id="bot1-lvl">
                                     <span class="click lvl-1">Lvl 1 </span>
                                     <span class="click lvl-2">Lvl 2 </span>
@@ -71,7 +72,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" class="input-field" id="P3-name" name="P3-name" placeholder="BOT 2">
+                                <input type="text" class="input-field" id="P3-name" name="P3-name" placeholder="BOT 2" maxlength="8">
                                 <span class="bot-lvls hidden" id="bot2-lvl">
                                     <span class="click lvl-1">Lvl 1 </span>
                                     <span class="click lvl-2">Lvl 2 </span>
@@ -83,7 +84,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" class="input-field" id="P4-name" name="P4-name" placeholder="BOT 3">
+                                <input type="text" class="input-field" id="P4-name" name="P4-name" placeholder="BOT 3" maxlength="8">
                                 <span class="bot-lvls hidden" id="bot2-lvl">
                                     <span class="click lvl-1">Lvl 1 </span>
                                     <span class="click lvl-2">Lvl 2 </span>
@@ -103,6 +104,7 @@
             <span class="player">
                 <span class="player-name">
                     <span id="p2">PLAYER 2</span>
+                    <i class="fa-solid fa-bell hidden"></i>
                 </span>
                 <span class="top-cards">
                     <span class="card" id="p2-c1">X</span>
@@ -119,6 +121,7 @@
             <span class="player">
                 <span class="player-name">
                     <span id="p3">PLAYER 3</span>
+                    <i class="fa-solid fa-bell hidden"></i>
                 </span>
                 <span class="top-cards">
                     <span class="card" id="p3-c1">X</span>
@@ -135,6 +138,7 @@
             <span class="player">
                 <span class="player-name">
                     <span id="p4">PLAYER 4</span>
+                    <i class="fa-solid fa-bell hidden"></i>
                 </span>
                 <span class="top-cards">
                     <span class="card" id="p4-c1">X</span>
@@ -177,21 +181,25 @@
             <div class="prompt" id="top-prompt"></div>
             <span class="player">
                 <span class="top-cards">
-                    <span class="click card" id="p1-c1">X</span>
-                    <span class="click card" id="p1-c2">X</span>
+                    <span class="click card" id="p1-c1" action=" ">X</span>
+                    <span class="click card" id="p1-c2" action=" ">X</span>
                 </span>
                 <span class="btm-cards">
-                    <span class="click card" id="p1-c3">X</span>
-                    <span class="click card" id="p1-c4">X</span>
+                    <span class="click card" id="p1-c3" action=" ">X</span>
+                    <span class="click card" id="p1-c4" action=" ">X</span>
                 </span>
                 <span class="player-name">
                     <span id="p1">PLAYER 1</span>
+                    <i class="fa-solid fa-bell hidden"></i>
                 </span>
                 <span class="scores">
                     <span id="scr1">0</span>
                 </span>
             </span>
-            <div class="" id="btm-prompt"><i class="click fa-solid fa-circle-xmark hidden" id="reject"></i><span class="click btns bg-btns" id="done" action="done">DONE</span><i class="click fa-solid fa-circle-check hidden" id="accept"></i></div>
+            <div class="" id="btm-prompt"><i class="click fa-solid fa-circle-xmark hidden" id="reject"></i>
+                <span class="click hidden" id="knock"><i class=" fa-solid fa-bell" id="icon-knock"></i><span id="knock-count"></span></span>
+                <span class="click btns bg-btns" id="done" action="done">DONE</span>
+                <i class="click fa-solid fa-circle-check hidden" id="accept"></i></div>
         </div>
     </div>
     <script src="assets/js/script.js"></script>
