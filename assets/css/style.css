@@ -198,7 +198,7 @@ body {
 .hearts,
 .spades {
     background-image: url(/GameOfKings/assets/images/club.svg), 
-    url(/assets/images/club.svg);
+    url(/GameOfKings/assets/images/club.svg);
     background-repeat: no-repeat, no-repeat;
     background-size: 1rem, 1rem;
     background-position: top .25rem left .25rem, bottom .25rem right .25rem;
@@ -206,17 +206,17 @@ body {
 }
 
 .diamonds {
-    background-image: url(/GameOfKings/assets/images/diamond.svg), url(/assets/images/diamond.svg);
+    background-image: url(/GameOfKings/assets/images/diamond.svg), url(/GameOfKings/assets/images/diamond.svg);
     color: red;
 }
 
 .hearts {
-    background-image: url(/GameOfKings/assets/images/heart.svg), url(/assets/images/heart.svg);
+    background-image: url(/GameOfKings/assets/images/heart.svg), url(/GameOfKings/assets/images/heart.svg);
     color: red;
 }
 
 .spades {
-    background-image: url(/GameOfKings/assets/images/spade.svg), url(/assets/images/spade.svg);
+    background-image: url(/GameOfKings/assets/images/spade.svg), url(/GameOfKings/assets/images/spade.svg);
 }
 
 .picked {
