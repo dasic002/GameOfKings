@@ -167,28 +167,67 @@ body {
     display: inline-block;
     height: 2.93rem;
     width: 1.99rem;
-    border-radius: .31rem;
+    border-radius: .15rem;
+    background-image: url(/assets/images/card-back.png);
+    background-size: 1.9rem;
+    background-repeat: no-repeat;
+    background-position: center center;
     background-color: whitesmoke;
     color: black;
     text-align: center;
     align-content: center;
     margin: .15rem;
-    padding: .2rem;
+    padding: .1rem;
 }
 
 .deck {
     height: 6.05rem;
     width: 4.18rem;
+    border-radius: .3rem;
+    background-image: url(/assets/images/card-back.png);
+    background-size: 4rem;
+    background-repeat: no-repeat;
+    background-position: center center;
     font-size: 3rem;
     margin: 0.5rem;
+    padding: .2rem;
     box-shadow: .1rem .1rem .1rem .15rem rgba(0, 0, 0, .5);
+}
+
+.clubs,
+.diamonds,
+.hearts,
+.spades {
+    background-image: url(/assets/images/club.svg), 
+    url(/assets/images/club.svg);
+    background-repeat: no-repeat, no-repeat;
+    background-size: 1rem, 1rem;
+    background-position: top .25rem left .25rem, bottom .25rem right .25rem;
+    text-transform: capitalize;
+}
+
+.diamonds {
+    background-image: url(/assets/images/diamond.svg), url(/assets/images/diamond.svg);
+    color: red;
+}
+
+.hearts {
+    background-image: url(/assets/images/heart.svg), url(/assets/images/heart.svg);
+    color: red;
+}
+
+.spades {
+    background-image: url(/assets/images/spade.svg), url(/assets/images/spade.svg);
 }
 
 .picked {
     height: 18.15rem;
     width: 12.54rem;
+    border-radius: .9rem;
+    background-size: 12rem;
     font-size: 9rem;
     margin: 1.5rem;
+    padding: .6rem;
     box-shadow: .3rem .3rem .45rem;
 }
 

@@ -104,14 +104,20 @@ document.addEventListener("DOMContentLoaded", function () {
             } else if (this.getAttribute('id').includes('p1-c')) {
                 if (this.getAttribute('class').includes('deck')) {
                     let x = this.getAttribute('id').slice(-1);
-                    let y = this.getAttribute('class');
-                    y = addClass(y, ' selected');
-                    this.setAttribute('class', y);
+                    this.classList.add('selected');
+                    // let y = this.getAttribute('class');
+                    // y = addClass(y, ' selected');
+                    // this.setAttribute('class', y);
                     hand('swap', parseInt(x - 1));
-                    if (this.getAttribute('action').includes('swapout')) {
+                    if (this.getAttribute('action') === 'swapout') {
                         picked('swapout');
-                        timedIdx = 3;
-                        timer = setTimeout(timedFunctions, 1000);
+                        if (knocker === 4) {
+                            timedIdx = 3;
+                            timer = setTimeout(timedFunctions, 1000);
+                        } else {
+                            setTimeout(next, 1000);
+                        }
+                        
                     }
                 } else if (this.getAttribute('class').includes('picked')) {
                     // do nothing
@@ -148,9 +154,10 @@ document.addEventListener("DOMContentLoaded", function () {
             } else if (this.getAttribute('id') === 'knock') {
                 knocker = turnIndex;
                 timedIdx = 0;
-                let x = this.getAttribute('class');
-                x = addClass(x, ' no-knock');
-                this.setAttribute('class', x);
+                this.classList.add('no-knock');
+                // let x = this.getAttribute('class');
+                // x = addClass(x, ' no-knock');
+                // this.setAttribute('class', x);
                 next();
             } else {
                 let item = this.getAttribute('id') === null ? this.innerText : this.getAttribute('id');
@@ -163,16 +170,18 @@ document.addEventListener("DOMContentLoaded", function () {
 })
 
 function timedFunctions() {
+    let x = document.getElementById('knock-count');
     switch (timedIdx) {
         case (0):
             clearTimeout(timer);
+            x.innerHTML = '';
             break;
         case (1):
             break;
         case (2):
             break;
         case (3):
-            let x = document.getElementById('knock-count');
+            
             switch (x.innerHTML) {
                 case (''):
                     x.innerHTML = ' 3';
@@ -211,19 +220,17 @@ function menu() {
     let menu = document.getElementById('menu-list');
     let state = menu.style.display;
     let menuBtn = document.getElementById('menu-btn');
-    let bars = menuBtn.children[0].getAttribute('class');
-    let x = menuBtn.children[1].getAttribute('class');
+    let bars = menuBtn.children[0];
+    let x = menuBtn.children[1];
     if (state === 'block') {
-        bars = remClass(bars, ' hidden');
-        x = addClass(x, ' hidden');
+        bars.classList.remove('hidden');
+        x.classList.add('hidden');
         menu.style.display = 'none';
     } else {
-        x = remClass(x, ' hidden');
-        bars = addClass(bars, ' hidden');
+        x.classList.remove('hidden');
+        bars.classList.add('hidden');
         menu.style.display = 'block';
     }
-    menuBtn.children[1].setAttribute('class', x);
-    menuBtn.children[0].setAttribute('class', bars);
 }
 
 // function that will run the sequence of functions of the game, triggering functions to manipulate data stored in constants
@@ -271,67 +278,115 @@ function table(action, data) {
 
     if (action === 'empty') {
         for (let card of cards) {
-            let x = card.getAttribute('class');
-            x = addClass(x, ' missing-card');
-            card.setAttribute('class', x);
+            card.classList.add('missing-card');
+            // let x = card.getAttribute('class');
+            // x = addClass(x, ' missing-card');
+            // card.setAttribute('class', x);
             card.innerHTML = '';
         }
         for (let card of decks) {
-            let x = card.getAttribute('class');
-            x = addClass(x, ' missing-card');
-            card.setAttribute('class', x);
+            card.classList.add('missing-card');
+            // let x = card.getAttribute('class');
+            // x = addClass(x, ' missing-card');
+            // card.setAttribute('class', x);
             card.innerHTML = '';
         }
     } else if (action === "deal") {
         console.log(data);
         if (data < 16) {
-            let y = cards[data].getAttribute('class');
-            y = remClass(y, 'missing-card');
-            cards[data].setAttribute('class', y);
+            cards[data].classList.remove('missing-card');
+            // let y = cards[data].getAttribute('class');
+            // y = remClass(y, 'missing-card');
+            // cards[data].setAttribute('class', y);
         } else if (data < 22) {
             data = data - 16;
-            let y = decks[data].getAttribute('class');
-            y = remClass(y, 'missing-card');
-            decks[data].setAttribute('class', y);
+            decks[data].classList.remove('missing-card');
+            // let y = decks[data].getAttribute('class');
+            // y = remClass(y, 'missing-card');
+            // decks[data].setAttribute('class', y);
         } else {
             alert('action "deal" given data larger than 21!');
         }
 
     } else if (action === 'values') {
         if (data < 16) {
-            cards[data].innerHTML = playerData[turnIndex].cardHand[data % 4];
+            // cards[data].innerHTML = playerData[turnIndex].cardHand[data % 4];
+            cards[data].innerHTML = '';
         } else if (data < 19) {
             data = data - 16;
             let i = data + 1;
-            let x = decks[data].getAttribute('class');
+            let x = decks[data];
+
             if (drawDeck.length === 0) {
                 let x = discardStack('donate');
                 drawStack('add', x);
-                decks[data].innerHTML = drawDeck[drawDeck.length - i];
+                // decks[data].innerHTML = drawDeck[drawDeck.length - i];
+                decks[data].innerHTML = '';
             }
 
             if (drawDeck[drawDeck.length - i] === undefined) {
                 decks[data].innerHTML = '';
-                x = addClass(x, ' missing-card');
-                decks[data].setAttribute('class', x);
+                x.classList.add('missing-card');
             } else {
-                decks[data].innerHTML = drawDeck[drawDeck.length - i];
-                x = remClass(x, ' missing-card');
-                decks[data].setAttribute('class', x);
+                // decks[data].innerHTML = drawDeck[drawDeck.length - i];
+                decks[data].innerHTML = '';
+                x.classList.remove('missing-card');
             }
 
         } else if (data < 22) {
             data = data - 16;
             let i = data - 3;
-            let x = decks[data].getAttribute('class');
+            let x = decks[data];
             if (discardDeck[i] === undefined) {
                 decks[data].innerHTML = '';
-                x = addClass(x, ' missing-card');
-                decks[data].setAttribute('class', x);
+                x.classList.add('missing-card');
             } else {
-                decks[data].innerHTML = discardDeck[i];
-                x = remClass(x, ' missing-card');
-                decks[data].setAttribute('class', x);
+                let suit;
+                switch (discardDeck[i][0]) {
+                    case ('c'):
+                        console.log(discardDeck[i][0]);
+                        suit = decks[data];
+                        suit.classList.add('clubs');
+                        suit.classList.remove('diamonds', 'hearts', 'spades');
+                        console.log(suit);
+                        break;
+                    case ('d'):
+                        console.log(discardDeck[i][0]);
+                        suit = decks[data];
+                        suit.classList.add('diamonds');
+                        suit.classList.remove('clubs', 'hearts', 'spades');
+                        console.log(suit);
+                        break;
+                    case ('h'):
+                        console.log(discardDeck[i][0]);
+                        suit = decks[data];
+                        suit.classList.add('hearts');
+                        suit.classList.remove('diamonds', 'clubs', 'spades');
+                        console.log(suit);
+                        break;
+                    case ('s'):
+                        console.log(discardDeck[i][0]);
+                        suit = decks[data];
+                        suit.classList.add('spades');
+                        suit.classList.remove('diamonds', 'hearts', 'clubs');
+                        console.log(suit);
+                        break;
+                }
+
+                switch (discardDeck[i][1]) {
+                    case ('x'):
+                        decks[data].innerHTML = 10;
+                        break;
+                    case 1:
+                        decks[data].innerHTML = "a";
+                    default:
+                        decks[data].innerHTML = discardDeck[i][1];
+                        break;
+                }
+
+                decks[data].classList.remove('missing-card');
+                // x = remClass(x, ' missing-card');
+                // decks[data].setAttribute('class', x);
             }
         } else {
             alert('action "values" given data larger than 21!');
@@ -346,33 +401,43 @@ function table(action, data) {
                 case (0):
                     p1Name.innerHTML = playerData[x].playerName; // display player names
                     p1Score.innerHTML = playerData[x].score; // display player current score
-                    y = p1Bell.getAttribute('class');
-                    knocker === x ? y = remClass(y, ' hidden') : y = addClass(y, ' hidden');
-                    p1Bell.setAttribute('class', y);
+                    // y = p1Bell;
+                    if (knocker === x) {
+                        p1Bell.classList.remove('hidden');
+                    } else {
+                        p1Bell.classList.add('hidden');
+                    }
+                    // p1Bell.setAttribute('class', y);
                     console.log(`main player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
                     continue;
                 case (1):
                     p2Name.innerHTML = playerData[x].playerName;
                     p2Score.innerHTML = playerData[x].score;
-                    y = p2Bell.getAttribute('class');
-                    knocker === x ? y = remClass(y, ' hidden') : y = addClass(y, ' hidden');
-                    p2Bell.setAttribute('class', y);
+                    if (knocker === x) {
+                        p2Bell.classList.remove('hidden');
+                    } else {
+                        p2Bell.classList.add('hidden');
+                    }
                     console.log(`LeftTop player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
                     continue;
                 case (2):
                     p3Name.innerHTML = playerData[x].playerName;
                     p3Score.innerHTML = playerData[x].score;
-                    y = p3Bell.getAttribute('class');
-                    knocker === x ? y = remClass(y, ' hidden') : y = addClass(y, ' hidden');
-                    p3Bell.setAttribute('class', y);
+                    if (knocker === x) {
+                        p3Bell.classList.remove('hidden');
+                    } else {
+                        p3Bell.classList.add('hidden');
+                    }
                     console.log(`centerTop player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
                     continue;
                 case (3):
                     p4Name.innerHTML = playerData[x].playerName;
                     p4Score.innerHTML = playerData[x].score;
-                    y = p4Bell.getAttribute('class');
-                    knocker === x ? y = remClass(y, ' hidden') : y = addClass(y, ' hidden');
-                    p4Bell.setAttribute('class', y);
+                    if (knocker === x) {
+                        p4Bell.classList.remove('hidden');
+                    } else {
+                        p4Bell.classList.add('hidden');
+                    }
                     console.log(`rightTop player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
             }
         }
@@ -534,10 +599,12 @@ function hand(action, data) {
     if (action === 'open') {
         // adds class of deck so appearance is larger as set for the cards in the decks
         for (let card of cards) {
-            let x = card.getAttribute('class');
-            x = addClass(x, ' deck');
-            x = remClass(x, ' selected');
-            card.setAttribute('class', x);
+            card.classList.add('deck');
+            card.classList.remove('selected');
+            // let x = card.getAttribute('class');
+            // x = addClass(x, ' deck');
+            // x = remClass(x, ' selected');
+            // card.setAttribute('class', x);
         }
         // for testing, sets the cards ID to the correct position in the player's hand
         for (let i = 0; i < 4; i++) {
@@ -585,18 +652,19 @@ function hand(action, data) {
         }
     } else if (action === 'swapout') {
         for (let card of cards) {
-            let x = card.getAttribute('action');
-            console.log(x);
-            x = addClass(x, 'swapout');
-            console.log(x);
-            card.setAttribute('action', x);
+            // let x = card.getAttribute('action');
+            // console.log(x);
+            // x = addClass(x, 'swapout');
+            // console.log(x);
+            card.setAttribute('action', 'swapout');
         }
     } else if (action === 'close') {
         for (let card of cards) {
-            let x = card.getAttribute('class');
-            x = remClass(x, ' deck');
-            x = remClass(x, ' selected');
-            card.setAttribute('class', x);
+            card.classList.remove('deck', 'selected');
+            // let x = card.getAttribute('class');
+            // x = remClass(x, ' deck');
+            // x = remClass(x, ' selected');
+            // card.setAttribute('class', x);
         }
         document.getElementById('top-prompt').style.display = 'none';
         document.getElementById('btm-prompt').style.display = 'none';
@@ -624,25 +692,30 @@ function picked(action, data) {
         document.getElementById('main-player').getElementsByClassName('scores')[0].style.display = '';
 
         let x = document.getElementById('p1-c1');
-        let z = remClass(x.getAttribute('class'), ' picked');
-        z = remClass(z, ' selected');
-        document.getElementById('p1-c1').setAttribute('class', z);
+        x.classList.remove('picked', 'selected');
+        // let z = remClass(x.getAttribute('class'), ' picked');
+        // z = remClass(z, ' selected');
+        // document.getElementById('p1-c1').setAttribute('class', z);
 
         let y = document.getElementById('done');
-        z = addClass(y.getAttribute('class'), ' hidden');
-        document.getElementById('done').setAttribute('class', z);
+        y.classList.add('hidden');
+        // z = addClass(y.getAttribute('class'), ' hidden');
+        // document.getElementById('done').setAttribute('class', z);
 
         y = document.getElementById('knock');
-        z = addClass(y.getAttribute('class'), ' hidden');
-        document.getElementById('knock').setAttribute('class', z);
+        y.classList.add('hidden');
+        // z = addClass(y.getAttribute('class'), ' hidden');
+        // document.getElementById('knock').setAttribute('class', z);
 
         y = document.getElementById('reject');
-        z = addClass(y.getAttribute('class'), ' hidden');
-        document.getElementById('reject').setAttribute('class', z);
+        y.classList.add('hidden');
+        // z = addClass(y.getAttribute('class'), ' hidden');
+        // document.getElementById('reject').setAttribute('class', z);
 
         y = document.getElementById('accept');
-        z = addClass(y.getAttribute('class'), ' hidden');
-        document.getElementById('accept').setAttribute('class', z);
+        y.classList.add('hidden');
+        // z = addClass(y.getAttribute('class'), ' hidden');
+        // document.getElementById('accept').setAttribute('class', z);
 
         x.innerHTML = playerData[turnIndex].cardHand[0];
 
@@ -659,25 +732,30 @@ function picked(action, data) {
         document.getElementById('main-player').getElementsByClassName('scores')[0].style.display = 'none';
 
         let x = document.getElementById('p1-c1');
-        let z = addClass(x.getAttribute('class'), ' picked');
-        z = remClass(z, ' selected');
-        document.getElementById('p1-c1').setAttribute('class', z);
+        x.classList.add('picked');
+        // let z = addClass(x.getAttribute('class'), ' picked');
+        // z = remClass(z, ' selected');
+        // document.getElementById('p1-c1').setAttribute('class', z);
 
         let y = document.getElementById('done');
-        z = addClass(y.getAttribute('class'), ' hidden');
-        document.getElementById('done').setAttribute('class', z);
+        y.classList.add('hidden');
+        // z = addClass(y.getAttribute('class'), ' hidden');
+        // document.getElementById('done').setAttribute('class', z);
 
         y = document.getElementById('knock');
-        z = addClass(y.getAttribute('class'), ' hidden');
-        document.getElementById('knock').setAttribute('class', z);
+        y.classList.add('hidden');
+        // z = addClass(y.getAttribute('class'), ' hidden');
+        // document.getElementById('knock').setAttribute('class', z);
 
         y = document.getElementById('reject');
-        z = remClass(y.getAttribute('class'), ' hidden');
-        document.getElementById('reject').setAttribute('class', z);
+        y.classList.remove('hidden');
+        // z = remClass(y.getAttribute('class'), ' hidden');
+        // document.getElementById('reject').setAttribute('class', z);
 
         y = document.getElementById('accept');
-        z = remClass(y.getAttribute('class'), ' hidden');
-        document.getElementById('accept').setAttribute('class', z);
+        y.classList.remove('hidden');
+        // z = remClass(y.getAttribute('class'), ' hidden');
+        // document.getElementById('accept').setAttribute('class', z);
 
         if (action === 'draw') {
             x.innerHTML = drawDeck.slice(-1)[0];
@@ -690,20 +768,24 @@ function picked(action, data) {
             document.getElementById('top-prompt').innerHTML = `Card being discarded`;
 
             y = document.getElementById('done');
-            z = addClass(y.getAttribute('class'), ' hidden');
-            document.getElementById('done').setAttribute('class', z);
+            y.classList.add('hidden');
+            // z = addClass(y.getAttribute('class'), ' hidden');
+            // document.getElementById('done').setAttribute('class', z);
 
             y = document.getElementById('knock');
-            z = remClass(y.getAttribute('class'), ' hidden');
-            document.getElementById('knock').setAttribute('class', z);
+            y.classList.remove('hidden');
+            // z = remClass(y.getAttribute('class'), ' hidden');
+            // document.getElementById('knock').setAttribute('class', z);
 
             y = document.getElementById('reject');
-            z = addClass(y.getAttribute('class'), ' hidden');
-            document.getElementById('reject').setAttribute('class', z);
+            y.classList.add('hidden');
+            // z = addClass(y.getAttribute('class'), ' hidden');
+            // document.getElementById('reject').setAttribute('class', z);
 
             y = document.getElementById('accept');
-            z = addClass(y.getAttribute('class'), ' hidden');
-            document.getElementById('accept').setAttribute('class', z);
+            y.classList.add('hidden');
+            // z = addClass(y.getAttribute('class'), ' hidden');
+            // document.getElementById('accept').setAttribute('class', z);
         }
     }
 
