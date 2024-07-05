@@ -168,7 +168,7 @@ body {
     height: 2.93rem;
     width: 1.99rem;
     border-radius: .15rem;
-    background-image: url(/assets/images/card-back.png);
+    background-image: url(/gameofkings/assets/images/card-back.png);
     background-size: 1.9rem;
     background-repeat: no-repeat;
     background-position: center center;
@@ -184,7 +184,6 @@ body {
     height: 6.05rem;
     width: 4.18rem;
     border-radius: .3rem;
-    background-image: url(/assets/images/card-back.png);
     background-size: 4rem;
     background-repeat: no-repeat;
     background-position: center center;
@@ -198,7 +197,7 @@ body {
 .diamonds,
 .hearts,
 .spades {
-    background-image: url(/assets/images/club.svg), 
+    background-image: url(/gameofkings/assets/images/club.svg), 
     url(/assets/images/club.svg);
     background-repeat: no-repeat, no-repeat;
     background-size: 1rem, 1rem;
@@ -207,17 +206,17 @@ body {
 }
 
 .diamonds {
-    background-image: url(/assets/images/diamond.svg), url(/assets/images/diamond.svg);
+    background-image: url(/gameofkings/assets/images/diamond.svg), url(/assets/images/diamond.svg);
     color: red;
 }
 
 .hearts {
-    background-image: url(/assets/images/heart.svg), url(/assets/images/heart.svg);
+    background-image: url(/gameofkings/assets/images/heart.svg), url(/assets/images/heart.svg);
     color: red;
 }
 
 .spades {
-    background-image: url(/assets/images/spade.svg), url(/assets/images/spade.svg);
+    background-image: url(/gameofkings/assets/images/spade.svg), url(/assets/images/spade.svg);
 }
 
 .picked {
