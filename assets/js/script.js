@@ -22,6 +22,9 @@ let timedIdx = 0;
 let timer;
 // variable to record if and who has knocked, 4 means no one has knocked, 0-3 will match the playerData index and compared to turnIndex
 let knocker = 4;
+// variable to countdown the turns left since a player has locked in their hand
+let endRound = 0;
+
 
 // wait for the DOM to finish loading before running the game
 // Get the button elements and add event listeners to them
@@ -82,9 +85,13 @@ document.addEventListener("DOMContentLoaded", function () {
             } else if (this.getAttribute('action') === 'new-hand') {
                 hand('open');
             } else if (this.getAttribute('action') === 'done') {
-                if (newRound > 1) {
-                    shiftTurns();
-                    plrPrompt();
+                if (newRound > 0) {
+                    hand('open');
+                    document.getElementById('done').classList.add('hidden');
+                    document.getElementById('top-prompt').innerHTML = 'Ready...';
+                    timedIdx = 2;
+                    timedFunctions();
+                    newRound--;
                 } else {
                     if (document.getElementById('p1-c1').getAttribute('class').includes('picked')) {
 
@@ -153,6 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert(`${playerData[knocker].playerName} has already knocked!`);
             } else if (this.getAttribute('id') === 'knock') {
                 knocker = turnIndex;
+                endRound = 4;
                 timedIdx = 0;
                 this.classList.add('no-knock');
                 // let x = this.getAttribute('class');
@@ -179,6 +187,31 @@ function timedFunctions() {
         case (1):
             break;
         case (2):
+            let btm = document.getElementById('btm-prompt')
+            btm = btm.getElementsByTagName('p')[0];
+            switch (btm.innerHTML) {
+                case '':
+                    btm.innerHTML = '3, ';
+                    timer = setTimeout(timedFunctions, 1000);
+                    break;
+                case '3, ':
+                    btm.innerHTML = '3, 2, ';
+                    timer = setTimeout(timedFunctions, 1000);
+                    break;
+                case '3, 2, ':
+                    btm.innerHTML = '3, 2, 1!';
+                    table('values', 14);
+                    table('values', 15);
+                    timer = setTimeout(timedFunctions, 1000);
+                    break;
+                case '3, 2, 1!':
+                    btm.innerHTML = '';
+                    table('hide', 14);
+                    table('hide', 15);
+                    timedIdx = 0;
+                    next();
+                    break;
+            }
             break;
         case (3):
             
@@ -205,12 +238,12 @@ function timedFunctions() {
 }
 
 function next() {
-    // alert('testing timeout');
     hand('close');
     picked('clear');
     shiftTurns();
     table('update');
-    if (playerData[turnIndex].botSkill === 0) {
+    // whilst it's still first turns on start of new round, or the next player is human, get prompt up
+    if (newRound > 0 || playerData[turnIndex].botSkill === 0) {
         plrPrompt();
     }
 }
@@ -295,23 +328,18 @@ function table(action, data) {
         console.log(data);
         if (data < 16) {
             cards[data].classList.remove('missing-card');
-            // let y = cards[data].getAttribute('class');
-            // y = remClass(y, 'missing-card');
-            // cards[data].setAttribute('class', y);
         } else if (data < 22) {
             data = data - 16;
             decks[data].classList.remove('missing-card');
-            // let y = decks[data].getAttribute('class');
-            // y = remClass(y, 'missing-card');
-            // decks[data].setAttribute('class', y);
         } else {
             alert('action "deal" given data larger than 21!');
         }
 
     } else if (action === 'values') {
         if (data < 16) {
+            cardFace(cards[data],playerData[turnIndex].cardHand[data % 4]);
             // cards[data].innerHTML = playerData[turnIndex].cardHand[data % 4];
-            cards[data].innerHTML = '';
+            // cards[data].innerHTML = '';
         } else if (data < 19) {
             data = data - 16;
             let i = data + 1;
@@ -341,58 +369,20 @@ function table(action, data) {
                 decks[data].innerHTML = '';
                 x.classList.add('missing-card');
             } else {
-                let suit;
-                switch (discardDeck[i][0]) {
-                    case ('c'):
-                        console.log(discardDeck[i][0]);
-                        suit = decks[data];
-                        suit.classList.add('clubs');
-                        suit.classList.remove('diamonds', 'hearts', 'spades');
-                        console.log(suit);
-                        break;
-                    case ('d'):
-                        console.log(discardDeck[i][0]);
-                        suit = decks[data];
-                        suit.classList.add('diamonds');
-                        suit.classList.remove('clubs', 'hearts', 'spades');
-                        console.log(suit);
-                        break;
-                    case ('h'):
-                        console.log(discardDeck[i][0]);
-                        suit = decks[data];
-                        suit.classList.add('hearts');
-                        suit.classList.remove('diamonds', 'clubs', 'spades');
-                        console.log(suit);
-                        break;
-                    case ('s'):
-                        console.log(discardDeck[i][0]);
-                        suit = decks[data];
-                        suit.classList.add('spades');
-                        suit.classList.remove('diamonds', 'hearts', 'clubs');
-                        console.log(suit);
-                        break;
-                }
-
-                switch (discardDeck[i][1]) {
-                    case ('x'):
-                        decks[data].innerHTML = 10;
-                        break;
-                    case '1':
-                        decks[data].innerHTML = "a";
-                        break;
-                    default:
-                        decks[data].innerHTML = discardDeck[i][1];
-                        break;
-                }
-
+                cardFace(decks[data],discardDeck[i]);
                 decks[data].classList.remove('missing-card');
-                // x = remClass(x, ' missing-card');
-                // decks[data].setAttribute('class', x);
             }
         } else {
             alert('action "values" given data larger than 21!');
         }
 
+    } else if (action === 'hide') {
+        if (data < 16) {
+            cards[data].innerHTML = '';
+            cards[data].classList.remove('clubs', 'diamonds', 'hearts', 'spades');
+        } else {
+            alert(`error: card place ${data} not valid under table('hide')`);
+        }
     } else if (action === 'playerNames') {
         let x = turnIndex - 1;
         let y;
@@ -446,12 +436,17 @@ function table(action, data) {
     } else if (action === 'update') {
         table('playerNames');
         for (let i = 0; i < 22; i++) {
-            if (i < 16) {
+            if (i < 16 && endRound === 1) {
                 if (i % 4 === 0) {
                     shiftTurns();
                 }
+                table('values', i);
+            } else if (i >= 16) {
+                table('values', i);
+            } else {
+                continue;
             }
-            table('values', i);
+            
         }
     }
 }
@@ -482,7 +477,9 @@ function drawStack(action, data) {
                 playerData[turnIndex].cardHand.push(card);
                 let place = i + 4 * j;
                 table('deal', place);
-                table('values', place);
+                if (place > 18){
+                    table('values', place);
+                }
                 shiftTurns();
             }
         }
@@ -545,14 +542,14 @@ function plrPrompt() {
             document.getElementById('other-players').style.display = 'none';
             document.getElementById('decks-area').style.display = 'none';
             document.getElementById('main-player').style.display = 'none';
-            newRound--;
+            // newRound--;
             console.log(`newRound deducted ${newRound}`);
         } else if (humans === false) {
             console.log('no humans but P1!')
             turnIndex = 0;
-            newRound = 2;
+            newRound = 1;
             hand('open');
-            newRound--;
+            // newRound--;
         } else {
             console.log(`bot player - turnIndex: ${turnIndex} on newRound ${newRound}`);
             newRound--;
@@ -608,14 +605,15 @@ function hand(action, data) {
             // card.setAttribute('class', x);
         }
         // for testing, sets the cards ID to the correct position in the player's hand
-        for (let i = 0; i < 4; i++) {
-            cards[i].innerHTML = playerData[turnIndex].cardHand[i];
-        }
+        // for (let i = 0; i < 4; i++) {
+        //     cards[i].innerHTML = playerData[turnIndex].cardHand[i];
+        // }
         // presents main-player name, score and message
         document.getElementById('p1').innerHTML = playerData[turnIndex].playerName;
         document.getElementById('scr1').innerHTML = playerData[turnIndex].score;
         if (newRound > 0) {
             document.getElementById('top-prompt').innerHTML = 'Want to shuffle?';
+            document.getElementById('done').classList.remove('hidden');
         } else {
             document.getElementById('top-prompt').innerHTML = 'Pick a card to swap';
             document.getElementById('btm-prompt').style.display = 'none';
@@ -693,32 +691,21 @@ function picked(action, data) {
         document.getElementById('main-player').getElementsByClassName('scores')[0].style.display = '';
 
         let x = document.getElementById('p1-c1');
-        x.classList.remove('picked', 'selected');
-        // let z = remClass(x.getAttribute('class'), ' picked');
-        // z = remClass(z, ' selected');
-        // document.getElementById('p1-c1').setAttribute('class', z);
+        x.classList.remove('picked', 'selected', 'clubs', 'diamonds', 'hearts', 'spades');
 
         let y = document.getElementById('done');
         y.classList.add('hidden');
-        // z = addClass(y.getAttribute('class'), ' hidden');
-        // document.getElementById('done').setAttribute('class', z);
 
         y = document.getElementById('knock');
         y.classList.add('hidden');
-        // z = addClass(y.getAttribute('class'), ' hidden');
-        // document.getElementById('knock').setAttribute('class', z);
 
         y = document.getElementById('reject');
         y.classList.add('hidden');
-        // z = addClass(y.getAttribute('class'), ' hidden');
-        // document.getElementById('reject').setAttribute('class', z);
 
         y = document.getElementById('accept');
         y.classList.add('hidden');
-        // z = addClass(y.getAttribute('class'), ' hidden');
-        // document.getElementById('accept').setAttribute('class', z);
 
-        x.innerHTML = playerData[turnIndex].cardHand[0];
+        x.innerHTML = '';
 
     } else {
         document.getElementById('other-players').style.display = 'none';
@@ -759,11 +746,14 @@ function picked(action, data) {
         // document.getElementById('accept').setAttribute('class', z);
 
         if (action === 'draw') {
-            x.innerHTML = drawDeck.slice(-1)[0];
+            // x.innerHTML = drawDeck.slice(-1)[0];
+            cardFace(x, drawDeck.slice(-1)[0]);
         } else if (action === 'discard') {
-            x.innerHTML = discardDeck.slice(0)[0];
+            // x.innerHTML = discardDeck.slice(0)[0];
+            cardFace(x, discardDeck.slice(0)[0]);
         } else if (action === 'swapout') {
             x.innerHTML = pair[1];
+            cardFace(x, pair[1]);
             pair.splice(0);
 
             document.getElementById('top-prompt').innerHTML = `Card being discarded`;
@@ -830,6 +820,7 @@ function logBot(strg1) {
         return strg1 = [y, x];
     } else {
         humans = true;
+        strg1 = strg1.slice(0, 8); // should the human name string be longer that 8 characters, trim excess
         return strg1 = [strg1, 0]; // if does not contain '_BOT ' then assume the name is human and bot skill level is set to 0
     }
 }
@@ -851,4 +842,45 @@ function shuffle(data) {
         arr.push(x);
     } while (data.length > 0);
     return arr;
+}
+
+function cardFace(place, id){
+    let suit = place;
+    switch (id[0]) {
+        case ('c'):
+            console.log(id[0]);
+            suit.classList.add('clubs');
+            suit.classList.remove('diamonds', 'hearts', 'spades');
+            console.log(suit);
+            break;
+        case ('d'):
+            console.log(id[0]);
+            suit.classList.add('diamonds');
+            suit.classList.remove('clubs', 'hearts', 'spades');
+            console.log(suit);
+            break;
+        case ('h'):
+            console.log(id[0]);
+            suit.classList.add('hearts');
+            suit.classList.remove('diamonds', 'clubs', 'spades');
+            console.log(suit);
+            break;
+        case ('s'):
+            console.log(id[0]);
+            suit.classList.add('spades');
+            suit.classList.remove('diamonds', 'hearts', 'clubs');
+            console.log(suit);
+            break;
+    }
+    switch (id[1]) {
+        case ('x'):
+            suit.innerHTML = 10;
+            break;
+        case '1':
+            suit.innerHTML = "a";
+            break;
+        default:
+            suit.innerHTML = id[1];
+            break;
+    }
 }
