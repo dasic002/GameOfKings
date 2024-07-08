@@ -15,6 +15,8 @@ const drawDeck = [];
 const discardDeck = [];
 // Constant for selected cards to swap
 const pair = [];
+// Constant to track curent picked card
+const pickCard = [];
 // timed function index, to trigger the correct function specified on a timed action
 // 0 will mean ignore, 1 will deal the cards to the table, 2 will reveal the bottom cards of a hand, 3 will offer the knock button, 4 will reveal knocked hand
 let timedIdx = 0;
@@ -93,9 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     timedFunctions();
                     newRound--;
                 } else {
-                    if (document.getElementById('p1-c1').getAttribute('class').includes('picked')) {
-
-                    }
+                    alert(`not sure which occasion this done btn is exposed and it's not the first set of turns!`)
                     newRound = 0;
                     hand('close');
                     picked('clear');
@@ -112,9 +112,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (this.getAttribute('class').includes('deck')) {
                     let x = this.getAttribute('id').slice(-1);
                     this.classList.add('selected');
-                    // let y = this.getAttribute('class');
-                    // y = addClass(y, ' selected');
-                    // this.setAttribute('class', y);
                     hand('swap', parseInt(x - 1));
                     if (this.getAttribute('action') === 'swapout') {
                         picked('swapout');
@@ -138,22 +135,24 @@ document.addEventListener("DOMContentLoaded", function () {
                     picked('discard');
                 }
             } else if (this.getAttribute('id') === 'reject') {
-                if (document.getElementById('p1-c1').innerHTML === discardDeck[0]) {
+                if (pickCard[0] === discardDeck[0]) {
                     picked('clear');
+                    pickCard.splice(0);
                 } else {
                     drawStack('discard');
                     plrPrompt();
                 }
             } else if (this.getAttribute('id') === 'accept') {
                 let card;
-                if (document.getElementById('p1-c1').innerHTML === discardDeck[0]) {
+                if (pickCard[0] === discardDeck[0]) {
                     card = discardDeck.shift();
-                } else if (document.getElementById('p1-c1').innerHTML === drawDeck.slice(-1)[0]) {
+                } else if (pickCard[0] === drawDeck.slice(-1)[0]) {
                     card = drawDeck.pop();
                 }
                 console.log(card);
                 pair.push(card);
                 picked('clear');
+                pickCard.splice(0);
                 hand('open');
                 hand('swapout');
             } else if (this.getAttribute('id') === 'knock' && this.getAttribute('class').includes('no-knock')) {
@@ -495,6 +494,7 @@ function drawStack(action, data) {
         let card = drawDeck.pop();
         discardStack('add', card);
         picked('clear');
+        pickCard.splice(0);
         shiftTurns();
         table('update');
     } else if (action === 'add') {
@@ -747,14 +747,20 @@ function picked(action, data) {
 
         if (action === 'draw') {
             // x.innerHTML = drawDeck.slice(-1)[0];
+            pickCard.push(drawDeck.slice(-1)[0]);
             cardFace(x, drawDeck.slice(-1)[0]);
+            console.log(`pickCard: ${pickCard}`);
         } else if (action === 'discard') {
             // x.innerHTML = discardDeck.slice(0)[0];
+            pickCard.push(discardDeck.slice(0)[0]);
             cardFace(x, discardDeck.slice(0)[0]);
+            console.log(`pickCard: ${pickCard}`);
         } else if (action === 'swapout') {
-            x.innerHTML = pair[1];
+            // x.innerHTML = pair[1];
+            // pickCard.push(pair[1]);
             cardFace(x, pair[1]);
             pair.splice(0);
+            console.log(`pickCard: ${pickCard}`);
 
             document.getElementById('top-prompt').innerHTML = `Card being discarded`;
 
