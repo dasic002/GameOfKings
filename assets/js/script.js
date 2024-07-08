@@ -110,19 +110,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 table('update');
             } else if (this.getAttribute('id').includes('p1-c')) {
                 if (this.getAttribute('class').includes('deck')) {
-                    let x = this.getAttribute('id').slice(-1);
+                    pickCard.push(parseInt(this.getAttribute('id').slice(-1)) - 1);
                     this.classList.add('selected');
-                    hand('swap', parseInt(x - 1));
-                    if (this.getAttribute('action') === 'swapout') {
-                        picked('swapout');
-                        if (knocker === 4) {
-                            timedIdx = 3;
-                            timer = setTimeout(timedFunctions, 1000);
-                        } else {
-                            setTimeout(next, 1000);
-                        }
-                        
-                    }
+                    timedIdx = 3;
+                    timer = setTimeout(timedFunctions, 200);
                 } else if (this.getAttribute('class').includes('picked')) {
                     // do nothing
                 } else {
@@ -213,11 +204,23 @@ function timedFunctions() {
             }
             break;
         case (3):
-            
+
             switch (x.innerHTML) {
                 case (''):
-                    x.innerHTML = ' 3';
-                    timer = setTimeout(timedFunctions, 1000);
+                    hand('swap', pickCard[0]);
+                    pickCard.splice(0);
+                    if (newRound > 0) {
+                        break;
+                    } else if (knocker != 4) {
+                        picked('swapout');
+                        x.innerHTML = ' 1';
+                        timer = setTimeout(timedFunctions, 1000);
+                        break;
+                    } else {
+                        picked('swapout');
+                        x.innerHTML = ' 3';
+                        timer = setTimeout(timedFunctions, 1000);
+                    }
                     break;
                 case (' 3'):
                     x.innerHTML = ' 2';
@@ -336,7 +339,7 @@ function table(action, data) {
 
     } else if (action === 'values') {
         if (data < 16) {
-            cardFace(cards[data],playerData[turnIndex].cardHand[data % 4]);
+            cardFace(cards[data], playerData[turnIndex].cardHand[data % 4]);
             // cards[data].innerHTML = playerData[turnIndex].cardHand[data % 4];
             // cards[data].innerHTML = '';
         } else if (data < 19) {
@@ -368,7 +371,7 @@ function table(action, data) {
                 decks[data].innerHTML = '';
                 x.classList.add('missing-card');
             } else {
-                cardFace(decks[data],discardDeck[i]);
+                cardFace(decks[data], discardDeck[i]);
                 decks[data].classList.remove('missing-card');
             }
         } else {
@@ -445,7 +448,6 @@ function table(action, data) {
             } else {
                 continue;
             }
-            
         }
     }
 }
@@ -476,7 +478,7 @@ function drawStack(action, data) {
                 playerData[turnIndex].cardHand.push(card);
                 let place = i + 4 * j;
                 table('deal', place);
-                if (place > 18){
+                if (place > 18) {
                     table('values', place);
                 }
                 shiftTurns();
@@ -528,8 +530,8 @@ function discardStack(action, data) {
 
 // function will produce a prompt for human players when more than one human is playing on the same device
 function plrPrompt() {
-    if (newRound > 0) {
-        if (newRound === 1) {
+    if (newRound > 1) {
+        if (newRound === 2) {
             console.log('last prompt for new hand!');
         }
 
@@ -561,6 +563,7 @@ function plrPrompt() {
         }
 
     } else {
+        newRound = 0;
         if (humans === true && playerData[turnIndex].botSkill === 0) {
             console.log(`${playerData[turnIndex].playerName} is a human player!`);
             document.getElementById('wlcm-msg').innerHTML = `${playerData[turnIndex].playerName}!<br>Pick a card!`;
@@ -721,6 +724,7 @@ function picked(action, data) {
 
         let x = document.getElementById('p1-c1');
         x.classList.add('picked');
+        x.classList.remove('selected');
         // let z = addClass(x.getAttribute('class'), ' picked');
         // z = remClass(z, ' selected');
         // document.getElementById('p1-c1').setAttribute('class', z);
@@ -850,7 +854,7 @@ function shuffle(data) {
     return arr;
 }
 
-function cardFace(place, id){
+function cardFace(place, id) {
     let suit = place;
     switch (id[0]) {
         case ('c'):
