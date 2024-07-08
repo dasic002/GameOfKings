@@ -377,8 +377,9 @@ function table(action, data) {
                     case ('x'):
                         decks[data].innerHTML = 10;
                         break;
-                    case 1:
+                    case '1':
                         decks[data].innerHTML = "a";
+                        break;
                     default:
                         decks[data].innerHTML = discardDeck[i][1];
                         break;

@@ -27,7 +27,7 @@
                 <i class="fa-solid fa-xmark hidden"></i>
             </span></h2>
         <ul id="menu-list">
-            <li><a href="index.html">New Game</a></li>
+            <li class="click"><a href="index.html">New Game</a></li>
             <li class="click" action="how-to-play"><a href="https://www.youtube.com" target="_blank">How to Play</a>
             </li>
             <li>Settings</li>
@@ -45,7 +45,7 @@
 
         <div class="" id="welcome">
             <h2 id="wlcm-msg">Welcome to Kings</h2>
-            <span class="click btns bg-btns" id="play" action="play">PLAY</span>
+            <button class="click btns bg-btns" id="play" action="play">PLAY</button>
         </div>
         <div class="hidden" id="player-form">
             <div>
@@ -62,41 +62,41 @@
                                 <input type="text" class="input-field" id="P2-name" name="P2-name"
                                     placeholder="BOT 1" maxlength="8">
                                 <span class="bot-lvls hidden" id="bot1-lvl">
-                                    <span class="click lvl-1">Lvl 1 </span>
-                                    <span class="click lvl-2">Lvl 2 </span>
-                                    <span class="click lvl-3">Lvl 3</span>
+                                    <button class="click lvl-1">Lvl 1 </button>
+                                    <button class="click lvl-2">Lvl 2 </button>
+                                    <button class="click lvl-3">Lvl 3</button>
                                 </span>
                             </td>
-                            <td><span class="click add-bot btns"><i class="fa-solid fa-robot"></i>
-                                    <i class="fa-solid fa-xmark hidden"></i></span></td>
+                            <td><button class="click add-bot btns"><i class="fa-solid fa-robot"></i>
+                                    <i class="fa-solid fa-xmark hidden"></i></button></td>
                         </tr>
                         <tr>
                             <td>
                                 <input type="text" class="input-field" id="P3-name" name="P3-name" placeholder="BOT 2" maxlength="8">
                                 <span class="bot-lvls hidden" id="bot2-lvl">
-                                    <span class="click lvl-1">Lvl 1 </span>
-                                    <span class="click lvl-2">Lvl 2 </span>
-                                    <span class="click lvl-3">Lvl 3</span>
+                                    <button class="click lvl-1">Lvl 1 </button>
+                                    <button class="click lvl-2">Lvl 2 </button>
+                                    <button class="click lvl-3">Lvl 3</button>
                                 </span>
                             </td>
-                            <td><span class="click add-bot btns"><i class="fa-solid fa-robot"></i>
-                                <i class="fa-solid fa-xmark hidden"></i></span></td>
+                            <td><button class="click add-bot btns"><i class="fa-solid fa-robot"></i>
+                                <i class="fa-solid fa-xmark hidden"></i></button></td>
                         </tr>
                         <tr>
                             <td>
                                 <input type="text" class="input-field" id="P4-name" name="P4-name" placeholder="BOT 3" maxlength="8">
                                 <span class="bot-lvls hidden" id="bot2-lvl">
-                                    <span class="click lvl-1">Lvl 1 </span>
-                                    <span class="click lvl-2">Lvl 2 </span>
-                                    <span class="click lvl-3">Lvl 3</span>
+                                    <button class="click lvl-1">Lvl 1 </button>
+                                    <button class="click lvl-2">Lvl 2 </button>
+                                    <button class="click lvl-3">Lvl 3</button>
                                 </span>
                             </td>
-                            <td><span class="click add-bot btns"><i class="fa-solid fa-robot"></i>
-                                <i class="fa-solid fa-xmark hidden"></i></span></td>
+                            <td><button class="click add-bot btns"><i class="fa-solid fa-robot"></i>
+                                <i class="fa-solid fa-xmark hidden"></i></button></td>
                         </tr>
                     </table>
                 </form>
-                <span class="click btns bg-btns" action="next">Start Game</span>
+                <button class="click btns bg-btns" action="next">Start Game</button>
             </div>
         </div>
         <!-- section that displays other players info (name / cards / scores) -->
@@ -159,7 +159,7 @@
             <span id="decks">
                 <!-- card stack to pick up from -->
                 <span>
-                    <span class="deck click" id="draw-stack">X</span>
+                    <button class="deck click" id="draw-stack">X</button>
                     <!-- the line below will indicate when the stack has 2 cards -->
                     <span class="deck" id="draw-stack-1">Y</span>
                     <!-- the line below will indicate when the stack has 3 or more cards -->
@@ -167,7 +167,7 @@
                 </span>
                 <span>
                     <!-- card stack to discard cards to -->
-                    <span class="deck click" id="discard-stack">A</span>
+                    <button class="deck click" id="discard-stack">A</button>
                     <!-- the line below will indicate when the stack has 2 cards -->
                     <span class="deck" id="discard-stack-1">B</span>
                     <!-- the line below will indicate when the stack has 3 or more cards -->
@@ -181,12 +181,12 @@
             <div class="prompt" id="top-prompt"></div>
             <span class="player">
                 <span class="top-cards">
-                    <span class="click card" id="p1-c1" action=" ">X</span>
-                    <span class="click card" id="p1-c2" action=" ">X</span>
+                    <button class="click card" id="p1-c1" action=" ">X</button>
+                    <button class="click card" id="p1-c2" action=" ">X</button>
                 </span>
                 <span class="btm-cards">
-                    <span class="click card" id="p1-c3" action=" ">X</span>
-                    <span class="click card" id="p1-c4" action=" ">X</span>
+                    <button class="click card" id="p1-c3" action=" ">X</button>
+                    <button class="click card" id="p1-c4" action=" ">X</button>
                 </span>
                 <span class="player-name">
                     <span id="p1">PLAYER 1</span>
@@ -196,10 +196,11 @@
                     <span id="scr1">0</span>
                 </span>
             </span>
-            <div class="" id="btm-prompt"><i class="click fa-solid fa-circle-xmark hidden" id="reject"></i>
-                <span class="click hidden" id="knock"><i class=" fa-solid fa-bell" id="icon-knock"></i><span id="knock-count"></span></span>
-                <span class="click btns bg-btns" id="done" action="done">DONE</span>
-                <i class="click fa-solid fa-circle-check hidden" id="accept"></i></div>
+            <div class="" id="btm-prompt">
+                <button class="click hidden" id="reject"><i class="fa-solid fa-circle-xmark"></i></button>
+                <button class="click hidden" id="knock"><i class=" fa-solid fa-bell" id="icon-knock"></i><span id="knock-count"></span></button>
+                <button class="click btns bg-btns" id="done" action="done">DONE</button>
+                <button class="click hidden" id="accept"><i class="fa-solid fa-circle-check"></i></div></button>
         </div>
     </div>
     <script src="assets/js/script.js"></script>
