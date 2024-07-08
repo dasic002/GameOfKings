@@ -169,6 +169,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function timedFunctions() {
     let x = document.getElementById('knock-count');
+    let btm = document.getElementById('btm-prompt')
+    btm = btm.getElementsByTagName('p')[0];
     switch (timedIdx) {
         case (0):
             clearTimeout(timer);
@@ -177,8 +179,6 @@ function timedFunctions() {
         case (1):
             break;
         case (2):
-            let btm = document.getElementById('btm-prompt')
-            btm = btm.getElementsByTagName('p')[0];
             switch (btm.innerHTML) {
                 case '':
                     btm.innerHTML = '3, ';
@@ -198,8 +198,9 @@ function timedFunctions() {
                     btm.innerHTML = '';
                     table('hide', 14);
                     table('hide', 15);
-                    timedIdx = 0;
-                    next();
+                    timedIdx = 4;
+                    timer = setTimeout(timedFunctions, 200);
+                    // next();
                     break;
             }
             break;
@@ -207,7 +208,9 @@ function timedFunctions() {
 
             switch (x.innerHTML) {
                 case (''):
-                    hand('swap', pickCard[0]);
+                    if (pickCard.length > 0) {
+                        hand('swap', pickCard[0]);
+                    }
                     pickCard.splice(0);
                     if (newRound > 0) {
                         break;
@@ -236,6 +239,36 @@ function timedFunctions() {
                     next();
                     break;
             }
+            break;
+        case 4:
+            switch (x.innerHTML) {
+                case '':
+                    document.getElementById('knock').classList.remove('hidden');
+                    if (knocker != 4) {
+                        x.innerHTML = ' 1';
+                        timer = setTimeout(timedFunctions, 1000);
+                        break;
+                    } else {
+                        x.innerHTML = ' 3';
+                        timer = setTimeout(timedFunctions, 1000);
+                    }
+                    break;
+                case (' 3'):
+                    x.innerHTML = ' 2';
+                    timer = setTimeout(timedFunctions, 1000);
+                    break;
+                case (' 2'):
+                    x.innerHTML = ' 1';
+                    timer = setTimeout(timedFunctions, 1000);
+                    break;
+                case (' 1'):
+                    x.innerHTML = '';
+                    document.getElementById('knock').classList.add('hidden');
+                    timedIdx = 0;
+                    next();
+                    break;
+            }
+            break;
     }
 }
 
