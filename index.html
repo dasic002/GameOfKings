@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,8 +58,8 @@
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" class="input-field" id="P2-name" name="P2-name"
-                                    placeholder="BOT 1" maxlength="8">
+                                <input type="text" class="input-field" id="P2-name" name="P2-name" placeholder="BOT 1"
+                                    maxlength="8">
                                 <span class="bot-lvls hidden" id="bot1-lvl">
                                     <button class="click lvl-1">Lvl 1 </button>
                                     <button class="click lvl-2">Lvl 2 </button>
@@ -72,7 +71,8 @@
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" class="input-field" id="P3-name" name="P3-name" placeholder="BOT 2" maxlength="8">
+                                <input type="text" class="input-field" id="P3-name" name="P3-name" placeholder="BOT 2"
+                                    maxlength="8">
                                 <span class="bot-lvls hidden" id="bot2-lvl">
                                     <button class="click lvl-1">Lvl 1 </button>
                                     <button class="click lvl-2">Lvl 2 </button>
@@ -80,11 +80,12 @@
                                 </span>
                             </td>
                             <td><button class="click add-bot btns"><i class="fa-solid fa-robot"></i>
-                                <i class="fa-solid fa-xmark hidden"></i></button></td>
+                                    <i class="fa-solid fa-xmark hidden"></i></button></td>
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" class="input-field" id="P4-name" name="P4-name" placeholder="BOT 3" maxlength="8">
+                                <input type="text" class="input-field" id="P4-name" name="P4-name" placeholder="BOT 3"
+                                    maxlength="8">
                                 <span class="bot-lvls hidden" id="bot2-lvl">
                                     <button class="click lvl-1">Lvl 1 </button>
                                     <button class="click lvl-2">Lvl 2 </button>
@@ -92,7 +93,7 @@
                                 </span>
                             </td>
                             <td><button class="click add-bot btns"><i class="fa-solid fa-robot"></i>
-                                <i class="fa-solid fa-xmark hidden"></i></button></td>
+                                    <i class="fa-solid fa-xmark hidden"></i></button></td>
                         </tr>
                     </table>
                 </form>
@@ -183,6 +184,12 @@
                     <span class="deck" id="discard-stack-2">C</span>
                 </span>
             </span>
+            <!-- Prompt at the end of round or game -->
+            <span class="hidden" id="game-end">
+                <h2>End of round!</h2>
+                <p>Player 1 won!</p>
+                <button class="click btns bg-btns" id="game-end-btn">Next round!</button>
+            </span>
         </div>
 
         <!-- Main or Current player's info -->
@@ -211,9 +218,11 @@
             <div class="prompt" id="btm-prompt">
                 <p class="hidden" id="msg"></p>
                 <button class="click hidden" id="reject"><i class="fa-solid fa-circle-xmark"></i></button>
-                <button class="click hidden" id="knock"><i class=" fa-solid fa-bell" id="icon-knock"></i><span id="knock-count"></span></button>
+                <button class="click hidden" id="knock"><i class=" fa-solid fa-bell" id="icon-knock"></i><span
+                        id="knock-count"></span></button>
                 <button class="click btns bg-btns" id="done" action="done">DONE</button>
-                <button class="click hidden" id="accept"><i class="fa-solid fa-circle-check"></i></div></button>
+                <button class="click hidden" id="accept"><i class="fa-solid fa-circle-check"></i>
+            </div></button>
         </div>
     </div>
     <script src="assets/js/script.js"></script>

@@ -955,6 +955,7 @@ function cardFace(place, id) {
 function scoreVal() {
     let scores = [];
     let lowest = 0;
+    let msg;
     for (let i = 0; i < 4; i++) {
         lowest = 0;
         for (let j = 0; j < 4; j++) {
@@ -986,8 +987,9 @@ function scoreVal() {
     // end of copied code
 
     if (scores[knocker] === lowest && findDuplicates(scores).includes(lowest) === false) {
-        console.log(`${playerData[knocker].playerName} won this round!`);
-        alert(`${playerData[knocker].playerName} won this round!`);
+        msg = `${playerData[knocker].playerName} won this round!`;
+        console.log(msg);
+        // alert(msg);
         for (let i = 0; i < 4; i++) {
             let k;
             switch (i) {
@@ -1017,8 +1019,10 @@ function scoreVal() {
         }
     } else {
         scores[knocker] = 2 * scores[knocker];
-        console.log(`${playerData[knocker].playerName} lost! Score doubled ${scores[knocker]}`);
-        alert(`${playerData[knocker].playerName} lost! Score doubled to ${scores[knocker]}.\n${playerData[scores.indexOf(lowest)].playerName} scored ${lowest}!`);
+        msg = `${playerData[knocker].playerName} lost! Score doubled to ${scores[knocker]}.
+        ${playerData[scores.indexOf(lowest)].playerName} scored ${lowest}!`;
+        console.log(msg);
+        // alert(msg);
         for (let i = 0; i < 4; i++) {
             let k;
             switch (i) {
@@ -1052,6 +1056,23 @@ function scoreVal() {
     // push scores to playerData
     for (let i = 0; i < 4; i++) {
         playerData[i].score += scores[i];
+        scores.splice(i, 1, playerData[i].score);
     }
     knocker = 4;
+
+    document.getElementById('decks').style.display = 'none';
+    let gamePrompt = document.getElementById('game-end');
+    gamePrompt.classList.remove('hidden');
+    
+    if (Math.max(...scores) > 199) {
+        // alert(`end of game, someone has reached 200 points or more!`);
+        msg = `${playerData[scores.indexOf(Math.min(...scores))].playerName} has won the game with ${Math.min(...scores)} points!`;
+        gamePrompt.getElementsByTagName('h2')[0].innerHTML = 'End of game!';
+        gamePrompt.getElementsByTagName('p')[0].innerHTML = msg;
+        gamePrompt.getElementsByTagName('button')[0].innerHTML = 'New Game';
+    } else {
+        gamePrompt.getElementsByTagName('h2')[0].innerHTML = 'End of round!';
+        gamePrompt.getElementsByTagName('p')[0].innerHTML = msg;
+        gamePrompt.getElementsByTagName('button')[0].innerHTML = 'Next Round';
+    }
 }
