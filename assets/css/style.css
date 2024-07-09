@@ -203,6 +203,15 @@ body {
     box-shadow: .1rem .1rem .1rem .15rem rgba(0, 0, 0, .5);
 }
 
+.card.clubs,
+.card.diamonds,
+.card.hearts,
+.card.spades {
+    background-size: 0.6rem;
+    background-position: top 0.2rem left .2rem, bottom .2rem right .2rem;
+    font-size: 1.25rem;
+}
+
 button.card {
     width: 2.19rem;
     height: 3.13rem;
@@ -255,12 +264,22 @@ button.picked {
     box-shadow: .3rem .3rem .45rem rgba(0, 0, 0, .5);
 }
 
+.deck.clubs,
+.deck.diamonds,
+.deck.hearts,
+.deck.spades {
+    background-size: 1rem, 1rem;
+    background-position: top .25rem left .25rem, bottom .25rem right .25rem;
+    font-size: 3rem;
+}
+
 .picked.clubs,
 .picked.diamonds,
 .picked.hearts,
 .picked.spades {
     background-size: 3rem;
     background-position: top .75rem left .75rem, bottom .75rem right .75rem;
+    font-size: 9rem;
 }
 
 .missing-card {

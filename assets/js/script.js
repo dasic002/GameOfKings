@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     pickCard.splice(0);
                 } else {
                     drawStack('discard');
-                    plrPrompt();
+                    next();
                 }
             } else if (this.getAttribute('id') === 'accept') {
                 let card;
@@ -280,6 +280,11 @@ function next() {
     // whilst it's still first turns on start of new round, or the next player is human, get prompt up
     if (newRound > 0 || playerData[turnIndex].botSkill === 0) {
         plrPrompt();
+    }
+    if (endRound > 0) {
+        endRound--;
+    } else {
+        endRound = 0;
     }
 }
 
@@ -469,6 +474,9 @@ function table(action, data) {
         }
 
     } else if (action === 'update') {
+        if (endRound === 1) {
+            scoreVal();
+        }
         table('playerNames');
         for (let i = 0; i < 22; i++) {
             if (i < 16 && endRound === 1) {
@@ -530,8 +538,8 @@ function drawStack(action, data) {
         discardStack('add', card);
         picked('clear');
         pickCard.splice(0);
-        shiftTurns();
-        table('update');
+        // shiftTurns();
+        // table('update');
     } else if (action === 'add') {
         for (let i = 0; i < data.length; i++) {
             drawDeck.push(data[i]);
@@ -925,5 +933,51 @@ function cardFace(place, id) {
         default:
             suit.innerHTML = id[1];
             break;
+    }
+}
+
+function scoreVal() {
+    let scores = [];
+    let lowest = 0;
+    for (let i = 0; i < 4; i++) {
+        lowest = 0;
+        for (let j = 0; j < 4; j++) {
+            let x = playerData[i].cardHand[j][1];
+            switch (x) {
+                case 'k':
+                    x = 0;
+                    break;
+                case 'q':
+                case 'j':
+                case 'x':
+                    x = 10;
+                    break;
+                default:
+                    x = parseInt(x);
+                    break;
+            }
+            lowest += x;
+        }
+        scores.push(lowest);
+        console.log(`${playerData[i].playerName} scored ${scores[i]}`);
+    }
+    // scores = [playerData[0].score, playerData[1].score, playerData[2].score, playerData[3].score];
+    lowest = Math.min(scores[0], scores[1], scores[2], scores[3]);
+    console.log(`Lowest score = ${lowest}`);
+    
+    // copied from https://stackoverflow.com/questions/49215358/checking-for-duplicate-strings-in-javascript-array
+    let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) !== index);
+    // end of copied code
+    
+    if (scores[knocker] === lowest && findDuplicates(scores).includes(lowest) === false) {
+        console.log(`${playerData[knocker].playerName} won this round!`);
+        alert(`${playerData[knocker].playerName} won this round!`);
+    } else {
+        scores[knocker] = 2 * scores[knocker];
+        console.log(`${playerData[knocker].playerName} lost! Score doubled ${scores[knocker]}`);
+        alert(`${playerData[knocker].playerName} lost! Score doubled to ${scores[knocker]}.\n${playerData[scores.indexOf(lowest)].playerName} scored ${lowest}!`);
+    }
+    for (let i = 0; i < 4; i++) {
+        playerData[i].score += scores[i];
     }
 }
