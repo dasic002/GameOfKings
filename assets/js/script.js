@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 // Constant for player data to manipulate throughout the game
 const playerData = [];
 // Constant to keep track of whose turn it is
@@ -32,19 +33,33 @@ let endRound = 0;
 // Get the button elements and add event listeners to them
 // based on DOM loading event listener from Love Maths walkthrough project
 document.addEventListener("DOMContentLoaded", function () {
-    let buttons = document.getElementsByClassName("click"); // event listener will look clickable elements by the class "click"
+    let menuButtons = document.getElementById('menu').getElementsByClassName("click"); // event listener will look clickable elements in the menu div by the class "click"
 
-    for (let button of buttons) {
+    for (let button of menuButtons) {
         button.addEventListener('click', function () {
             if (this.getAttribute('action') === 'menu') {
                 menu();
+            } else if (this.innerHTML === 'New Game') {
+                menu();
+                runGame('newGame');
             } else if (this.getAttribute('action') === 'how-to-play') {
                 menu();
             } else if (this.getAttribute('id') === 'sound-state') {
                 let state = this.innerText;
-                state === 'OFF' ? state = 'ON' : state = 'OFF';
+                state = state === 'OFF' ? 'ON' : 'OFF';
                 this.innerHTML = state;
-            } else if (this.getAttribute('action') === 'play') {
+            } else {
+                let item = this.getAttribute('id') === null ? this.innerText : this.getAttribute('id');
+                alert(item);
+            }
+        });
+    }
+
+    let clickButtons = document.getElementById('game-area').getElementsByClassName("click"); // event listener will look clickable elements by the class "click"
+
+    for (let button of clickButtons) {
+        button.addEventListener('click', function () {
+            if (this.getAttribute('action') === 'play') {
                 document.getElementById('welcome').style.display = 'none';
                 document.getElementById('player-form').style.display = 'block';
             } else if (this.getAttribute('action') === 'next') {
@@ -54,34 +69,34 @@ document.addEventListener("DOMContentLoaded", function () {
                     let P2 = String(document.getElementById('P2-name').value);
                     let P3 = String(document.getElementById('P3-name').value);
                     let P4 = String(document.getElementById('P4-name').value);
-                    P1 === '' ? P1 = ['Player 1', 0] : P1 = [P1, 0];
-                    P2 === '' ? P2 = ['_BOT 1', 2] : P2 = logBot(P2);
-                    P3 === '' ? P3 = ['_BOT 2', 2] : P3 = logBot(P3);
-                    P4 === '' ? P4 = ['_BOT 3', 2] : P4 = logBot(P4);
+                    P1 = P1 === '' ? ['Player 1', 0] : [P1, 0];
+                    P2 = P2 === '' ? ['_BOT 1', 2] : logBot(P2);
+                    P3 = P3 === '' ? ['_BOT 2', 2] : logBot(P3);
+                    P4 = P4 === '' ? ['_BOT 3', 2] : logBot(P4);
                     P1 = {
                         botSkill: P1[1],
                         playerName: P1[0],
                         cardHand: [],
                         score: 0
-                    }
+                    };
                     P2 = {
                         botSkill: P2[1],
                         playerName: P2[0],
                         cardHand: [],
                         score: 0
-                    }
+                    };
                     P3 = {
                         botSkill: P3[1],
                         playerName: P3[0],
                         cardHand: [],
                         score: 0
-                    }
+                    };
                     P4 = {
                         botSkill: P4[1],
                         playerName: P4[0],
                         cardHand: [],
                         score: 0
-                    }
+                    };
                     playerData.push(P1, P2, P3, P4);
                     runGame('new');
                 }
@@ -96,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     timedFunctions();
                     newRound--;
                 } else {
-                    alert(`not sure which occasion this done btn is exposed and it's not the first set of turns!`)
+                    alert(`not sure which occasion this done btn is exposed and it's not the first set of turns!`);
                     newRound = 0;
                     hand('close');
                     picked('clear');
@@ -170,15 +185,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 let item = this.getAttribute('id') === null ? this.innerText : this.getAttribute('id');
                 alert(item);
             }
-        })
+        });
     }
 
-
-})
+});
 
 function timedFunctions() {
     let x = document.getElementById('knock-count');
-    let btm = document.getElementById('btm-prompt')
+    let btm = document.getElementById('btm-prompt');
     btm = btm.getElementsByTagName('p')[0];
     switch (timedIdx) {
         case (0):
@@ -526,7 +540,7 @@ function table(action, data) {
         let x = turnIndex - 1;
         let y;
         for (let i = 0; i < 4; i++) {
-            x > 2 ? x = 0 : x++;
+            x = x > 2 ? 0 : x + 1;
             switch (i) {
                 case (0):
                     p1Name.innerHTML = playerData[x].playerName; // display player names
@@ -691,7 +705,7 @@ function plrPrompt() {
             // newRound--;
             console.log(`newRound deducted ${newRound}`);
         } else if (humans === false) {
-            console.log('no humans but P1!')
+            console.log('no humans but P1!');
             turnIndex = 0;
             newRound = 1;
             hand('open');
@@ -971,20 +985,26 @@ function logBot(strg1) {
         } else {
             x = 2; // else assume skill level of 2
         }
-        return strg1 = [y, x];
+        strg1 = [y, x];
+        return strg1;
     } else {
         humans = true;
         strg1 = strg1.slice(0, 8); // should the human name string be longer that 8 characters, trim excess
-        return strg1 = [strg1, 0]; // if does not contain '_BOT ' then assume the name is human and bot skill level is set to 0
+        strg1 = [strg1, 0]; // if does not contain '_BOT ' then assume the name is human and bot skill level is set to 0
+        return strg1;
     }
 }
 
 // shifts turns for either play turn or dealer turn. Action must be 'dealer', otherwise assumes play turn is being shifted.
 function shiftTurns(action) {
     let x;
-    action === 'dealer' ? x = dealerIndex : x = turnIndex;
-    x > 2 ? x = 0 : x++;
-    action === 'dealer' ? dealerIndex = x : turnIndex = x;
+    x = action === 'dealer' ? dealerIndex : turnIndex;
+    x = x > 2 ? 0 : x + 1;
+    if (action === 'dealer') {
+        dealerIndex = x;
+    } else {
+        turnIndex = x;
+    }
 }
 
 // function to shuffle any values inside an array, to mimic the shuffling of cards
