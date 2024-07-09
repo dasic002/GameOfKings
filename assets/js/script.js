@@ -181,6 +181,7 @@ function timedFunctions() {
         case (2):
             switch (btm.innerHTML) {
                 case '':
+                    btm.classList.remove('hidden');
                     btm.innerHTML = '3, ';
                     timer = setTimeout(timedFunctions, 1000);
                     break;
@@ -196,6 +197,7 @@ function timedFunctions() {
                     break;
                 case '3, 2, 1!':
                     btm.innerHTML = '';
+                    btm.classList.add('hidden');
                     table('hide', 14);
                     table('hide', 15);
                     timedIdx = 4;
