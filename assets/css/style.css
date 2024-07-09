@@ -163,11 +163,13 @@ body {
     justify-content: space-around;
 }
 
-.player-name i {
+.player-name i,
+.player-name p {
     color: yellow;
     padding: .3rem;
     background-color: black;
     border-radius: .3rem;
+    margin: 0;
 }
 
 .card,

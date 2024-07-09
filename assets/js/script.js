@@ -288,7 +288,7 @@ function next() {
         plrPrompt();
     }
     if (endRound > 0) {
-        if (endRound === 1 && turnIndex != knocker) {
+        if (endRound === 1 && turnIndex != knocker && knocker != 4) {
             endRound = 2;
             console.log(`Oops! endRound ${endRound} does not match knocker's turn yet!`);
             // alert(`Oops! endRound ${endRound} does not match knocker's turn yet!`);
@@ -486,6 +486,10 @@ function table(action, data) {
         }
 
     } else if (action === 'update') {
+        // if (endRound === 1 && knocker === 4) {
+        //     endRound = 0;
+        //     return;
+        // } else 
         if (endRound === 1) {
             scoreVal();
         }
@@ -976,20 +980,78 @@ function scoreVal() {
     // scores = [playerData[0].score, playerData[1].score, playerData[2].score, playerData[3].score];
     lowest = Math.min(scores[0], scores[1], scores[2], scores[3]);
     console.log(`Lowest score = ${lowest}`);
-    
+
     // copied from https://stackoverflow.com/questions/49215358/checking-for-duplicate-strings-in-javascript-array
     let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) !== index);
     // end of copied code
-    
+
     if (scores[knocker] === lowest && findDuplicates(scores).includes(lowest) === false) {
         console.log(`${playerData[knocker].playerName} won this round!`);
         alert(`${playerData[knocker].playerName} won this round!`);
+        for (let i = 0; i < 4; i++) {
+            let k;
+            switch (i) {
+                case 0:
+                    k = 3; // place of player 1
+                    break;
+                case 1:
+                    k = 0; // place of player 2
+                    break;
+                case 2:
+                    k = 1; // place of player 3
+                    break;
+                case 3:
+                    k = 2; // place of player 4
+                    break;
+            }
+            let pNameGroup = document.getElementsByClassName('player-name');
+            for (let j = 1; j < 5; j++) {
+                let x = pNameGroup[k].children[j];
+                x.classList.add('hidden'); // hide all icons after player's name
+            }
+            if (knocker === i) {
+                pNameGroup[k].children[2].classList.remove('hidden'); // show trophy for winning knocker
+            } else {
+                pNameGroup[k].children[3].classList.remove('hidden'); // show cross for losers
+            }
+        }
     } else {
         scores[knocker] = 2 * scores[knocker];
         console.log(`${playerData[knocker].playerName} lost! Score doubled ${scores[knocker]}`);
         alert(`${playerData[knocker].playerName} lost! Score doubled to ${scores[knocker]}.\n${playerData[scores.indexOf(lowest)].playerName} scored ${lowest}!`);
+        for (let i = 0; i < 4; i++) {
+            let k;
+            switch (i) {
+                case 0:
+                    k = 3; // place of player 1
+                    break;
+                case 1:
+                    k = 0; // place of player 2
+                    break;
+                case 2:
+                    k = 1; // place of player 3
+                    break;
+                case 3:
+                    k = 2; // place of player 4
+                    break;
+            }
+            let pNameGroup = document.getElementsByClassName('player-name');
+            for (let j = 1; j < 5; j++) {
+                let x = pNameGroup[k].children[j];
+                x.classList.add('hidden'); // hide all icons after player's name
+            }
+            if (knocker === i) {
+                pNameGroup[k].children[4].classList.remove('hidden'); // show 2x for losing knocker
+            } else if (scores.indexOf(lowest) === i) {
+                pNameGroup[k].children[2].classList.remove('hidden'); // show trophy for winner of round
+            } else {
+                pNameGroup[k].children[3].classList.remove('hidden'); // show cross for losers
+            }
+        }
     }
+    // push scores to playerData
     for (let i = 0; i < 4; i++) {
         playerData[i].score += scores[i];
     }
+    knocker = 4;
 }
