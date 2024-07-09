@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else if (this.getAttribute('action') === 'next') {
                 if (this.innerText === "Start Game") {
                     let P1 = String(document.getElementById('P1-name').value);
+                    P1 = P1.slice(0, 8); // should the human name string be longer that 8 characters, trim excess
                     let P2 = String(document.getElementById('P2-name').value);
                     let P3 = String(document.getElementById('P3-name').value);
                     let P4 = String(document.getElementById('P4-name').value);
@@ -108,6 +109,12 @@ document.addEventListener("DOMContentLoaded", function () {
             } else if (this.getAttribute('action') === 'to-pick') {
                 hand('close');
                 table('update');
+            } else if (this.getAttribute('id') === 'game-end-btn') {
+                if (this.innerHTML === 'New Game') {
+                    runGame('newGame');
+                } else {
+                    runGame('newRound');
+                }
             } else if (this.getAttribute('id').includes('p1-c')) {
                 if (this.getAttribute('class').includes('deck')) {
                     pickCard.push(parseInt(this.getAttribute('id').slice(-1)) - 1);
@@ -327,8 +334,63 @@ function runGame(action, data) {
         document.getElementById('other-players').style.display = 'block';
         document.getElementById('decks-area').style.display = 'block';
         document.getElementById('main-player').style.display = 'block';
+        document.getElementById('knock').classList.remove('no-knock');
         drawStack('deal');
         plrPrompt();
+    } else if (action === 'newGame') {
+        // hide game end prompt
+        document.getElementById('decks').style.display = '';
+        let gamePrompt = document.getElementById('game-end');
+        gamePrompt.classList.add('hidden');
+        // hide game table
+        document.getElementById('other-players').style.display = 'none';
+        document.getElementById('decks-area').style.display = 'none';
+        document.getElementById('main-player').style.display = 'none';
+        // display up player entry form
+        document.getElementById('welcome').style.display = 'none';
+        document.getElementById('player-form').style.display = 'block';
+        // prefill names and bots of last game
+        document.getElementById('P1-name').value = playerData[0].playerName;
+        document.getElementById('P2-name').value = `${playerData[1].playerName} ,${playerData[1].botSkill}`;
+        document.getElementById('P3-name').value = `${playerData[2].playerName} ,${playerData[2].botSkill}`;
+        document.getElementById('P4-name').value = `${playerData[3].playerName} ,${playerData[3].botSkill}`;
+        // clear playerData
+        playerData.splice(0);
+        // reset values for new round
+        oldDealerIndex = 0;
+        dealerIndex = 0;
+        turnIndex = 0;
+        drawDeck.splice(0);
+        discardDeck.splice(0);
+        pair.splice(0);
+        pickCard.splice(0);
+        timedIdx = 0;
+        knocker = 4;
+        endRound = 0;
+        // run new game setup
+        runGame('new');
+    } else if (action === 'newRound') {
+        // shift dealer to turn
+        oldDealerIndex = dealerIndex;
+        // reset values for new round
+        playerData[0].cardHand.splice(0);
+        playerData[1].cardHand.splice(0);
+        playerData[2].cardHand.splice(0);
+        playerData[3].cardHand.splice(0);
+        turnIndex = 0;
+        drawDeck.splice(0);
+        discardDeck.splice(0);
+        pair.splice(0);
+        pickCard.splice(0);
+        timedIdx = 0;
+        knocker = 4;
+        endRound = 0;
+        // hide game end prompt
+        document.getElementById('decks').style.display = '';
+        let gamePrompt = document.getElementById('game-end');
+        gamePrompt.classList.add('hidden');
+        // run new game setup
+        runGame('new');
     }
 }
 
@@ -364,6 +426,7 @@ function table(action, data) {
     if (action === 'empty') {
         for (let card of cards) {
             card.classList.add('missing-card');
+            card.classList.remove('clubs', 'diamonds', 'hearts', 'spades');
             // let x = card.getAttribute('class');
             // x = addClass(x, ' missing-card');
             // card.setAttribute('class', x);
@@ -371,10 +434,34 @@ function table(action, data) {
         }
         for (let card of decks) {
             card.classList.add('missing-card');
+            card.classList.remove('clubs', 'diamonds', 'hearts', 'spades');
             // let x = card.getAttribute('class');
             // x = addClass(x, ' missing-card');
             // card.setAttribute('class', x);
             card.innerHTML = '';
+        }
+        // clear icons by names
+        for (let i = 0; i < 4; i++) {
+            let k;
+            switch (i) {
+                case 0:
+                    k = 3; // place of player 1
+                    break;
+                case 1:
+                    k = 0; // place of player 2
+                    break;
+                case 2:
+                    k = 1; // place of player 3
+                    break;
+                case 3:
+                    k = 2; // place of player 4
+                    break;
+            }
+            let pNameGroup = document.getElementsByClassName('player-name');
+            for (let j = 1; j < 5; j++) {
+                let x = pNameGroup[k].children[j];
+                x.classList.add('hidden'); // hide all icons after player's name
+            }
         }
     } else if (action === "deal") {
         console.log(data);
@@ -1019,8 +1106,7 @@ function scoreVal() {
         }
     } else {
         scores[knocker] = 2 * scores[knocker];
-        msg = `${playerData[knocker].playerName} lost! Score doubled to ${scores[knocker]}.
-        ${playerData[scores.indexOf(lowest)].playerName} scored ${lowest}!`;
+        msg = `${playerData[knocker].playerName} lost! Score doubled to ${scores[knocker]}.<br>${playerData[scores.indexOf(lowest)].playerName} scored ${lowest}!`;
         console.log(msg);
         // alert(msg);
         for (let i = 0; i < 4; i++) {
@@ -1063,7 +1149,7 @@ function scoreVal() {
     document.getElementById('decks').style.display = 'none';
     let gamePrompt = document.getElementById('game-end');
     gamePrompt.classList.remove('hidden');
-    
+
     if (Math.max(...scores) > 199) {
         // alert(`end of game, someone has reached 200 points or more!`);
         msg = `${playerData[scores.indexOf(Math.min(...scores))].playerName} has won the game with ${Math.min(...scores)} points!`;
