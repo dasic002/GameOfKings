@@ -34,6 +34,7 @@ let endRound = 0;
 // based on DOM loading event listener from Love Maths walkthrough project
 document.addEventListener("DOMContentLoaded", function () {
     let menuButtons = document.getElementById('menu').getElementsByClassName("click"); // event listener will look clickable elements in the menu div by the class "click"
+    
 
     for (let button of menuButtons) {
         button.addEventListener('click', function () {
@@ -44,6 +45,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 runGame('newGame');
             } else if (this.getAttribute('action') === 'how-to-play') {
                 menu();
+                document.getElementById('how-to').style.display = 'block';
+                document.getElementById('game-area').style.display = 'none';
             } else if (this.getAttribute('id') === 'sound-state') {
                 let state = this.innerText;
                 state = state === 'OFF' ? 'ON' : 'OFF';
@@ -54,6 +57,11 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+    
+    document.getElementById('cls-how-to').addEventListener('click', function() {
+        document.getElementById('how-to').style.display = '';
+        document.getElementById('game-area').style.display = '';
+    })
 
     let clickButtons = document.getElementById('game-area').getElementsByClassName("click"); // event listener will look clickable elements by the class "click"
 

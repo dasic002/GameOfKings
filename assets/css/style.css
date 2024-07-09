@@ -63,6 +63,35 @@ body {
     color: inherit;
 }
 
+#how-to {
+    margin-bottom: 5rem;
+}
+
+#how-to button {
+    font-size: 3rem;
+    color: inherit;
+    background-color: rgb(0 0 0);
+    border-width: 0;
+    border-radius: 2rem;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 0.1rem .2rem .0rem;
+}
+
+#how-to h1,
+#how-to h2,
+#how-to h3,
+#how-to h4 {
+    margin-bottom: .25rem;
+}
+
+#how-to p, #how-to li {
+    text-align: justify;
+    padding: 0.5rem 1rem;
+    margin: 0;
+}
+
 #wlcm-msg,
 #play {
     font-size: 4rem;
