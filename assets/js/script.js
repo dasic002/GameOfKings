@@ -131,7 +131,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     pickCard.splice(0);
                 } else {
                     drawStack('discard');
-                    next();
+                    timedIdx = 3;
+                    timer = setTimeout(timedFunctions, 1000);
+                    // next();
                 }
             } else if (this.getAttribute('id') === 'accept') {
                 let card;
@@ -245,6 +247,7 @@ function timedFunctions() {
         case 4:
             switch (x.innerHTML) {
                 case '':
+                    document.getElementById('btm-prompt').classList.remove('hidden');
                     document.getElementById('knock').classList.remove('hidden');
                     if (knocker != 4) {
                         x.innerHTML = ' 1';
@@ -266,6 +269,7 @@ function timedFunctions() {
                 case (' 1'):
                     x.innerHTML = '';
                     document.getElementById('knock').classList.add('hidden');
+                    document.getElementById('btm-prompt').classList.add('hidden');
                     timedIdx = 0;
                     next();
                     break;
@@ -284,7 +288,13 @@ function next() {
         plrPrompt();
     }
     if (endRound > 0) {
+        if (endRound === 1 && turnIndex != knocker) {
+            endRound = 2;
+            console.log(`Oops! endRound ${endRound} does not match knocker's turn yet!`);
+            // alert(`Oops! endRound ${endRound} does not match knocker's turn yet!`);
+        }
         endRound--;
+
     } else {
         endRound = 0;
     }
@@ -538,7 +548,7 @@ function drawStack(action, data) {
     } else if (action === 'discard') {
         let card = drawDeck.pop();
         discardStack('add', card);
-        picked('clear');
+        // picked('clear');
         pickCard.splice(0);
         // shiftTurns();
         // table('update');
@@ -803,9 +813,9 @@ function picked(action, data) {
             cardFace(x, discardDeck.slice(0)[0]);
             console.log(`pickCard: ${pickCard}`);
         } else if (action === 'swapout') {
-            // x.innerHTML = pair[1];
-            // pickCard.push(pair[1]);
-            cardFace(x, pair[1]);
+            let y = pair[1] === undefined ? discardDeck[0] : pair[1];
+            console.log(y);
+            cardFace(x, y);
             pair.splice(0);
             console.log(`pickCard: ${pickCard}`);
 
