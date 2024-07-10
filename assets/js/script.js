@@ -320,17 +320,17 @@ function next() {
     //     plrPrompt();
     // }
     plrPrompt();
-    if (endRound > 0) {
-        if (endRound === 1 && turnIndex != knocker && knocker != 4) {
-            endRound = 2;
-            console.log(`Oops! endRound ${endRound} does not match knocker's turn yet!`);
-            // alert(`Oops! endRound ${endRound} does not match knocker's turn yet!`);
-        }
-        endRound--;
+    // if (endRound > 0) {
+    //     if (endRound === 1 && turnIndex != knocker && knocker != 4) {
+    //         endRound = 2;
+    //         console.log(`Oops! endRound ${endRound} does not match knocker's turn yet!`);
+    //         // alert(`Oops! endRound ${endRound} does not match knocker's turn yet!`);
+    //     }
+    //     endRound--;
 
-    } else {
-        endRound = 0;
-    }
+    // } else {
+    //     endRound = 0;
+    // }
 }
 
 // toggles the navigation menu open and close, including changing the icon from hamburger bars to cross
@@ -597,16 +597,16 @@ function table(action, data) {
                     } else {
                         p4Bell.classList.add('hidden');
                     }
-                    // console.log(`rightTop player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
+                // console.log(`rightTop player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
             }
         }
 
     } else if (action === 'update') {
-        // if (endRound === 1 && knocker === 4) {
-        //     endRound = 0;
-        //     return;
-        // } else 
-        if (endRound === 1) {
+        if (endRound > 1) {
+            endRound--;
+        } else if (endRound === 1 && knocker === 4) {
+            endRound = 0;
+        } else if (endRound === 1) {
             scoreVal();
         }
         table('playerNames');
@@ -708,7 +708,7 @@ function plrPrompt() {
             console.log('last prompt for new hand!');
         }
 
-        if (humans === true && playerData[turnIndex].botSkill === 0) {
+        if ( /*humans === true &&*/ playerData[turnIndex].botSkill === 0) {
             console.log(`${playerData[turnIndex].playerName} is a human player! on newRound ${newRound}`);
             document.getElementById('wlcm-msg').innerHTML = `${playerData[turnIndex].playerName}`;
             document.getElementById('play').innerHTML = 'READY';
@@ -719,12 +719,12 @@ function plrPrompt() {
             document.getElementById('main-player').style.display = 'none';
             // newRound--;
             // console.log(`newRound deducted ${newRound}`);
-        } else if (humans === false) {
-            console.log('no humans but P1!');
-            turnIndex = 0;
-            newRound = 1;
-            hand('open');
-            // newRound--;
+            // } else if (humans === false) {
+            //     console.log('no humans but P1!');
+            //     turnIndex = 0;
+            //     newRound = 1;
+            //     hand('open');
+            //     // newRound--;
         } else {
             botPlay('newHand');
             console.log(`bot player - ${playerData[turnIndex].playerName} plays new hand`);
@@ -737,7 +737,7 @@ function plrPrompt() {
 
     } else {
         newRound = 0;
-        if (humans === true && playerData[turnIndex].botSkill === 0) {
+        if (/*humans === true &&*/ playerData[turnIndex].botSkill === 0) {
             console.log(`${playerData[turnIndex].playerName} is a human player!`);
             document.getElementById('wlcm-msg').innerHTML = `${playerData[turnIndex].playerName}!<br>Pick a card!`;
             document.getElementById('play').innerHTML = 'READY';
@@ -797,9 +797,9 @@ function hand(action, data) {
     } else if (action === 'swap') {
         pair.push(data);
         // console.log(data);
-        if (pair.length > 1) {
-            let x = pair[0];
-            let y = pair[1];
+        if (pair.length % 2 === 0) {  // run when pair has an even number of entries, to reduce the risk of failure when it has not been cleared
+            let x = pair.slice(-2)[0];  // slice the data from the end as the entries are pushed on and may have more than 2
+            let y = pair.slice(-2)[1];
             console.log(`we have ${x} and ${y}`);
             if (Number.isInteger(x)) {
                 let a = playerData[turnIndex].cardHand[x];
@@ -813,7 +813,8 @@ function hand(action, data) {
                 let b = playerData[turnIndex].cardHand.splice(y, 1)[0];
                 playerData[turnIndex].cardHand.splice(y, 0, x);
                 console.log(playerData[turnIndex].cardHand);
-                pair[1] = b;
+                pair.pop();  // clear last entry
+                pair.push(b);  // add this as the last entry
                 discardStack('add', b);
                 // pair.splice(0);
                 // hand('close');
@@ -932,7 +933,7 @@ function picked(action, data) {
             cardFace(x, discardDeck.slice(0)[0]);
             // console.log(`pickCard: ${pickCard}`);
         } else if (action === 'swapout') {
-            let y = pair[1] === undefined ? discardDeck[0] : pair[1];
+            let y = pair.slice(-2)[1] === undefined ? discardDeck[0] : pair.slice(-2)[1];
             console.log(y);
             cardFace(x, y);
             pair.splice(0);
@@ -1228,6 +1229,7 @@ function botPlay(action) {
         }
         if (score < 4 && knocker === 4) {
             knocker = turnIndex;
+            endRound = 4;
         }
     } else {
         let selCrd1 = discardDeck[0][1]; // get the top discard card value
@@ -1236,7 +1238,7 @@ function botPlay(action) {
         let score = 0;
         for (let i = 0; i < 6; i++) {
             let x;
-            if (i < 4){
+            if (i < 4) {
                 x = playerData[turnIndex].knownHand[i][1];
             } else if (i === 4) {
                 x = selCrd1;
@@ -1257,7 +1259,7 @@ function botPlay(action) {
                     x = parseInt(x);
                     break;
             }
-            if (i < 4){
+            if (i < 4) {
                 score += x;
                 selHand.push(x);
             } else if (i === 4) {
@@ -1318,6 +1320,7 @@ function botPlay(action) {
             } else {                        // we've committed to picking from the drawdeck so have to dispose it if it's no good for us
                 drawStack('discard');
             }
+            pair.splice(0);
         }
     }
 }
