@@ -406,6 +406,7 @@ function runGame(action, data) {
         let gamePrompt = document.getElementById('game-end');
         gamePrompt.classList.add('hidden');
         // run new game setup
+        runGame('new');
     }
 }
 
