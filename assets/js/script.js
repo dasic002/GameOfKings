@@ -25,7 +25,7 @@ let timedIdx = 0;
 let timer;
 // variable to record if and who has knocked, 4 means no one has knocked, 0-3 will match the playerData index and compared to turnIndex
 let knocker = 4;
-// variable to countdown the turns left since a player has locked in their hand
+// variable to mark a player has locked in their hand, 2 is freshly locked triggers scoring, 1 just waits for the next human player to be prompted with result, see ln 600
 let endRound = 0;
 
 
@@ -185,7 +185,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert(`${playerData[knocker].playerName} has already knocked!`);
             } else if (this.getAttribute('id') === 'knock') {
                 knocker = turnIndex;
-                endRound = 4;
                 timedIdx = 0;
                 this.classList.add('no-knock');
                 // let x = this.getAttribute('class');
@@ -320,17 +319,6 @@ function next() {
     //     plrPrompt();
     // }
     plrPrompt();
-    // if (endRound > 0) {
-    //     if (endRound === 1 && turnIndex != knocker && knocker != 4) {
-    //         endRound = 2;
-    //         console.log(`Oops! endRound ${endRound} does not match knocker's turn yet!`);
-    //         // alert(`Oops! endRound ${endRound} does not match knocker's turn yet!`);
-    //     }
-    //     endRound--;
-
-    // } else {
-    //     endRound = 0;
-    // }
 }
 
 // toggles the navigation menu open and close, including changing the icon from hamburger bars to cross
@@ -394,7 +382,6 @@ function runGame(action, data) {
         knocker = 4;
         endRound = 0;
         // run new game setup
-        runGame('new');
     } else if (action === 'newRound') {
         // shift dealer to turn
         oldDealerIndex = dealerIndex;
@@ -403,6 +390,9 @@ function runGame(action, data) {
         playerData[1].cardHand.splice(0);
         playerData[2].cardHand.splice(0);
         playerData[3].cardHand.splice(0);
+        playerData[1].knownHand.splice(0);
+        playerData[2].knownHand.splice(0);
+        playerData[3].knownHand.splice(0);
         turnIndex = 0;
         drawDeck.splice(0);
         discardDeck.splice(0);
@@ -416,7 +406,6 @@ function runGame(action, data) {
         let gamePrompt = document.getElementById('game-end');
         gamePrompt.classList.add('hidden');
         // run new game setup
-        runGame('new');
     }
 }
 
@@ -556,10 +545,12 @@ function table(action, data) {
             } else {
                 x++;
             }
+            let name = playerData[x].playerName;
+            let scr = playerData[x].score;
             switch (i) {
                 case (0):
-                    p1Name.innerHTML = playerData[x].playerName; // display player names
-                    p1Score.innerHTML = playerData[x].score; // display player current score
+                    p1Name.innerHTML = name; // display player names
+                    p1Score.innerHTML = scr; // display player current score
                     // y = p1Bell;
                     if (knocker === x) {
                         p1Bell.classList.remove('hidden');
@@ -570,8 +561,8 @@ function table(action, data) {
                     // console.log(`main player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
                     continue;
                 case (1):
-                    p2Name.innerHTML = playerData[x].playerName;
-                    p2Score.innerHTML = playerData[x].score;
+                    p2Name.innerHTML = name;
+                    p2Score.innerHTML = scr;
                     if (knocker === x) {
                         p2Bell.classList.remove('hidden');
                     } else {
@@ -580,8 +571,8 @@ function table(action, data) {
                     // console.log(`LeftTop player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
                     continue;
                 case (2):
-                    p3Name.innerHTML = playerData[x].playerName;
-                    p3Score.innerHTML = playerData[x].score;
+                    p3Name.innerHTML = name;
+                    p3Score.innerHTML = scr;
                     if (knocker === x) {
                         p3Bell.classList.remove('hidden');
                     } else {
@@ -590,8 +581,8 @@ function table(action, data) {
                     // console.log(`centerTop player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
                     continue;
                 case (3):
-                    p4Name.innerHTML = playerData[x].playerName;
-                    p4Score.innerHTML = playerData[x].score;
+                    p4Name.innerHTML = name;
+                    p4Score.innerHTML = scr;
                     if (knocker === x) {
                         p4Bell.classList.remove('hidden');
                     } else {
@@ -602,24 +593,34 @@ function table(action, data) {
         }
 
     } else if (action === 'update') {
-        if (endRound > 1) {
-            endRound--;
-        } else if (endRound === 1 && knocker === 4) {
-            endRound = 0;
-        } else if (endRound === 1) {
-            scoreVal();
-        }
         table('playerNames');
-        for (let i = 0; i < 22; i++) {
-            if (i < 16 && endRound === 1) {
+        for (let i = 16; i < 22; i++) {
+            table('values', i);
+        }
+
+        if (endRound === 0 && knocker != 4) {  // this will be the only point endRound becomes true because table updates after player takes turn
+            endRound = 2;
+        } else if (endRound > 0 && knocker === 4) { // should there be an error or a point the endRound var is not cleared
+            endRound = 0;
+        } else if (turnIndex === knocker) {
+            // first time turnIndex matches knocker score card hands only once!
+            if (endRound === 2) { 
+                scoreVal();
+            }
+            // update table card faces
+            for (let i = 0; i < 16; i++) {
                 if (i % 4 === 0) {
                     shiftTurns();
                 }
                 table('values', i);
-            } else if (i >= 16) {
+            }
+            endRound--;
+        } else if (endRound === 1) { // all players should get a chance to see the score before choosing to go on to the next round
+            for (let i = 0; i < 16; i++) {
+                if (i % 4 === 0) {
+                    shiftTurns();
+                }
                 table('values', i);
-            } else {
-                continue;
             }
         }
     }
@@ -1183,7 +1184,7 @@ function scoreVal() {
         playerData[i].score += scores[i];
         scores.splice(i, 1, playerData[i].score);
     }
-    knocker = 4;
+    // knocker = 4; // this line messes up with our intent to present and update the table after scoring, it won't reveal unless knocker is player 1
 
     document.getElementById('decks').style.display = 'none';
     let gamePrompt = document.getElementById('game-end');
@@ -1229,7 +1230,7 @@ function botPlay(action) {
         }
         if (score < 4 && knocker === 4) {
             knocker = turnIndex;
-            endRound = 4;
+            // endRound = 4;
         }
     } else {
         let selCrd1 = discardDeck[0][1]; // get the top discard card value
@@ -1272,7 +1273,7 @@ function botPlay(action) {
         // if the known hand should score less than 8pts then player knocks
         if (score < 8 && knocker === 4) {
             knocker = turnIndex;
-            endRound = 4;
+            // endRound = 4;
         }
 
         let highest = Math.max(...selHand); // what is the highest value card in our hand;
