@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else if (this.getAttribute('id') === 'knock') {
                 knocker = turnIndex;
                 timedIdx = 0;
-                this.classList.add('no-knock');
+                // this.classList.add('no-knock');
                 // let x = this.getAttribute('class');
                 // x = addClass(x, ' no-knock');
                 // this.setAttribute('class', x);
@@ -601,11 +601,13 @@ function table(action, data) {
 
         if (endRound === 0 && knocker != 4) {  // this will be the only point endRound becomes true because table updates after player takes turn
             endRound = 2;
+            document.getElementById('knock').classList.add('no-knock');
         } else if (endRound > 0 && knocker === 4) { // should there be an error or a point the endRound var is not cleared
             endRound = 0;
+            document.getElementById('knock').classList.remove('no-knock');
         } else if (turnIndex === knocker) {
             // first time turnIndex matches knocker score card hands only once!
-            if (endRound === 2) { 
+            if (endRound === 2) {
                 scoreVal();
             }
             // update table card faces
@@ -1271,58 +1273,56 @@ function botPlay(action) {
             }
         }
 
-        // if the known hand should score less than 8pts then player knocks
-        if (score < 8 && knocker === 4) {
-            knocker = turnIndex;
-            // endRound = 4;
-        }
-
         let highest = Math.max(...selHand); // what is the highest value card in our hand;
+        // deduct from our known hand score
+        score -= highest;
         // if no one has knocked yet, let's be picky, card has to be worth less than 4pts
-        if (knocker === 4 && selCrd1 < 4) {
-            if (selCrd1 < highest) {  // if the discard deck card is lower than the highest in our hand
+        if (knocker === 4) {
+            if (selCrd1 < highest && selCrd1 < 4) {  // if the discard deck card is lower than the highest in our hand
+                score += selCrd1;
                 highest = selHand.indexOf(highest); // convert highest to its index in the array
                 selCrd1 = discardDeck.shift();
                 playerData[turnIndex].knownHand.splice(highest, 1, selCrd1);  // now we know the card value at this location of our hand, let's push to remember before proceeding
                 hand('swap', selCrd1);
                 hand('swap', highest);
-            } else if (selCrd2 < highest) { // if the discard deck pick won't work, let's try drawdeck card
+            } else if (selCrd2 < highest && selCrd2 < 4) { // if the discard deck pick won't work, let's try drawdeck card
+                score += selCrd2;
                 highest = selHand.indexOf(highest); // convert highest to its index in the array
                 selCrd2 = drawDeck.pop();
                 playerData[turnIndex].knownHand.splice(highest, 1, selCrd2);  // now we know the card value at this location of our hand, let's push to remember before proceeding
                 hand('swap', selCrd2);
                 hand('swap', highest);
             } else {                        // we've committed to picking from the drawdeck so have to dispose it if it's no good for us
+                score += highest;  // if neither card was good, restore score of known hand to before picking card.
                 drawStack('discard');
             }
             // else if someone has knocked on the table, we won't be so picky about the card, we just need to lower our score, anything less than 6pts is viable
-        } else if (knocker != 4 && selCrd1 < 6) {
-            if (selCrd1 < highest) {  // if the discard deck card is lower than the highest in our hand
+        } else if (knocker != 4) {
+            if (selCrd1 < highest && selCrd1 < 6) {  // if the discard deck card is lower than the highest in our hand
+                score += selCrd1;
                 highest = selHand.indexOf(highest); // convert highest to its index in the array
                 selCrd1 = discardDeck.shift();
                 playerData[turnIndex].knownHand.splice(highest, 1, selCrd1);  // now we know the card value at this location of our hand, let's push to remember before proceeding
                 hand('swap', selCrd1);
                 hand('swap', highest);
-            } else if (selCrd2 < highest) { // if the discard deck pick won't work, let's try drawdeck card
+            } else if (selCrd2 < highest && selCrd2 < 6) { // if the discard deck pick won't work, let's try drawdeck card
+                score += selCrd2;
                 highest = selHand.indexOf(highest); // convert highest to its index in the array
                 selCrd2 = drawDeck.pop();
                 playerData[turnIndex].knownHand.splice(highest, 1, selCrd2);  // now we know the card value at this location of our hand, let's push to remember before proceeding
                 hand('swap', selCrd2);
                 hand('swap', highest);
             } else {                        // we've committed to picking from the drawdeck so have to dispose it if it's no good for us
+                score += highest;  // if neither card was good, restore score of known hand to before picking card.
                 drawStack('discard');
             }
-        } else {
-            if (selCrd2 < highest) { // if the discard deck pick is too high, let's chance it with drawdeck card
-                highest = selHand.indexOf(highest); // convert highest to its index in the array
-                selCrd2 = drawDeck.pop();
-                playerData[turnIndex].knownHand.splice(highest, 1, selCrd2);  // now we know the card value at this location of our hand, let's push to remember before proceeding
-                hand('swap', selCrd2);
-                hand('swap', highest);
-            } else {                        // we've committed to picking from the drawdeck so have to dispose it if it's no good for us
-                drawStack('discard');
-            }
-            pair.splice(0);
+        }
+
+        pair.splice(0);
+
+        // if the known hand should score less than 8pts then player knocks
+        if (score < 8 && knocker === 4) {
+            knocker = turnIndex;
         }
     }
 }
