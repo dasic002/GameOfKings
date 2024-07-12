@@ -85,6 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         botSkill: P1[1],
                         playerName: P1[0],
                         cardHand: [],
+                        roundState: 0,
                         score: 0
                     };
                     P2 = {
@@ -92,6 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         playerName: P2[0],
                         cardHand: [],
                         knownHand: [],
+                        roundState: 0,
                         score: 0
                     };
                     P3 = {
@@ -99,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         playerName: P3[0],
                         cardHand: [],
                         knownHand: [],
+                        roundState: 0,
                         score: 0
                     };
                     P4 = {
@@ -106,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         playerName: P4[0],
                         cardHand: [],
                         knownHand: [],
+                        roundState: 0,
                         score: 0
                     };
                     playerData.push(P1, P2, P3, P4);
@@ -393,6 +397,10 @@ function runGame(action, data) {
         playerData[1].knownHand.splice(0);
         playerData[2].knownHand.splice(0);
         playerData[3].knownHand.splice(0);
+        playerData[0].roundState = 0;
+        playerData[1].roundState = 0;
+        playerData[2].roundState = 0;
+        playerData[3].roundState = 0;
         turnIndex = 0;
         drawDeck.splice(0);
         discardDeck.splice(0);
@@ -423,16 +431,16 @@ function table(action, data) {
     cards = document.getElementsByClassName('card');
     decks = document.getElementsByClassName('deck');
     // get player name elements
-    let p1Name = document.getElementById('p1');
-    let p2Name = document.getElementById('p2');
-    let p3Name = document.getElementById('p3');
-    let p4Name = document.getElementById('p4');
+    // let p1Name = document.getElementById('p1');
+    // let p2Name = document.getElementById('p2');
+    // let p3Name = document.getElementById('p3');
+    // let p4Name = document.getElementById('p4');
     // get player bell icon
     let pNameGroup = document.getElementsByClassName('player-name');
-    let p1Bell = pNameGroup[3].getElementsByTagName('i')[0];
-    let p2Bell = pNameGroup[0].getElementsByTagName('i')[0];
-    let p3Bell = pNameGroup[1].getElementsByTagName('i')[0];
-    let p4Bell = pNameGroup[2].getElementsByTagName('i')[0];
+    // let p1Bell = pNameGroup[3].getElementsByTagName('i')[0];
+    // let p2Bell = pNameGroup[0].getElementsByTagName('i')[0];
+    // let p3Bell = pNameGroup[1].getElementsByTagName('i')[0];
+    // let p4Bell = pNameGroup[2].getElementsByTagName('i')[0];
     // get player score elements
     let p1Score = document.getElementById('scr1');
     let p2Score = document.getElementById('scr2');
@@ -457,28 +465,28 @@ function table(action, data) {
             card.innerHTML = '';
         }
         // clear icons by names
-        for (let i = 0; i < 4; i++) {
-            let k;
-            switch (i) {
-                case 0:
-                    k = 3; // place of player 1
-                    break;
-                case 1:
-                    k = 0; // place of player 2
-                    break;
-                case 2:
-                    k = 1; // place of player 3
-                    break;
-                case 3:
-                    k = 2; // place of player 4
-                    break;
-            }
-            let pNameGroup = document.getElementsByClassName('player-name');
-            for (let j = 1; j < 5; j++) {
-                let x = pNameGroup[k].children[j];
-                x.classList.add('hidden'); // hide all icons after player's name
-            }
-        }
+        // for (let i = 0; i < 4; i++) {
+        //     let k;
+        //     switch (i) {
+        //         case 0:
+        //             k = 3; // place of player 1
+        //             break;
+        //         case 1:
+        //             k = 0; // place of player 2
+        //             break;
+        //         case 2:
+        //             k = 1; // place of player 3
+        //             break;
+        //         case 3:
+        //             k = 2; // place of player 4
+        //             break;
+        //     }
+        //     // let pNameGroup = document.getElementsByClassName('player-name');
+        //     for (let j = 1; j < 5; j++) {
+        //         let x = pNameGroup[k].children[j];
+        //         x.classList.add('hidden'); // hide all icons after player's name
+        //     }
+        // }
     } else if (action === "deal") {
         if (data < 16) {
             cards[data].classList.remove('missing-card');
@@ -539,7 +547,7 @@ function table(action, data) {
         }
     } else if (action === 'playerNames') {
         let x = turnIndex - 1;
-        let y;
+        let y;  // variable to track place of player on table
         for (let i = 0; i < 4; i++) {
             if (x > 2) {
                 x = 0;
@@ -548,53 +556,47 @@ function table(action, data) {
             }
             let name = playerData[x].playerName;
             let scr = playerData[x].score;
+
             switch (i) {
                 case (0):
-                    p1Name.innerHTML = name; // display player names
                     p1Score.innerHTML = scr; // display player current score
-                    // y = p1Bell;
-                    if (knocker === x) {
-                        p1Bell.classList.remove('hidden');
-                    } else {
-                        p1Bell.classList.add('hidden');
-                    }
-                    // p1Bell.setAttribute('class', y);
-                    // console.log(`main player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
-                    continue;
+                    y = 3;
+                    break;
                 case (1):
-                    p2Name.innerHTML = name;
                     p2Score.innerHTML = scr;
-                    if (knocker === x) {
-                        p2Bell.classList.remove('hidden');
-                    } else {
-                        p2Bell.classList.add('hidden');
-                    }
-                    // console.log(`LeftTop player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
-                    continue;
+                    y = 0;
+                    break;
                 case (2):
-                    p3Name.innerHTML = name;
                     p3Score.innerHTML = scr;
-                    if (knocker === x) {
-                        p3Bell.classList.remove('hidden');
-                    } else {
-                        p3Bell.classList.add('hidden');
-                    }
-                    // console.log(`centerTop player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
-                    continue;
+                    y = 1;
+                    break;
                 case (3):
-                    p4Name.innerHTML = name;
                     p4Score.innerHTML = scr;
-                    if (knocker === x) {
-                        p4Bell.classList.remove('hidden');
-                    } else {
-                        p4Bell.classList.add('hidden');
-                    }
-                // console.log(`rightTop player place -> knocker = ${knocker} and turnIndex = ${turnIndex} and x = ${x}`);
+                    y = 2;
+            }
+
+            // hide all icons after player's name
+            for (let j = 1; j < 5; j++) {
+                let x = pNameGroup[y].children[j];
+                x.classList.add('hidden');
+            }
+
+            // Update player name on location
+            pNameGroup[y].children[0].innerHTML = name;
+
+            // Add relevant icon next to player's name
+            if (knocker === x && (playerData[x].roundState === 0 || playerData[x].roundState === 'k')) {
+                pNameGroup[y].children[1].classList.remove('hidden'); // show bell for knocker
+            } else if (playerData[x].roundState === 'd') {
+                pNameGroup[y].children[4].classList.remove('hidden'); // show 2x for losing knocker
+            } else if (playerData[x].roundState === 'w') {
+                pNameGroup[y].children[2].classList.remove('hidden'); // show trophy for winner of round
+            } else if (playerData[x].roundState === 'l') {
+                pNameGroup[y].children[3].classList.remove('hidden'); // show cross for losers
             }
         }
 
     } else if (action === 'update') {
-        table('playerNames');
         for (let i = 16; i < 22; i++) {
             table('values', i);
         }
@@ -602,6 +604,7 @@ function table(action, data) {
         if (endRound === 0 && knocker != 4) {  // this will be the only point endRound becomes true because table updates after player takes turn
             endRound = 2;
             document.getElementById('knock').classList.add('no-knock');
+            playerData[knocker].roundState = 'k';  //  
         } else if (endRound > 0 && knocker === 4) { // should there be an error or a point the endRound var is not cleared
             endRound = 0;
             document.getElementById('knock').classList.remove('no-knock');
@@ -626,6 +629,7 @@ function table(action, data) {
                 table('values', i);
             }
         }
+        table('playerNames');
     }
 }
 
@@ -1120,31 +1124,11 @@ function scoreVal() {
         msg = `${playerData[knocker].playerName} won this round!`;
         console.log(msg);
         // alert(msg);
-        for (let i = 0; i < 4; i++) {
-            let k;
-            switch (i) {
-                case 0:
-                    k = 3; // place of player 1
-                    break;
-                case 1:
-                    k = 0; // place of player 2
-                    break;
-                case 2:
-                    k = 1; // place of player 3
-                    break;
-                case 3:
-                    k = 2; // place of player 4
-                    break;
-            }
-            let pNameGroup = document.getElementsByClassName('player-name');
-            for (let j = 1; j < 5; j++) {
-                let x = pNameGroup[k].children[j];
-                x.classList.add('hidden'); // hide all icons after player's name
-            }
+        for (i = 0; i < 4; i++) {
             if (knocker === i) {
-                pNameGroup[k].children[2].classList.remove('hidden'); // show trophy for winning knocker
+                playerData[i].roundState = 'w';
             } else {
-                pNameGroup[k].children[3].classList.remove('hidden'); // show cross for losers
+                playerData[i].roundState = 'l';
             }
         }
     } else {
@@ -1152,35 +1136,16 @@ function scoreVal() {
         msg = `${playerData[knocker].playerName} lost! Score doubled to ${scores[knocker]}.<br>${playerData[scores.indexOf(lowest)].playerName} scored ${lowest}!`;
         console.log(msg);
         // alert(msg);
-        for (let i = 0; i < 4; i++) {
-            let k;
-            switch (i) {
-                case 0:
-                    k = 3; // place of player 1
-                    break;
-                case 1:
-                    k = 0; // place of player 2
-                    break;
-                case 2:
-                    k = 1; // place of player 3
-                    break;
-                case 3:
-                    k = 2; // place of player 4
-                    break;
-            }
-            let pNameGroup = document.getElementsByClassName('player-name');
-            for (let j = 1; j < 5; j++) {
-                let x = pNameGroup[k].children[j];
-                x.classList.add('hidden'); // hide all icons after player's name
-            }
+        for (i = 0; i < 4; i++) {
             if (knocker === i) {
-                pNameGroup[k].children[4].classList.remove('hidden'); // show 2x for losing knocker
+                playerData[i].roundState = 'd';
             } else if (scores.indexOf(lowest) === i) {
-                pNameGroup[k].children[2].classList.remove('hidden'); // show trophy for winner of round
+                playerData[i].roundState = 'w';
             } else {
-                pNameGroup[k].children[3].classList.remove('hidden'); // show cross for losers
+                playerData[i].roundState = 'l';
             }
         }
+
     }
     // push scores to playerData
     for (let i = 0; i < 4; i++) {
