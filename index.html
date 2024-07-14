@@ -41,68 +41,126 @@
     </nav>
 
     <div class="hidden" id="how-to">
-        <button class="click" id="cls-how-to"><i class="fa-solid fa-circle-xmark"></i></button>
-        <p>Kings is a simple, fun (and addictive) card game suitable for all ages. Exercises the player's memory and
-            strategy skills. 
-            The objective of the game is to score as low as possible, with Kings being worth zero points, the remainder
-            as their numerical value (Jacks and Queens are worth 10pts).
-        </p>
-        <h3>How is it played?</h3>
-        <h4>Set up</h4>
-        <ol>
-            <li>Cards shuffled, each player is dealt 4 cards face down, remaining deck placed in the centre as a draw
-                stack and
-                the top card is turned over to form the discard stack.</li>
-            <li>Players will arrange their 4 cards in a 2 x 2 formation in front of them. This helps with the memory
-                aspect of
-                the game.</li>
-            <li>Without looking at their hand, the players can opt to shuffle their cards around in their 2 x 2
-                formation in the
-                hope it may reveal the larger value cards in the next step.</li>
-            <li>Before play begins, the dealer counts down "3, 2, 1!" where on "1", players can look at only the bottom
-                2 cards
-                of their hand for about 1 second. Cards are placed back down and no further shuffling is allowed from
-                this
-                point.</li>
-        </ol>
-        <h4>Playing the game</h4>
-        <ol>
-            <li>The player to the left of the dealer goes first, taking turns clockwise.</li>
-            <li>Knowing only the bottom 2 cards of their hand, the player must choose to either draw the top card from
-                the
-                discard stack (since it is visible and may be significantly lower than just seen in their hand) or take
-                a chance
-                and pick from the draw stack. Once they see the card they have picked, they can choose whether to swap
-                with any
-                of the ones in their hand or to discard it.</li>
-            <li>Each player takes a turn by choosing to pick a card from either stack and deciding whether to swap with
-                another
-                from their hand or not.</li>
-            <li>Before moving on to the next player, the current player may knock on the table to indicate they are
-                locking in
-                their hand, indicating this is the last round for everyone else as this player believes they have the
-                lowest
-                scoring hand on the table.</li>
-            <li>Once the last player, the one to the right of the person that locked their hand has picked up a card and
-                decided
-                whether to swap or not, it is time for the locked in player to reveal their hand. Remember, they believe
-                they
-                have the lowest scoring hand on the table, should they not, their points are doubled.</li>
-            <li>The game goes on in several rounds of the above until one of the players has reached at least 200pts.
-                The winner
-                of the game has the lowest score of the table.</li>
-        </ol>
-        <h4>Other Scenarios</h4>
-        <p><strong>Q. </strong>What happens if there are no more cards in the draw stack?</p>
-        <p><strong>A. </strong>Collect all but the top card from the discard stack and shuffle to use this as the new draw stack.</p>
-        <h4>Scoring example</h4>
-        <p>If the knocking player had 2x kings, 1x 3 and 1x 4. This totals to 7 in that round.</p>
-        <p>Should another player on this round score 7 points or lower, the knocking player's score doubles to 14.</p>
+        <div class="container">
+            <div id="how-to-0">
+                <p>Kings is a simple, fun (and addictive) card game suitable for all ages. Exercises the player's memory
+                    and strategy skills. The objective of the game is to score as low as possible, with Kings being
+                    worth zero points, the remainder as their numerical value (Jacks and Queens are worth 10pts).
+                </p>
+                <span>
+                    <span class="ht-card hearts">K</span>
+                    <p>Worth 0 points.</p>
+                </span>
+                <span>
+                    <span class="ht-card hearts">Q</span>
+                    <span class="ht-card hearts">J</span>
+                    <span class="ht-card hearts">10</span>
+                    <p>Worth 10 points.</p>
+                </span>
+                <span>
+                    <span class="ht-card hearts">A</span>
+                    <span class="ht-card hearts">2</span>
+                    <span>(...)</span>
+                    <span class="ht-card hearts">8</span>
+                    <span class="ht-card hearts">9</span>
+                    <p>Worth 1, 2, (...), 8, 9 points, respectively.</p>
+                </span>
+                <p id="page-of">1 of 10</p>
+            </div>
+            <div id="how-to-1">
+                <h3>How is it played?</h3>
+                <h4>Set up</h4>
+                <p>Cards shuffled, each player is dealt 4 cards face down, remaining deck placed in the centre as a
+                    draw stack and the top card is turned over to form the discard stack.</p>
+                <img src="assets/images/htp-cards-dealt-out.png" alt="Cards dealt out to players" id="htp1-img">
+                <p id="page-of">2 of 10</p>
+            </div>
+            <div id="how-to-2">
+                <p>Players will arrange their 4 cards in a 2 x 2 formation in front of them. This helps with the memory
+                    aspect of the game.</p>
+                <p>Without looking at their hand, the players can opt to shuffle their cards around in their 2 x 2
+                    formation in the
+                    hope it may reveal the larger value cards in the next step.</p>
+                <img src="assets/images/htp-2by2-formation.png" alt="Cards arraged in 2 by 2 formation" id="htp2-img">
+                <p id="page-of">3 of 10</p>
+            </div>
+            <div id="how-to-3">
+                <p>Before play begins, the dealer counts down "3, 2, 1!" where on "1", players can look at only the
+                    bottom 2 cards of their hand for about 1 second. Cards are placed back down and no further shuffling
+                    is allowed from this point.</p>
+                <img src="assets/images/htp-reveal-countdown.png" alt="Bottom 2 cards revealed at the start"
+                    id="htp3-img">
+                <p id="page-of">4 of 10</p>
+            </div>
+            <div id="how-to-4">
+                <h4>Playing the game</h4>
+                <p>The player to the left of the dealer goes first, taking turns clockwise.</p>
+                <p>Knowing only the bottom 2 cards of their hand, the player must choose to either draw the top card
+                    from the discard stack (since it is visible and may be significantly lower than just seen in their
+                    hand) or take a chance and pick from the draw stack. Once they see the card they have picked, they
+                    can choose whether to swap with any of the ones in their hand or to discard it.</p>
+                <p>Their turn ends when the player has placed a card in the discard stack, either the card swapped out
+                    from
+                    their hand or the card picked from the draw stack.</p>
+                <img src="assets/images/htp-draw-and-discard-stacks.png" alt="stacks of cards available to pick from"
+                    id="htp4-img">
+                <p id="page-of">5 of 10</p>
+            </div>
+            <div id="how-to-5">
+                <p>Before moving on to the next player, the current player may knock on the table to indicate they are
+                    locking in their hand, indicating this is the last round for everyone else as this player believes
+                    they have the lowest scoring hand on the table.</p>
+                <p>The bell icon button appears for 3 seconds only before moving on to the next player.</p>
+                <img src="assets/images/htp-knocking-button.png"
+                    alt="knocking button counts down from 3 before disappearing" id="htp5-img">
+                <p id="page-of">8 of 10</p>
+            </div>
+            <div id="how-to-6">
+                <p>Once the last player, the one to the right of the person that locked their hand has picked up a card
+                    and
+                    decided whether to swap or not, it is time for the locked in player to reveal their hand. Remember,
+                    they
+                    believe they have the lowest scoring hand on the table, should they not, their points are doubled.
+                </p>
+                <img src="assets/images/htp-end-of-round.png" alt="example of the end of round" id="htp5-img">
+                <p id="page-of">7 of 10</p>
+            </div>
+            <div id="how-to-7">
+                <p>The game goes on in several rounds of the above until one of the players has reached at least 200pts.
+                    The winner of the game has the lowest score of the table.</p>
+                <img src="assets/images/htp-end-of-game.png" alt="example of end of game" id="htp6-img">
+                <p id="page-of">8 of 10</p>
+            </div>
+            <div id="how-to-8">
+                <h4>Other Scenarios</h4>
+                <p><strong>Q. </strong>What happens if there are no more cards in the draw stack?</p>
+                <p><strong>A. </strong>Collect all but the top card from the discard stack and shuffle to use this as
+                    the new draw stack. This game will do this automatically when the draw stack gives away its last
+                    card.</p>
+                <p id="page-of">9 of 10</p>
+            </div>
+            <div id="how-to-9">
+                <h4>Scoring example</h4>
+                <p>If the knocking player had 2x 6, 1x 3 and 1x 4. This totals to 19 points in that round.</p>
+                <p>Should another player on this round score 19 points or lower, the knocking player's score doubles to
+                    38.</p>
+                <img src="assets/images/htp-scoring-example.png" alt="example of card hand scored and points doubled" id="htp7-img">
+                <p id="page-of">10 of 10</p>
+            </div>
+
+            <nav class="center" id="how-to-nav">
+                <button class="click" id="left-how-to"><i class="fa-solid fa-circle-arrow-left"></i></button>
+                <button class="click" id="cls-how-to"><i class="fa-solid fa-circle-xmark"></i></button>
+                <button class="click" id="right-how-to"><i class="fa-solid fa-circle-arrow-right"></i></button>
+            </nav>
+        </div>
+
+
     </div>
 
     <div class="hidden" id="credits">
         <h2>Credits</h2>
-        
+
     </div>
 
     <!-- Where the game takes place -->
@@ -110,7 +168,8 @@
 
         <div class="" id="welcome">
             <h2 id="wlcm-msg">Welcome to Kings</h2>
-            <button class="click btns bg-btns" id="play" action="play">PLAY</button>
+            <button class="click btns bg-btns" id="play" action="play">PLAY</button><br>
+            <button class="click" id="help"><i class="fa-solid fa-circle-question"></i></button>
         </div>
         <div class="hidden" id="player-form">
             <div>

@@ -27,6 +27,8 @@ let timer;
 let knocker = 4;
 // variable to mark a player has locked in their hand, 2 is freshly locked triggers scoring, 1 just waits for the next human player to be prompted with result, see ln 600
 let endRound = 0;
+// variable for tracking instructions page
+let howToPg = 0;
 
 
 // wait for the DOM to finish loading before running the game
@@ -45,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 runGame('newGame');
             } else if (this.getAttribute('action') === 'how-to-play') {
                 menu();
+                howToNav();
                 document.getElementById('how-to').style.display = 'block';
                 document.getElementById('game-area').style.display = 'none';
             } else if (this.getAttribute('id') === 'sound-state') {
@@ -57,6 +60,16 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+
+    document.getElementById('left-how-to').addEventListener('click', function () {
+        howToPg--;
+        howToNav();
+    })
+
+    document.getElementById('right-how-to').addEventListener('click', function () {
+        howToPg++;
+        howToNav();
+    })
 
     document.getElementById('cls-how-to').addEventListener('click', function () {
         document.getElementById('how-to').style.display = '';
@@ -115,6 +128,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     playerData.push(P1, P2, P3, P4);
                     runGame('new');
                 }
+            } else if (this.getAttribute('id') === 'help') {
+                menu('close');
+                howToNav();
+                document.getElementById('how-to').style.display = 'block';
+                document.getElementById('game-area').style.display = 'none';
             } else if (this.getAttribute('action') === 'new-hand') {
                 hand('open');
             } else if (this.getAttribute('action') === 'done') {
@@ -326,13 +344,13 @@ function next() {
 }
 
 // toggles the navigation menu open and close, including changing the icon from hamburger bars to cross
-function menu() {
+function menu(data) {
     let menu = document.getElementById('menu-list');
     let state = menu.style.display;
     let menuBtn = document.getElementById('menu-btn');
     let bars = menuBtn.children[0];
     let x = menuBtn.children[1];
-    if (state === 'block') {
+    if (state === 'block' || data === 'close') {
         bars.classList.remove('hidden');
         x.classList.add('hidden');
         menu.style.display = 'none';
@@ -340,6 +358,55 @@ function menu() {
         x.classList.remove('hidden');
         bars.classList.add('hidden');
         menu.style.display = 'block';
+    }
+}
+
+function howToNav() {
+    let min = 0;
+    let max = 9;
+    howToPg = howToPg < min ? max : howToPg;
+    howToPg = howToPg > max ? min : howToPg;
+    document.getElementById('how-to-0').style.display = 'none';
+    document.getElementById('how-to-1').style.display = 'none';
+    document.getElementById('how-to-2').style.display = 'none';
+    document.getElementById('how-to-3').style.display = 'none';
+    document.getElementById('how-to-4').style.display = 'none';
+    document.getElementById('how-to-5').style.display = 'none';
+    document.getElementById('how-to-6').style.display = 'none';
+    document.getElementById('how-to-7').style.display = 'none';
+    document.getElementById('how-to-8').style.display = 'none';
+    document.getElementById('how-to-9').style.display = 'none';
+    switch (howToPg) {
+        case 0:
+            document.getElementById('how-to-0').style.display = 'block';
+            break;
+        case 1:
+            document.getElementById('how-to-1').style.display = 'block';
+            break;
+        case 2:
+            document.getElementById('how-to-2').style.display = 'block';
+            break;
+        case 3:
+            document.getElementById('how-to-3').style.display = 'block';
+            break;
+        case 4:
+            document.getElementById('how-to-4').style.display = 'block';
+            break;
+        case 5:
+            document.getElementById('how-to-5').style.display = 'block';
+            break;
+        case 6:
+            document.getElementById('how-to-6').style.display = 'block';
+            break;
+        case 7:
+            document.getElementById('how-to-7').style.display = 'block';
+            break;
+        case 8:
+            document.getElementById('how-to-8').style.display = 'block';
+            break;
+        case 9:
+            document.getElementById('how-to-9').style.display = 'block';
+            break;
     }
 }
 
@@ -430,18 +497,11 @@ function table(action, data) {
     let decks;
     cards = document.getElementsByClassName('card');
     decks = document.getElementsByClassName('deck');
-    // get player name elements
-    // let p1Name = document.getElementById('p1');
-    // let p2Name = document.getElementById('p2');
-    // let p3Name = document.getElementById('p3');
-    // let p4Name = document.getElementById('p4');
-    // get player bell icon
+
+    // get player name and icons groups
     let pNameGroup = document.getElementsByClassName('player-name');
-    // let p1Bell = pNameGroup[3].getElementsByTagName('i')[0];
-    // let p2Bell = pNameGroup[0].getElementsByTagName('i')[0];
-    // let p3Bell = pNameGroup[1].getElementsByTagName('i')[0];
-    // let p4Bell = pNameGroup[2].getElementsByTagName('i')[0];
-    // get player score elements
+
+    // player scoring space
     let p1Score = document.getElementById('scr1');
     let p2Score = document.getElementById('scr2');
     let p3Score = document.getElementById('scr3');
@@ -464,29 +524,7 @@ function table(action, data) {
             // card.setAttribute('class', x);
             card.innerHTML = '';
         }
-        // clear icons by names
-        // for (let i = 0; i < 4; i++) {
-        //     let k;
-        //     switch (i) {
-        //         case 0:
-        //             k = 3; // place of player 1
-        //             break;
-        //         case 1:
-        //             k = 0; // place of player 2
-        //             break;
-        //         case 2:
-        //             k = 1; // place of player 3
-        //             break;
-        //         case 3:
-        //             k = 2; // place of player 4
-        //             break;
-        //     }
-        //     // let pNameGroup = document.getElementsByClassName('player-name');
-        //     for (let j = 1; j < 5; j++) {
-        //         let x = pNameGroup[k].children[j];
-        //         x.classList.add('hidden'); // hide all icons after player's name
-        //     }
-        // }
+
     } else if (action === "deal") {
         if (data < 16) {
             cards[data].classList.remove('missing-card');
