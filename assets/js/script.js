@@ -29,6 +29,10 @@ let knocker = 4;
 let endRound = 0;
 // variable for tracking instructions page
 let howToPg = 0;
+// variable to compile messages with what the other players have done, the aim is to only track the last 4 actions i.e.: a full turn of the table
+const acts = ['New Game!'];
+// variable to compile the string per player's turn.
+let actStrg = '';
 
 
 // wait for the DOM to finish loading before running the game
@@ -185,17 +189,22 @@ document.addEventListener("DOMContentLoaded", function () {
                     picked('clear');
                     pickCard.splice(0);
                 } else {
+                    actStrg += ` drew and discarded`;
                     drawStack('discard');
+                    cardFace('', discardDeck[0]);  // fetch the name of the card, since it is visible in the discard deck on discarding
                     timedIdx = 3;
                     timer = setTimeout(timedFunctions, 1000);
-                    // next();
                 }
             } else if (this.getAttribute('id') === 'accept') {
                 let card;
                 if (pickCard[0] === discardDeck[0]) {
                     card = discardDeck.shift();
+                    actStrg += ` took the`;
+                    cardFace('', card);  // fetch the name of the card, since it is visible in the discard deck
+                    actStrg += ` for their`;
                 } else if (pickCard[0] === drawDeck.slice(-1)[0]) {
                     card = drawDeck.pop();
+                    actStrg += ` drew for their`;
                 }
                 console.log(card);
                 pair.push(card);
@@ -203,15 +212,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 pickCard.splice(0);
                 hand('open');
                 hand('swapout');
-            } else if (this.getAttribute('id') === 'knock' && this.getAttribute('class').includes('no-knock')) {
+            } else if (this.getAttribute('id') === 'knock' && knocker != 4) {
                 alert(`${playerData[knocker].playerName} has already knocked!`);
             } else if (this.getAttribute('id') === 'knock') {
                 knocker = turnIndex;
                 timedIdx = 0;
-                // this.classList.add('no-knock');
-                // let x = this.getAttribute('class');
-                // x = addClass(x, ' no-knock');
-                // this.setAttribute('class', x);
+                actStrg += ` and <strong>KNOCKED!</strong>`;
                 next();
             } else {
                 let item = this.getAttribute('id') === null ? this.innerText : this.getAttribute('id');
@@ -255,9 +261,9 @@ function timedFunctions() {
                     btm.classList.add('hidden');
                     table('hide', 14);
                     table('hide', 15);
+                    actStrg += ` has viewed bottom cards`;
                     timedIdx = 4;
                     timer = setTimeout(timedFunctions, 200);
-                    // next();
                     break;
             }
             break;
@@ -274,6 +280,7 @@ function timedFunctions() {
                     } else if (knocker != 4) {
                         picked('swapout');
                         x.innerHTML = ' 1';
+                        document.getElementById('knock').classList.add('no-knock');
                         timer = setTimeout(timedFunctions, 1000);
                         break;
                     } else {
@@ -304,6 +311,7 @@ function timedFunctions() {
                     document.getElementById('knock').classList.remove('hidden');
                     if (knocker != 4) {
                         x.innerHTML = ' 1';
+                        document.getElementById('knock').classList.add('no-knock');
                         timer = setTimeout(timedFunctions, 1000);
                         break;
                     } else {
@@ -332,14 +340,21 @@ function timedFunctions() {
 }
 
 function next() {
+    // if the player just played is human output their actions string to acts array, botPlay() already includes this code. Necessary to keep both so it works when bots play their new hand.
+    if (playerData[turnIndex].botSkill === 0) {
+        // limits the array of strings to the last 4 turns. i.e.: a full table's turn.
+        if (acts.length > 3) {
+            acts.shift();
+        }
+        // push the last act string to the acts array
+        acts.push(actStrg);
+        // clear the act string of the last turn in prep for the next turn
+        actStrg = '';
+    }
     hand('close');
     picked('clear');
     shiftTurns();
     table('update');
-    // whilst it's still first turns on start of new round, or the next player is human, get prompt up
-    // if (newRound > 0 || playerData[turnIndex].botSkill === 0) {
-    //     plrPrompt();
-    // }
     plrPrompt();
 }
 
@@ -421,6 +436,12 @@ function runGame(action, data) {
         document.getElementById('main-player').style.display = 'block';
         document.getElementById('knock').classList.remove('no-knock');
         drawStack('deal');
+        // get the div to hold the last actions played
+        let actsDisplay = document.getElementById('actions');
+
+        for (let i = 0; i < 4; i++) {
+            actsDisplay.children[i].innerHTML = '';
+        }
         plrPrompt();
     } else if (action === 'newGame') {
         // hide game end prompt
@@ -452,6 +473,8 @@ function runGame(action, data) {
         timedIdx = 0;
         knocker = 4;
         endRound = 0;
+        acts.splice(0);
+        acts.push('New Game!');
         // run new game setup
     } else if (action === 'newRound') {
         // shift dealer to turn
@@ -476,6 +499,8 @@ function runGame(action, data) {
         timedIdx = 0;
         knocker = 4;
         endRound = 0;
+        acts.splice(0);
+        acts.push('New Round!');
         // hide game end prompt
         document.getElementById('decks').style.display = '';
         let gamePrompt = document.getElementById('game-end');
@@ -749,31 +774,32 @@ function discardStack(action, data) {
 
 // function will produce a prompt for human players when more than one human is playing on the same device
 function plrPrompt() {
-    if (newRound > 1) {
-        if (newRound === 2) {
-            console.log('last prompt for new hand!');
-        }
+    // get the div to hold the last actions played
+    let actsDisplay = document.getElementById('actions');
 
-        if ( /*humans === true &&*/ playerData[turnIndex].botSkill === 0) {
+    for (let i = 0; i < acts.length; i++) {
+        if (acts[i] != '') {
+            actsDisplay.children[i].innerHTML = `${acts[i]}`;
+        } else {
+            actsDisplay.children[i].innerHTML = '';
+        }
+    }
+    actStrg = ''; // make sure act string is clear before new info added
+    actStrg += `${playerData[turnIndex].playerName}`;
+
+    if (newRound > 1) {
+        if (playerData[turnIndex].botSkill === 0) {
             console.log(`${playerData[turnIndex].playerName} is a human player! on newRound ${newRound}`);
             document.getElementById('wlcm-msg').innerHTML = `${playerData[turnIndex].playerName}`;
             document.getElementById('play').innerHTML = 'READY';
             document.getElementById('play').setAttribute('action', 'new-hand');
             document.getElementById('welcome').style.display = 'block';
+            document.getElementById('actions').style.display = 'block';
             document.getElementById('other-players').style.display = 'none';
             document.getElementById('decks-area').style.display = 'none';
             document.getElementById('main-player').style.display = 'none';
-            // newRound--;
-            // console.log(`newRound deducted ${newRound}`);
-            // } else if (humans === false) {
-            //     console.log('no humans but P1!');
-            //     turnIndex = 0;
-            //     newRound = 1;
-            //     hand('open');
-            //     // newRound--;
         } else {
             botPlay('newHand');
-            console.log(`bot player - ${playerData[turnIndex].playerName} plays new hand`);
             newRound--;
             if (newRound > 0) {
                 shiftTurns();
@@ -783,9 +809,16 @@ function plrPrompt() {
 
     } else {
         newRound = 0;
-        if (/*humans === true &&*/ playerData[turnIndex].botSkill === 0) {
+        if (playerData[turnIndex].botSkill === 0) {
             console.log(`${playerData[turnIndex].playerName} is a human player!`);
-            document.getElementById('wlcm-msg').innerHTML = `${playerData[turnIndex].playerName}!<br>Pick a card!`;
+            if (endRound === 2) {
+                document.getElementById('wlcm-msg').innerHTML = `${playerData[turnIndex].playerName}!<br>last card!`;
+            } else if (endRound === 1) {
+                document.getElementById('wlcm-msg').innerHTML = `${playerData[turnIndex].playerName}!<br>End of round!`;
+            } else {
+                document.getElementById('wlcm-msg').innerHTML = `${playerData[turnIndex].playerName}!<br>Pick a card!`;
+            }
+
             document.getElementById('play').innerHTML = 'READY';
             document.getElementById('play').setAttribute('action', 'to-pick');
             document.getElementById('welcome').style.display = 'block';
@@ -793,10 +826,7 @@ function plrPrompt() {
             document.getElementById('decks-area').style.display = 'none';
             document.getElementById('main-player').style.display = 'none';
         } else {
-            // ; // --- code to highlight bot currently playing;
             botPlay('turn'); // --- code to get bot to make a decision on play;
-            // shiftTurns();
-            // table('update');
             next();
         }
     }
@@ -859,24 +889,16 @@ function hand(action, data) {
                 let b = playerData[turnIndex].cardHand.splice(y, 1)[0];
                 playerData[turnIndex].cardHand.splice(y, 0, x);
                 console.log(playerData[turnIndex].cardHand);
+                hand('wordPlace', y);  // fetch the wording of the player's card place in their hand
+                actStrg += `, `;
+                cardFace('', b);  // fetch the name of the card, since it is visible in the discard deck on discarding
                 pair.pop();  // clear last entry
                 pair.push(b);  // add this as the last entry
                 discardStack('add', b);
-                // pair.splice(0);
-                // hand('close');
-                // shiftTurns();
-                // table('update');
-                // if (playerData[turnIndex].botSkill === 0) {
-                //     plrPrompt();
-                // }
             }
         }
     } else if (action === 'swapout') {
         for (let card of cards) {
-            // let x = card.getAttribute('action');
-            // console.log(x);
-            // x = addClass(x, 'swapout');
-            // console.log(x);
             card.setAttribute('action', 'swapout');
         }
     } else if (action === 'close') {
@@ -892,6 +914,21 @@ function hand(action, data) {
         document.getElementById('other-players').style.display = 'block';
         document.getElementById('decks-area').style.display = 'block';
         document.getElementById('main-player').style.display = 'block';
+    } else if (action === 'wordPlace') {
+        switch (data) {
+            case 0:
+                actStrg += ` top left`;
+                break;
+            case 1:
+                actStrg += ` top right`;
+                break;
+            case 2:
+                actStrg += ` bottom left`;
+                break;
+            case 3:
+                actStrg += ` bottom right`;
+                break;
+        }
     }
 }
 
@@ -1085,43 +1122,83 @@ function shuffle(data) {
 
 function cardFace(place, id) {
     let suit = place;
-    switch (id[0]) {
-        case ('c'):
-            // console.log(id[0]);
-            suit.classList.add('clubs');
-            suit.classList.remove('diamonds', 'hearts', 'spades');
-            // console.log(suit);
-            break;
-        case ('d'):
-            // console.log(id[0]);
-            suit.classList.add('diamonds');
-            suit.classList.remove('clubs', 'hearts', 'spades');
-            // console.log(suit);
-            break;
-        case ('h'):
-            // console.log(id[0]);
-            suit.classList.add('hearts');
-            suit.classList.remove('diamonds', 'clubs', 'spades');
-            // console.log(suit);
-            break;
-        case ('s'):
-            // console.log(id[0]);
-            suit.classList.add('spades');
-            suit.classList.remove('diamonds', 'hearts', 'clubs');
-            // console.log(suit);
-            break;
+    if (suit != '') {
+        switch (id[0]) {
+            case ('c'):
+                // console.log(id[0]);
+                suit.classList.add('clubs');
+                suit.classList.remove('diamonds', 'hearts', 'spades');
+                // console.log(suit);
+                break;
+            case ('d'):
+                // console.log(id[0]);
+                suit.classList.add('diamonds');
+                suit.classList.remove('clubs', 'hearts', 'spades');
+                // console.log(suit);
+                break;
+            case ('h'):
+                // console.log(id[0]);
+                suit.classList.add('hearts');
+                suit.classList.remove('diamonds', 'clubs', 'spades');
+                // console.log(suit);
+                break;
+            case ('s'):
+                // console.log(id[0]);
+                suit.classList.add('spades');
+                suit.classList.remove('diamonds', 'hearts', 'clubs');
+                // console.log(suit);
+                break;
+        }
+        switch (id[1]) {
+            case ('x'):
+                suit.innerHTML = 10;
+                break;
+            case '1':
+                suit.innerHTML = "a";
+                break;
+            default:
+                suit.innerHTML = id[1];
+                break;
+        }
+    } else {
+        // else if the place is blank, the function is to provide a written word description of the card
+        switch (id[1]) {
+            case ('x'):
+                actStrg += ' 10 of';
+                break;
+            case ('j'):
+                actStrg += ' Jack of';
+                break;
+            case ('q'):
+                actStrg += ' Queen of';
+                break;
+            case ('k'):
+                actStrg += ' King of';
+                break;
+            case '1':
+                actStrg += ' Ace of';
+                break;
+            default:
+                actStrg += ` ${id[1]} of`;
+                break;
+        }
+        switch (id[0]) {
+            case ('c'):
+                actStrg += ` clubs`;
+                break;
+            case ('d'):
+                actStrg += ' diamonds';
+                break;
+            case ('h'):
+                actStrg += ' hearts';
+                break;
+            case ('s'):
+                actStrg += ' spades';
+                break;
+        }
+
     }
-    switch (id[1]) {
-        case ('x'):
-            suit.innerHTML = 10;
-            break;
-        case '1':
-            suit.innerHTML = "a";
-            break;
-        default:
-            suit.innerHTML = id[1];
-            break;
-    }
+
 }
 
 function scoreVal() {
@@ -1211,6 +1288,7 @@ function scoreVal() {
 
 function botPlay(action) {
     if (action === 'newHand') {
+        actStrg += ` has viewed bottom cards`;
         playerData[turnIndex].knownHand.push('uu');
         playerData[turnIndex].knownHand.push('uu');
         playerData[turnIndex].knownHand.push(playerData[turnIndex].cardHand[2]);
@@ -1236,7 +1314,9 @@ function botPlay(action) {
         }
         if (score < 4 && knocker === 4) {
             knocker = turnIndex;
-            // endRound = 4;
+            actStrg += ` and <strong>KNOCKED!</strong>`;
+        } else {
+            actStrg += `.`;
         }
     } else {
         let selCrd1 = discardDeck[0][1]; // get the top discard card value
@@ -1279,53 +1359,52 @@ function botPlay(action) {
         let highest = Math.max(...selHand); // what is the highest value card in our hand;
         // deduct from our known hand score
         score -= highest;
+        // variable for the threshold in card value the bot will decide to keep or discard
+        let pkLimit;
         // if no one has knocked yet, let's be picky, card has to be worth less than 4pts
-        if (knocker === 4) {
-            if (selCrd1 < highest && selCrd1 < 4) {  // if the discard deck card is lower than the highest in our hand
-                score += selCrd1;
-                highest = selHand.indexOf(highest); // convert highest to its index in the array
-                selCrd1 = discardDeck.shift();
-                playerData[turnIndex].knownHand.splice(highest, 1, selCrd1);  // now we know the card value at this location of our hand, let's push to remember before proceeding
-                hand('swap', selCrd1);
-                hand('swap', highest);
-            } else if (selCrd2 < highest && selCrd2 < 4) { // if the discard deck pick won't work, let's try drawdeck card
-                score += selCrd2;
-                highest = selHand.indexOf(highest); // convert highest to its index in the array
-                selCrd2 = drawDeck.pop();
-                playerData[turnIndex].knownHand.splice(highest, 1, selCrd2);  // now we know the card value at this location of our hand, let's push to remember before proceeding
-                hand('swap', selCrd2);
-                hand('swap', highest);
-            } else {                        // we've committed to picking from the drawdeck so have to dispose it if it's no good for us
-                score += highest;  // if neither card was good, restore score of known hand to before picking card.
-                drawStack('discard');
-            }
-            // else if someone has knocked on the table, we won't be so picky about the card, we just need to lower our score, anything less than 6pts is viable
-        } else if (knocker != 4) {
-            if (selCrd1 < highest && selCrd1 < 6) {  // if the discard deck card is lower than the highest in our hand
-                score += selCrd1;
-                highest = selHand.indexOf(highest); // convert highest to its index in the array
-                selCrd1 = discardDeck.shift();
-                playerData[turnIndex].knownHand.splice(highest, 1, selCrd1);  // now we know the card value at this location of our hand, let's push to remember before proceeding
-                hand('swap', selCrd1);
-                hand('swap', highest);
-            } else if (selCrd2 < highest && selCrd2 < 6) { // if the discard deck pick won't work, let's try drawdeck card
-                score += selCrd2;
-                highest = selHand.indexOf(highest); // convert highest to its index in the array
-                selCrd2 = drawDeck.pop();
-                playerData[turnIndex].knownHand.splice(highest, 1, selCrd2);  // now we know the card value at this location of our hand, let's push to remember before proceeding
-                hand('swap', selCrd2);
-                hand('swap', highest);
-            } else {                        // we've committed to picking from the drawdeck so have to dispose it if it's no good for us
-                score += highest;  // if neither card was good, restore score of known hand to before picking card.
-                drawStack('discard');
-            }
-        }
+        // else if someone has knocked on the table, we won't be so picky about the card, we just need to lower our score, anything less than 6pts is viable
+        pkLimit = knocker === 4 ? 4 : 6;
+        console.log(`pick limit is ${pkLimit}!`);
 
+        if (selCrd1 < highest && selCrd1 < pkLimit) {  // if the discard deck card is lower than the highest in our hand
+            score += selCrd1;
+            highest = selHand.indexOf(highest); // convert highest to its index in the array
+            selCrd1 = discardDeck.shift();
+            playerData[turnIndex].knownHand.splice(highest, 1, selCrd1);  // now we know the card value at this location of our hand, let's push to remember before proceeding
+            actStrg += ` took the`;
+            cardFace('', selCrd1);  // fetch the name of the card, since it is visible in the discard deck
+            actStrg += ` for their`;
+            hand('swap', selCrd1);
+            hand('swap', highest);
+        } else if (selCrd2 < highest && selCrd2 < pkLimit) { // if the discard deck pick won't work, let's try drawdeck card
+            score += selCrd2;
+            highest = selHand.indexOf(highest); // convert highest to its index in the array
+            selCrd2 = drawDeck.pop();
+            playerData[turnIndex].knownHand.splice(highest, 1, selCrd2);  // now we know the card value at this location of our hand, let's push to remember before proceeding
+            actStrg += ` drew for their`;
+            hand('swap', selCrd2);
+            hand('swap', highest);
+        } else {                        // we've committed to picking from the drawdeck so have to dispose it if it's no good for us
+            score += highest;  // if neither card was good, restore score of known hand to before picking card.
+            actStrg += ` drew and discarded`;
+            drawStack('discard');
+            cardFace('', discardDeck[0]);  // fetch the name of the card, since it is visible in the discard deck on discarding
+        }
+        actStrg += `.`;
         pair.splice(0);
 
         // if the known hand should score less than 8pts then player knocks
         if (score < 8 && knocker === 4) {
             knocker = turnIndex;
+            actStrg += ` and <strong>KNOCKED!</strong>`;
         }
     }
+    // limits the array of strings to the last 4 turns. i.e.: a full table's turn.
+    if (acts.length > 3) {
+        acts.shift();
+    }
+    // push the last act string to the acts array
+    acts.push(actStrg);
+    // clear the act string of the last turn in prep for the next turn
+    actStrg = '';
 }
