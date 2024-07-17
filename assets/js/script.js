@@ -68,17 +68,17 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('left-how-to').addEventListener('click', function () {
         howToPg--;
         howToNav();
-    })
+    });
 
     document.getElementById('right-how-to').addEventListener('click', function () {
         howToPg++;
         howToNav();
-    })
+    });
 
     document.getElementById('cls-how-to').addEventListener('click', function () {
         document.getElementById('how-to').style.display = '';
         document.getElementById('game-area').style.display = '';
-    })
+    });
 
     let clickButtons = document.getElementById('game-area').getElementsByClassName("click"); // event listener will look clickable elements by the class "click"
 
@@ -206,7 +206,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     card = drawDeck.pop();
                     actStrg += ` drew for their`;
                 }
-                console.log(card);
                 pair.push(card);
                 picked('clear');
                 pickCard.splice(0);
@@ -355,6 +354,10 @@ function next() {
     picked('clear');
     shiftTurns();
     table('update');
+    if (endRound === 1 && newRound > 0) {
+        table('update');
+        return;
+    }
     plrPrompt();
 }
 
@@ -536,17 +539,11 @@ function table(action, data) {
         for (let card of cards) {
             card.classList.add('missing-card');
             card.classList.remove('clubs', 'diamonds', 'hearts', 'spades');
-            // let x = card.getAttribute('class');
-            // x = addClass(x, ' missing-card');
-            // card.setAttribute('class', x);
             card.innerHTML = '';
         }
         for (let card of decks) {
             card.classList.add('missing-card');
             card.classList.remove('clubs', 'diamonds', 'hearts', 'spades');
-            // let x = card.getAttribute('class');
-            // x = addClass(x, ' missing-card');
-            // card.setAttribute('class', x);
             card.innerHTML = '';
         }
 
@@ -563,8 +560,6 @@ function table(action, data) {
     } else if (action === 'values') {
         if (data < 16) {
             cardFace(cards[data], playerData[turnIndex].cardHand[data % 4]);
-            // cards[data].innerHTML = playerData[turnIndex].cardHand[data % 4];
-            // cards[data].innerHTML = '';
         } else if (data < 19) {
             data = data - 16;
             let i = data + 1;
@@ -573,7 +568,6 @@ function table(action, data) {
             if (drawDeck.length === 0) {
                 let x = discardStack('donate');
                 drawStack('add', x);
-                // decks[data].innerHTML = drawDeck[drawDeck.length - i];
                 decks[data].innerHTML = '';
             }
 
@@ -581,7 +575,6 @@ function table(action, data) {
                 decks[data].innerHTML = '';
                 x.classList.add('missing-card');
             } else {
-                // decks[data].innerHTML = drawDeck[drawDeck.length - i];
                 decks[data].innerHTML = '';
                 x.classList.remove('missing-card');
             }
@@ -668,6 +661,19 @@ function table(action, data) {
             endRound = 2;
             document.getElementById('knock').classList.add('no-knock');
             playerData[knocker].roundState = 'k';  //  
+            if (newRound > 0) {
+                // if a player knocks when they view their bottom cards, jump to scoring and end the game
+                scoreVal();
+                // update table card faces
+                for (let i = 0; i < 16; i++) {
+                    if (i % 4 === 0) {
+                        shiftTurns();
+                    }
+                    table('values', i);
+                }
+                endRound = 1;
+                return;
+            }
         } else if (endRound > 0 && knocker === 4) { // should there be an error or a point the endRound var is not cleared
             endRound = 0;
             document.getElementById('knock').classList.remove('no-knock');
@@ -684,7 +690,7 @@ function table(action, data) {
                 table('values', i);
             }
             endRound--;
-        } else if (endRound === 1) { // all players should get a chance to see the score before choosing to go on to the next round
+        } else if (endRound === 1) { // next human players should get a chance to see the score before choosing to go on to the next round
             for (let i = 0; i < 16; i++) {
                 if (i % 4 === 0) {
                     shiftTurns();
@@ -739,10 +745,7 @@ function drawStack(action, data) {
     } else if (action === 'discard') {
         let card = drawDeck.pop();
         discardStack('add', card);
-        // picked('clear');
         pickCard.splice(0);
-        // shiftTurns();
-        // table('update');
     } else if (action === 'add') {
         for (let i = 0; i < data.length; i++) {
             drawDeck.push(data[i]);
@@ -758,7 +761,6 @@ function discardStack(action, data) {
         discardDeck.unshift(data);
         let x = discardDeck.length;
         x = Math.min(x, 3);
-        // console.log(`number of cards in discard deck = ${x}`);
         // Run through the length of discard stack up to its top 3 cards to illustrate them on the table
         for (let i = 0; i < x; i++) {
             table('deal', 19 + i);
@@ -766,7 +768,6 @@ function discardStack(action, data) {
         }
     } else if (action === 'donate') {
         let arr = discardDeck.splice(1);
-        // console.log(arr);
         arr = shuffle(arr);
         return arr;
     }
@@ -850,15 +851,7 @@ function hand(action, data) {
         for (let card of cards) {
             card.classList.add('deck');
             card.classList.remove('selected');
-            // let x = card.getAttribute('class');
-            // x = addClass(x, ' deck');
-            // x = remClass(x, ' selected');
-            // card.setAttribute('class', x);
         }
-        // for testing, sets the cards ID to the correct position in the player's hand
-        // for (let i = 0; i < 4; i++) {
-        //     cards[i].innerHTML = playerData[turnIndex].cardHand[i];
-        // }
         // presents main-player name, score and message
         document.getElementById('p1').innerHTML = playerData[turnIndex].playerName;
         document.getElementById('scr1').innerHTML = playerData[turnIndex].score;
@@ -872,11 +865,9 @@ function hand(action, data) {
 
     } else if (action === 'swap') {
         pair.push(data);
-        // console.log(data);
         if (pair.length % 2 === 0) {  // run when pair has an even number of entries, to reduce the risk of failure when it has not been cleared
             let x = pair.slice(-2)[0];  // slice the data from the end as the entries are pushed on and may have more than 2
             let y = pair.slice(-2)[1];
-            console.log(`we have ${x} and ${y}`);
             if (Number.isInteger(x)) {
                 let a = playerData[turnIndex].cardHand[x];
                 let b = playerData[turnIndex].cardHand[y];
@@ -904,10 +895,6 @@ function hand(action, data) {
     } else if (action === 'close') {
         for (let card of cards) {
             card.classList.remove('deck', 'selected');
-            // let x = card.getAttribute('class');
-            // x = remClass(x, ' deck');
-            // x = remClass(x, ' selected');
-            // card.setAttribute('class', x);
         }
         document.getElementById('top-prompt').style.display = 'none';
         document.getElementById('btm-prompt').style.display = 'none';
@@ -981,91 +968,48 @@ function picked(action, data) {
         let x = document.getElementById('p1-c1');
         x.classList.add('picked');
         x.classList.remove('selected');
-        // let z = addClass(x.getAttribute('class'), ' picked');
-        // z = remClass(z, ' selected');
-        // document.getElementById('p1-c1').setAttribute('class', z);
 
         let y = document.getElementById('done');
         y.classList.add('hidden');
-        // z = addClass(y.getAttribute('class'), ' hidden');
-        // document.getElementById('done').setAttribute('class', z);
 
         y = document.getElementById('knock');
         y.classList.add('hidden');
-        // z = addClass(y.getAttribute('class'), ' hidden');
-        // document.getElementById('knock').setAttribute('class', z);
 
         y = document.getElementById('reject');
         y.classList.remove('hidden');
-        // z = remClass(y.getAttribute('class'), ' hidden');
-        // document.getElementById('reject').setAttribute('class', z);
 
         y = document.getElementById('accept');
         y.classList.remove('hidden');
-        // z = remClass(y.getAttribute('class'), ' hidden');
-        // document.getElementById('accept').setAttribute('class', z);
 
         if (action === 'draw') {
-            // x.innerHTML = drawDeck.slice(-1)[0];
             pickCard.push(drawDeck.slice(-1)[0]);
             cardFace(x, drawDeck.slice(-1)[0]);
-            // console.log(`pickCard: ${pickCard}`);
         } else if (action === 'discard') {
-            // x.innerHTML = discardDeck.slice(0)[0];
             pickCard.push(discardDeck.slice(0)[0]);
             cardFace(x, discardDeck.slice(0)[0]);
-            // console.log(`pickCard: ${pickCard}`);
         } else if (action === 'swapout') {
             let y = pair.slice(-2)[1] === undefined ? discardDeck[0] : pair.slice(-2)[1];
-            console.log(y);
             cardFace(x, y);
             pair.splice(0);
-            console.log(`pickCard: ${pickCard}`);
 
             document.getElementById('top-prompt').innerHTML = `Card being discarded`;
 
             y = document.getElementById('done');
             y.classList.add('hidden');
-            // z = addClass(y.getAttribute('class'), ' hidden');
-            // document.getElementById('done').setAttribute('class', z);
 
             y = document.getElementById('knock');
             y.classList.remove('hidden');
-            // z = remClass(y.getAttribute('class'), ' hidden');
-            // document.getElementById('knock').setAttribute('class', z);
 
             y = document.getElementById('reject');
             y.classList.add('hidden');
-            // z = addClass(y.getAttribute('class'), ' hidden');
-            // document.getElementById('reject').setAttribute('class', z);
 
             y = document.getElementById('accept');
             y.classList.add('hidden');
-            // z = addClass(y.getAttribute('class'), ' hidden');
-            // document.getElementById('accept').setAttribute('class', z);
         }
     }
 
 
 
-}
-
-// checks that the string contains the term and removes the term
-function remClass(strg1, term) {
-    let idx = strg1.indexOf(term);
-    if (idx >= 0) {
-        strg1 = strg1.replace(term, '');
-    }
-    return strg1;
-}
-
-// checks that the string contains the term, if it does NOT it adds it, this should reduce runaway errors.
-function addClass(strg1, term) {
-    let idx = strg1.indexOf(term);
-    if (idx < 0) {
-        strg1 += term;
-    }
-    return strg1;
 }
 
 // Captures the data for bot players, including the skill level, and presumes standard level 2 bot if the fields are left empty
@@ -1074,11 +1018,9 @@ function logBot(strg1) {
     let y;
     if (strg1.includes('_BOT ') === true) { // if string starts with '_BOT ' then look for comma
         x = strg1.indexOf(',');
-        // console.log(x);
         if (x > 0) {
             y = strg1.slice(0, x); // separate the bot name '_BOT n'
             x = parseInt(strg1.slice(x + 1, x + 2)); // get number for skill level after comma
-            // console.log(x);
 
         } else {
             x = 2; // else assume skill level of 2
@@ -1125,28 +1067,20 @@ function cardFace(place, id) {
     if (suit != '') {
         switch (id[0]) {
             case ('c'):
-                // console.log(id[0]);
                 suit.classList.add('clubs');
                 suit.classList.remove('diamonds', 'hearts', 'spades');
-                // console.log(suit);
                 break;
             case ('d'):
-                // console.log(id[0]);
                 suit.classList.add('diamonds');
                 suit.classList.remove('clubs', 'hearts', 'spades');
-                // console.log(suit);
                 break;
             case ('h'):
-                // console.log(id[0]);
                 suit.classList.add('hearts');
                 suit.classList.remove('diamonds', 'clubs', 'spades');
-                // console.log(suit);
                 break;
             case ('s'):
-                // console.log(id[0]);
                 suit.classList.add('spades');
                 suit.classList.remove('diamonds', 'hearts', 'clubs');
-                // console.log(suit);
                 break;
         }
         switch (id[1]) {
@@ -1227,7 +1161,6 @@ function scoreVal() {
         scores.push(lowest);
         console.log(`${playerData[i].playerName} scored ${scores[i]}`);
     }
-    // scores = [playerData[0].score, playerData[1].score, playerData[2].score, playerData[3].score];
     lowest = Math.min(scores[0], scores[1], scores[2], scores[3]);
     console.log(`Lowest score = ${lowest}`);
 
@@ -1238,8 +1171,7 @@ function scoreVal() {
     if (scores[knocker] === lowest && findDuplicates(scores).includes(lowest) === false) {
         msg = `${playerData[knocker].playerName} won this round!`;
         console.log(msg);
-        // alert(msg);
-        for (i = 0; i < 4; i++) {
+        for (let i = 0; i < 4; i++) {
             if (knocker === i) {
                 playerData[i].roundState = 'w';
             } else {
@@ -1250,8 +1182,7 @@ function scoreVal() {
         scores[knocker] = 2 * scores[knocker];
         msg = `${playerData[knocker].playerName} lost! Score doubled to ${scores[knocker]}.<br>${playerData[scores.indexOf(lowest)].playerName} scored ${lowest}!`;
         console.log(msg);
-        // alert(msg);
-        for (i = 0; i < 4; i++) {
+        for (let i = 0; i < 4; i++) {
             if (knocker === i) {
                 playerData[i].roundState = 'd';
             } else if (scores.indexOf(lowest) === i) {
@@ -1267,14 +1198,12 @@ function scoreVal() {
         playerData[i].score += scores[i];
         scores.splice(i, 1, playerData[i].score);
     }
-    // knocker = 4; // this line messes up with our intent to present and update the table after scoring, it won't reveal unless knocker is player 1
 
     document.getElementById('decks').style.display = 'none';
     let gamePrompt = document.getElementById('game-end');
     gamePrompt.classList.remove('hidden');
 
     if (Math.max(...scores) > 199) {
-        // alert(`end of game, someone has reached 200 points or more!`);
         msg = `${playerData[scores.indexOf(Math.min(...scores))].playerName} has won the game with ${Math.min(...scores)} points!`;
         gamePrompt.getElementsByTagName('h2')[0].innerHTML = 'End of game!';
         gamePrompt.getElementsByTagName('p')[0].innerHTML = msg;
@@ -1318,7 +1247,7 @@ function botPlay(action) {
         } else {
             actStrg += `.`;
         }
-    } else {
+    } else if (endRound != 1) {
         let selCrd1 = discardDeck[0][1]; // get the top discard card value
         let selCrd2 = drawDeck.slice(-1)[0][1]; // get the top drawdeck card value
         let selHand = [];
@@ -1364,7 +1293,6 @@ function botPlay(action) {
         // if no one has knocked yet, let's be picky, card has to be worth less than 4pts
         // else if someone has knocked on the table, we won't be so picky about the card, we just need to lower our score, anything less than 6pts is viable
         pkLimit = knocker === 4 ? 4 : 6;
-        console.log(`pick limit is ${pkLimit}!`);
 
         if (selCrd1 < highest && selCrd1 < pkLimit) {  // if the discard deck card is lower than the highest in our hand
             score += selCrd1;
