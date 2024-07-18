@@ -1,7 +1,8 @@
 # Game of Kings
+For my second portfolio project with Code Institute I built a game based on a game I play often with friends called **Kings**.
 
 **Kings** is a simple, fun (and addictive) card game suitable for all ages. Exercises the player's memory and strategy skills. 
-This project will develop my skills in Javascript, currently building it as a single player VS Robot players.
+This project will develop my skills in Javascript, currently building it as a single player VS Robot players or multiple players using the same device.
 
 The objective of the game is to score as low as possible, with Kings being worth zero points, the remainder as their numerical value (Jacks and Queens are worth 10pts).
 
@@ -32,7 +33,7 @@ The goals of this website are:
 - To entertain visitors
 - Potentially adding multiplayer features later to enable friends to compete remotely.
 
-<!-- [View the deployed website here](https://dasic002.github.io/Carlos-Da-Silva-Folio/index.html) -->
+[View the deployed website here](https://dasic002.github.io/GameOfKings/)
 
 <!-- ![Responsive design mockup](documentation/ResponsiveDesign.PNG) -->
 
@@ -40,10 +41,16 @@ The goals of this website are:
 ## UX - User Experience
 
 ### User stories
+#### First time player
+1) Upon visiting the site the first time I don't want to be overloaded with a lot of information. I want the option to simply proceed to the game rather than be prompted with the instructions.
+2) I want to be able to start the game with the least amount of clicks necessary.
+3) I want to be able to refer to the instructions mid play without losing the current state of my game.
 
-<!-- As a **Client** or **Employer**, I need to see some of Carlos' work to feel assured he has the skillset I'm looking for to contribute in my projects. Would also need an easy way to reach out to Carlos to discuss my project.
+#### Returning player
+1) I want to be able to play the game on any device, be it a desktop PC or my mobile.
 
-As a **Recruiter**, I need to see Carlos' employment history, ideally via LinkedIn or downloadable CV and be able to get in touch with him. -->
+#### Real life player introduced to the digital version
+1) I want the gameplay to be as accurate to the real life game, being able to knock on first sight of my hand and being able to see what the other players have done as I would playing around the table. They give me clues as to how well their game is going.
 
 ### Strategy
 

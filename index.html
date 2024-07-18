@@ -23,49 +23,46 @@
 
     <!-- div for the menu that will be fixed at the top left corner inline with the heading -->
     <nav id="menu">
-        <h2><span class="click" id="menu-btn" action="menu">
-                <i class="fa-solid fa-bars"></i>
-                <i class="fa-solid fa-xmark hidden"></i>
-            </span></h2>
+        <span class="click" id="menu-btn"><i class="fa-solid fa-bars"></i><i class="fa-solid fa-xmark hidden"></i></span>
         <ul id="menu-list">
             <li class="click">New Game</li>
-            <li class="click" action="how-to-play">How to Play</li>
+            <li class="click" id="htp-btn">How to Play</li>
             <!-- <li>Settings</li>
             <ul>
                 <li>Sound: <span class="click" id="sound-state">OFF</span></li>
                 <li class="click" action="theme">Colour theme</li>
             </ul> -->
             <!-- <li class="click" action="scores">Current Scores</li> -->
-            <li class="click" action="credits">Credits</li>
+            <li class="click" id="credits-btn">Credits</li>
         </ul>
     </nav>
 
     <div class="hidden" id="how-to">
         <div class="container">
             <div id="how-to-0">
-                <p>Kings is a simple, fun (and addictive) card game suitable for all ages. Exercises the player's memory
+                <p>Kings is a simple, fun and addictive card game suitable for all ages. Exercises the player's memory
                     and strategy skills. The objective of the game is to score as low as possible, with Kings being
                     worth zero points, the remainder as their numerical value (Jacks and Queens are worth 10pts).
                 </p>
-                <span>
+                <div>
                     <span class="ht-card hearts">K</span>
                     <p>Worth 0 points.</p>
-                </span>
-                <span>
+                </div>
+                <div>
                     <span class="ht-card hearts">Q</span>
                     <span class="ht-card hearts">J</span>
                     <span class="ht-card hearts">10</span>
                     <p>Worth 10 points.</p>
-                </span>
-                <span>
+                </div>
+                <div>
                     <span class="ht-card hearts">A</span>
                     <span class="ht-card hearts">2</span>
                     <span>(...)</span>
                     <span class="ht-card hearts">8</span>
                     <span class="ht-card hearts">9</span>
                     <p>Worth 1, 2, (...), 8, 9 points, respectively.</p>
-                </span>
-                <p id="page-of">1 of 10</p>
+                </div>
+                <p class="page-of">1 of 10</p>
             </div>
             <div id="how-to-1">
                 <h3>How is it played?</h3>
@@ -73,7 +70,7 @@
                 <p>Cards shuffled, each player is dealt 4 cards face down, remaining deck placed in the centre as a
                     draw stack and the top card is turned over to form the discard stack.</p>
                 <img src="assets/images/htp-cards-dealt-out.png" alt="Cards dealt out to players" id="htp1-img">
-                <p id="page-of">2 of 10</p>
+                <p class="page-of">2 of 10</p>
             </div>
             <div id="how-to-2">
                 <p>Players will arrange their 4 cards in a 2 x 2 formation in front of them. This helps with the memory
@@ -82,7 +79,7 @@
                     formation in the
                     hope it may reveal the larger value cards in the next step.</p>
                 <img src="assets/images/htp-2by2-formation.png" alt="Cards arraged in 2 by 2 formation" id="htp2-img">
-                <p id="page-of">3 of 10</p>
+                <p class="page-of">3 of 10</p>
             </div>
             <div id="how-to-3">
                 <p>Before play begins, the dealer counts down "3, 2, 1!" where on "1", players can look at only the
@@ -90,7 +87,7 @@
                     is allowed from this point.</p>
                 <img src="assets/images/htp-reveal-countdown.png" alt="Bottom 2 cards revealed at the start"
                     id="htp3-img">
-                <p id="page-of">4 of 10</p>
+                <p class="page-of">4 of 10</p>
             </div>
             <div id="how-to-4">
                 <h4>Playing the game</h4>
@@ -104,7 +101,7 @@
                     their hand or the card picked from the draw stack.</p>
                 <img src="assets/images/htp-draw-and-discard-stacks.png" alt="stacks of cards available to pick from"
                     id="htp4-img">
-                <p id="page-of">5 of 10</p>
+                <p class="page-of">5 of 10</p>
             </div>
             <div id="how-to-5">
                 <p>Before moving on to the next player, the current player may knock on the table to indicate they are
@@ -113,7 +110,7 @@
                 <p>The bell icon button appears for 3 seconds only before moving on to the next player.</p>
                 <img src="assets/images/htp-knocking-button.png"
                     alt="knocking button counts down from 3 before disappearing" id="htp5-img">
-                <p id="page-of">8 of 10</p>
+                <p class="page-of">8 of 10</p>
             </div>
             <div id="how-to-6">
                 <p>Once the last player, the one to the right of the person that locked their hand has picked up a card
@@ -122,14 +119,14 @@
                     they
                     believe they have the lowest scoring hand on the table, should they not, their points are doubled.
                 </p>
-                <img src="assets/images/htp-end-of-round.png" alt="example of the end of round" id="htp5-img">
-                <p id="page-of">7 of 10</p>
+                <img src="assets/images/htp-end-of-round.png" alt="example of the end of round" id="htp6-img">
+                <p class="page-of">7 of 10</p>
             </div>
             <div id="how-to-7">
                 <p>The game goes on in several rounds of the above until one of the players has reached at least 200pts.
                     The winner of the game has the lowest score of the table.</p>
-                <img src="assets/images/htp-end-of-game.png" alt="example of end of game" id="htp6-img">
-                <p id="page-of">8 of 10</p>
+                <img src="assets/images/htp-end-of-game.png" alt="example of end of game" id="htp7-img">
+                <p class="page-of">8 of 10</p>
             </div>
             <div id="how-to-8">
                 <h4>Other Scenarios</h4>
@@ -137,15 +134,15 @@
                 <p><strong>A. </strong>Collect all but the top card from the discard stack and shuffle to use this as
                     the new draw stack. This game will do this automatically when the draw stack gives away its last
                     card.</p>
-                <p id="page-of">9 of 10</p>
+                <p class="page-of">9 of 10</p>
             </div>
             <div id="how-to-9">
                 <h4>Scoring example</h4>
                 <p>If the knocking player had 2x 6, 1x 3 and 1x 4. This totals to 19 points in that round.</p>
                 <p>Should another player on this round score 19 points or lower, the knocking player's score doubles to
                     38.</p>
-                <img src="assets/images/htp-scoring-example.png" alt="example of card hand scored and points doubled" id="htp7-img">
-                <p id="page-of">10 of 10</p>
+                <img src="assets/images/htp-scoring-example.png" alt="example of card hand scored and points doubled" id="htp9-img">
+                <p class="page-of">10 of 10</p>
             </div>
 
             <nav class="center" id="how-to-nav">
@@ -174,13 +171,13 @@
                 <p></p>
                 <p></p>
             </div>
-            <button class="click btns bg-btns" id="play" action="play">PLAY</button><br>
+            <button class="click btns bg-btns" id="play">PLAY</button><br>
             <button class="click" id="help"><i class="fa-solid fa-circle-question"></i></button>
         </div>
         <div class="hidden" id="player-form">
             <div>
                 <h2 class="title">Player Names</h2>
-                <form action="" id="game-setup">
+                <form id="game-setup">
                     <table>
                         <tr>
                             <td><input type="text" id="P1-name" name="P1-name" class="input-field"
@@ -217,7 +214,7 @@
                             <td>
                                 <input type="text" class="input-field" id="P4-name" name="P4-name" placeholder="BOT 3"
                                     maxlength="8">
-                                <span class="bot-lvls hidden" id="bot2-lvl">
+                                <span class="bot-lvls hidden" id="bot3-lvl">
                                     <button class="click lvl-1">Lvl 1 </button>
                                     <button class="click lvl-2">Lvl 2 </button>
                                     <button class="click lvl-3">Lvl 3</button>
@@ -228,7 +225,7 @@
                         </tr>
                     </table>
                 </form>
-                <button class="click btns bg-btns" action="next">Start Game</button>
+                <button class="click btns bg-btns" id="next">Start Game</button>
             </div>
         </div>
         <!-- section that displays other players info (name / cards / scores) -->
@@ -239,7 +236,7 @@
                     <i class="fa-solid fa-bell hidden"></i>
                     <i class="fa-solid fa-trophy hidden"></i>
                     <i class="fa-solid fa-xmark hidden"></i>
-                    <p class="hidden">2x</p>
+                    <span class="x2 hidden">2x</span>
                 </span>
                 <span class="top-cards">
                     <span class="card" id="p2-c1">X</span>
@@ -259,7 +256,7 @@
                     <i class="fa-solid fa-bell hidden"></i>
                     <i class="fa-solid fa-trophy hidden"></i>
                     <i class="fa-solid fa-xmark hidden"></i>
-                    <p class="hidden">2x</p>
+                    <span class="x2 hidden">2x</span>
                 </span>
                 <span class="top-cards">
                     <span class="card" id="p3-c1">X</span>
@@ -279,7 +276,7 @@
                     <i class="fa-solid fa-bell hidden"></i>
                     <i class="fa-solid fa-trophy hidden"></i>
                     <i class="fa-solid fa-xmark hidden"></i>
-                    <p class="hidden">2x</p>
+                    <span class="x2 hidden">2x</span>
                 </span>
                 <span class="top-cards">
                     <span class="card" id="p4-c1">X</span>
@@ -316,11 +313,11 @@
                 </span>
             </span>
             <!-- Prompt at the end of round or game -->
-            <span class="hidden" id="game-end">
+            <div class="hidden" id="game-end">
                 <h2>End of round!</h2>
                 <p>Player 1 won!</p>
                 <button class="click btns bg-btns" id="game-end-btn">Next round!</button>
-            </span>
+            </div>
         </div>
 
         <!-- Main or Current player's info -->
@@ -328,19 +325,19 @@
             <div class="prompt" id="top-prompt"></div>
             <span class="player">
                 <span class="top-cards">
-                    <button class="click card" id="p1-c1" action=" ">X</button>
-                    <button class="click card" id="p1-c2" action=" ">X</button>
+                    <button class="click card" id="p1-c1">X</button>
+                    <button class="click card" id="p1-c2">X</button>
                 </span>
                 <span class="btm-cards">
-                    <button class="click card" id="p1-c3" action=" ">X</button>
-                    <button class="click card" id="p1-c4" action=" ">X</button>
+                    <button class="click card" id="p1-c3">X</button>
+                    <button class="click card" id="p1-c4">X</button>
                 </span>
                 <span class="player-name">
                     <span id="p1">PLAYER 1</span>
                     <i class="fa-solid fa-bell hidden"></i>
                     <i class="fa-solid fa-trophy hidden"></i>
                     <i class="fa-solid fa-xmark hidden"></i>
-                    <p class="hidden">2x</p>
+                    <span class="x2 hidden">2x</span>
                 </span>
                 <span class="scores">
                     <span id="scr1">0</span>
@@ -351,9 +348,9 @@
                 <button class="click hidden" id="reject"><i class="fa-solid fa-circle-xmark"></i></button>
                 <button class="click hidden" id="knock"><i class=" fa-solid fa-bell" id="icon-knock"></i><span
                         id="knock-count"></span></button>
-                <button class="click btns bg-btns" id="done" action="done">DONE</button>
-                <button class="click hidden" id="accept"><i class="fa-solid fa-circle-check"></i>
-            </div></button>
+                <button class="click btns bg-btns" id="done">DONE</button>
+                <button class="click hidden" id="accept"><i class="fa-solid fa-circle-check"></i></button>
+            </div>
         </div>
     </div>
     <script src="assets/js/script.js"></script>

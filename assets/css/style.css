@@ -33,10 +33,12 @@ body {
     z-index: 98;
 }
 
-#menu>h2 {
+#menu>span {
     text-align: left;
     margin-top: 1.2rem;
     margin-bottom: 0;
+    font-size: 1.5rem;
+    display: block;
 }
 
 #menu-toggle,
@@ -74,17 +76,16 @@ body {
 }
 
 .center,
-#page-of {
+.page-of {
     display: flex;
     margin: 0;
     position: absolute;
     bottom: 2rem;
     left: 50%;
-    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, 50%);
 }
 
-#page-of {
+.page-of {
     bottom: 6rem;
 }
 
@@ -113,7 +114,7 @@ body {
     margin: 0;
 }
 
-#how-to span p {
+#how-to-0 div p {
     text-align: center;
     padding: 0.5rem 1rem 1.5rem;
     margin: 0;
@@ -137,13 +138,14 @@ body {
 
 #htp1-img,
 #htp3-img,
-#htp6-img {
+#htp7-img {
     height: 45vh;
 }
 
 #htp2-img,
 #htp5-img,
-#htp7-img {
+#htp6-img,
+#htp9-img {
     height: 40vh;
 }
 
@@ -257,7 +259,7 @@ body {
 }
 
 .player-name i,
-.player-name p {
+.x2 {
     color: yellow;
     width: 1.5rem;
     height: 1.5rem;
@@ -521,7 +523,7 @@ button.picked {
 }
 
 /* for scaling font size only by height when display is as wide as 56% of the height or wider */
-@media screen and (min-aspect-ratio:0.56) {
+@media screen and (min-aspect-ratio:2.8/5) {
     html {
         font-size: 2.2vh;
     }
@@ -530,7 +532,7 @@ button.picked {
 
 /* for adding proportionate margins to the body once the aspect ratio of the display is greater 
 than 1.3, this margin keeps the proportions of the game cleaner   */
-@media screen and (min-aspect-ratio:1.3) {
+@media screen and (min-aspect-ratio:13/10) {
     body {
         margin: auto 20vw;
     }

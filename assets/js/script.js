@@ -44,12 +44,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     for (let button of menuButtons) {
         button.addEventListener('click', function () {
-            if (this.getAttribute('action') === 'menu') {
+            if (this.getAttribute('id') === 'menu-btn') {
                 menu();
             } else if (this.innerHTML === 'New Game') {
                 menu();
                 runGame('newGame');
-            } else if (this.getAttribute('action') === 'how-to-play') {
+            } else if (this.getAttribute('id') === 'htp-btn') {
                 menu();
                 howToNav();
                 document.getElementById('how-to').style.display = 'block';
@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 state = state === 'OFF' ? 'ON' : 'OFF';
                 this.innerHTML = state;
             } else {
+                // alert me of any clickable element that has not got an action assigned yet
                 let item = this.getAttribute('id') === null ? this.innerText : this.getAttribute('id');
                 alert(item);
             }
@@ -84,10 +85,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     for (let button of clickButtons) {
         button.addEventListener('click', function () {
-            if (this.getAttribute('action') === 'play') {
+            if (this.getAttribute('id') === 'play' && this.getAttribute('action') === null) {
                 document.getElementById('welcome').style.display = 'none';
                 document.getElementById('player-form').style.display = 'block';
-            } else if (this.getAttribute('action') === 'next') {
+            } else if (this.getAttribute('id') === 'next') {
                 if (this.innerText === "Start Game") {
                     let P1 = String(document.getElementById('P1-name').value);
                     P1 = P1.slice(0, 8); // should the human name string be longer that 8 characters, trim excess
@@ -139,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById('game-area').style.display = 'none';
             } else if (this.getAttribute('action') === 'new-hand') {
                 hand('open');
-            } else if (this.getAttribute('action') === 'done') {
+            } else if (this.getAttribute('id') === 'done') {
                 if (newRound > 0) {
                     hand('open');
                     document.getElementById('done').classList.add('hidden');
