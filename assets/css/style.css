@@ -33,12 +33,15 @@ body {
     z-index: 98;
 }
 
-#menu>span {
+#menu-btn {
     text-align: left;
     margin-top: 1.2rem;
     margin-bottom: 0;
     font-size: 1.5rem;
     display: block;
+    background-color: transparent;
+    border-width: 0;
+    color: inherit;
 }
 
 #menu-toggle,
@@ -164,7 +167,7 @@ body {
 }
 
 .btns {
-    background-color: rgb(221, 122, 0);
+    background-color: #61183D;
     box-shadow: .2rem .2rem .2rem 0px rgb(0, 0, 0);
     border-radius: 0.3rem;
     margin: .5rem;
@@ -489,7 +492,7 @@ button.picked {
 }
 
 #knock {
-    color: darkorange;
+    color: #61183D;
     background-color: whitesmoke;
     font-size: 3rem;
     margin: 1rem 3rem;

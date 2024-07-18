@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Meta tags for search engines -->
+    <meta name="description" content="Kings, the card game that test your memory and strategic thinking">
+    <meta name="keywords" content="Card game, single player, multiplayer, bot players, game of kings">
+
     <!-- Google fonts and font awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,17 +27,17 @@
 
     <!-- div for the menu that will be fixed at the top left corner inline with the heading -->
     <nav id="menu">
-        <span class="click" id="menu-btn"><i class="fa-solid fa-bars"></i><i class="fa-solid fa-xmark hidden"></i></span>
+        <button class="click" id="menu-btn" aria-label="Menu toggle"><i class="fa-solid fa-bars"></i><i class="fa-solid fa-xmark hidden"></i></button>
         <ul id="menu-list">
-            <li class="click">New Game</li>
-            <li class="click" id="htp-btn">How to Play</li>
+            <li class="click" aria-label="New Game">New Game</li>
+            <li class="click" id="htp-btn" aria-label="How to play">How to Play</li>
             <!-- <li>Settings</li>
             <ul>
                 <li>Sound: <span class="click" id="sound-state">OFF</span></li>
                 <li class="click" action="theme">Colour theme</li>
             </ul> -->
             <!-- <li class="click" action="scores">Current Scores</li> -->
-            <li class="click" id="credits-btn">Credits</li>
+            <li class="click" id="credits-btn" aria-label="Credits">Credits</li>
         </ul>
     </nav>
 
@@ -45,21 +49,21 @@
                     worth zero points, the remainder as their numerical value (Jacks and Queens are worth 10pts).
                 </p>
                 <div>
-                    <span class="ht-card hearts">K</span>
+                    <span class="ht-card hearts" aria-label="King of any suit">K</span>
                     <p>Worth 0 points.</p>
                 </div>
                 <div>
-                    <span class="ht-card hearts">Q</span>
-                    <span class="ht-card hearts">J</span>
-                    <span class="ht-card hearts">10</span>
+                    <span class="ht-card hearts" aria-label="Queen of any suit">Q</span>
+                    <span class="ht-card hearts" aria-label="Jack of any suit">J</span>
+                    <span class="ht-card hearts" aria-label="10 of any suit">10</span>
                     <p>Worth 10 points.</p>
                 </div>
                 <div>
-                    <span class="ht-card hearts">A</span>
-                    <span class="ht-card hearts">2</span>
+                    <span class="ht-card hearts" aria-label="Ace of any suit">A</span>
+                    <span class="ht-card hearts" aria-label="Two of any suit">2</span>
                     <span>(...)</span>
-                    <span class="ht-card hearts">8</span>
-                    <span class="ht-card hearts">9</span>
+                    <span class="ht-card hearts" aria-label="eight of any suit">8</span>
+                    <span class="ht-card hearts" aria-label="nine of any suit">9</span>
                     <p>Worth 1, 2, (...), 8, 9 points, respectively.</p>
                 </div>
                 <p class="page-of">1 of 10</p>
@@ -146,9 +150,9 @@
             </div>
 
             <nav class="center" id="how-to-nav">
-                <button class="click" id="left-how-to"><i class="fa-solid fa-circle-arrow-left"></i></button>
-                <button class="click" id="cls-how-to"><i class="fa-solid fa-circle-xmark"></i></button>
-                <button class="click" id="right-how-to"><i class="fa-solid fa-circle-arrow-right"></i></button>
+                <button class="click" id="left-how-to" aria-label="Navigate back through how to play"><i class="fa-solid fa-circle-arrow-left"></i></button>
+                <button class="click" id="cls-how-to" aria-label="Close how to play"><i class="fa-solid fa-circle-xmark"></i></button>
+                <button class="click" id="right-how-to" aria-label="Navigate forward through how to play"><i class="fa-solid fa-circle-arrow-right"></i></button>
             </nav>
         </div>
 
@@ -172,7 +176,7 @@
                 <p></p>
             </div>
             <button class="click btns bg-btns" id="play">PLAY</button><br>
-            <button class="click" id="help"><i class="fa-solid fa-circle-question"></i></button>
+            <button class="click" id="help" aria-label="How to play"><i class="fa-solid fa-circle-question"></i></button>
         </div>
         <div class="hidden" id="player-form">
             <div>
@@ -181,46 +185,46 @@
                     <table>
                         <tr>
                             <td><input type="text" id="P1-name" name="P1-name" class="input-field"
-                                    placeholder="Player 1" maxlength="8"></td>
+                                    placeholder="Player 1" maxlength="8" aria-label="Player 1 name"></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>
                                 <input type="text" class="input-field" id="P2-name" name="P2-name" placeholder="BOT 1"
-                                    maxlength="8">
+                                    maxlength="8" aria-label="Player 2 name or assumed Bot player">
                                 <span class="bot-lvls hidden" id="bot1-lvl">
-                                    <button class="click lvl-1">Lvl 1 </button>
-                                    <button class="click lvl-2">Lvl 2 </button>
-                                    <button class="click lvl-3">Lvl 3</button>
+                                    <button class="click lvl-1" aria-label="Bot 1 level 1">Lvl 1 </button>
+                                    <button class="click lvl-2" aria-label="Bot 1 level 2">Lvl 2 </button>
+                                    <button class="click lvl-3" aria-label="Bot 1 level 3">Lvl 3</button>
                                 </span>
                             </td>
-                            <td><button class="click add-bot btns"><i class="fa-solid fa-robot"></i>
+                            <td><button class="click add-bot btns" aria-label="Add bot 1"><i class="fa-solid fa-robot"></i>
                                     <i class="fa-solid fa-xmark hidden"></i></button></td>
                         </tr>
                         <tr>
                             <td>
                                 <input type="text" class="input-field" id="P3-name" name="P3-name" placeholder="BOT 2"
-                                    maxlength="8">
+                                    maxlength="8" aria-label="Player 3 name or assumed Bot player">
                                 <span class="bot-lvls hidden" id="bot2-lvl">
-                                    <button class="click lvl-1">Lvl 1 </button>
-                                    <button class="click lvl-2">Lvl 2 </button>
-                                    <button class="click lvl-3">Lvl 3</button>
+                                    <button class="click lvl-1" aria-label="Bot 2 level 1">Lvl 1 </button>
+                                    <button class="click lvl-2" aria-label="Bot 2 level 2">Lvl 2 </button>
+                                    <button class="click lvl-3" aria-label="Bot 2 level 3">Lvl 3</button>
                                 </span>
                             </td>
-                            <td><button class="click add-bot btns"><i class="fa-solid fa-robot"></i>
+                            <td><button class="click add-bot btns" aria-label="Add bot 2"><i class="fa-solid fa-robot"></i>
                                     <i class="fa-solid fa-xmark hidden"></i></button></td>
                         </tr>
                         <tr>
                             <td>
                                 <input type="text" class="input-field" id="P4-name" name="P4-name" placeholder="BOT 3"
-                                    maxlength="8">
+                                    maxlength="8" aria-label="Player 3 name or assumed Bot player">
                                 <span class="bot-lvls hidden" id="bot3-lvl">
-                                    <button class="click lvl-1">Lvl 1 </button>
-                                    <button class="click lvl-2">Lvl 2 </button>
-                                    <button class="click lvl-3">Lvl 3</button>
+                                    <button class="click lvl-1" aria-label="Bot 3 level 1">Lvl 1 </button>
+                                    <button class="click lvl-2" aria-label="Bot 3 level 2">Lvl 2 </button>
+                                    <button class="click lvl-3" aria-label="Bot 3 level 3">Lvl 3</button>
                                 </span>
                             </td>
-                            <td><button class="click add-bot btns"><i class="fa-solid fa-robot"></i>
+                            <td><button class="click add-bot btns" aria-label="Add bot 3"><i class="fa-solid fa-robot"></i>
                                     <i class="fa-solid fa-xmark hidden"></i></button></td>
                         </tr>
                     </table>
@@ -297,7 +301,7 @@
             <span id="decks">
                 <!-- card stack to pick up from -->
                 <span>
-                    <button class="deck click" id="draw-stack">X</button>
+                    <button class="deck click" id="draw-stack" aria-label="Pick a card from the draw stack">X</button>
                     <!-- the line below will indicate when the stack has 2 cards -->
                     <span class="deck" id="draw-stack-1">Y</span>
                     <!-- the line below will indicate when the stack has 3 or more cards -->
@@ -305,7 +309,7 @@
                 </span>
                 <span>
                     <!-- card stack to discard cards to -->
-                    <button class="deck click" id="discard-stack">A</button>
+                    <button class="deck click" id="discard-stack" aria-label="Pick a card from the discard stack">A</button>
                     <!-- the line below will indicate when the stack has 2 cards -->
                     <span class="deck" id="discard-stack-1">B</span>
                     <!-- the line below will indicate when the stack has 3 or more cards -->
@@ -325,12 +329,12 @@
             <div class="prompt" id="top-prompt"></div>
             <span class="player">
                 <span class="top-cards">
-                    <button class="click card" id="p1-c1">X</button>
-                    <button class="click card" id="p1-c2">X</button>
+                    <button class="click card" id="p1-c1" aria-label="top left card of your hand">X</button>
+                    <button class="click card" id="p1-c2" aria-label="top right card of your hand">X</button>
                 </span>
                 <span class="btm-cards">
-                    <button class="click card" id="p1-c3">X</button>
-                    <button class="click card" id="p1-c4">X</button>
+                    <button class="click card" id="p1-c3" aria-label="bottom left card of your hand">X</button>
+                    <button class="click card" id="p1-c4" aria-label="bottom right card of your hand">X</button>
                 </span>
                 <span class="player-name">
                     <span id="p1">PLAYER 1</span>
@@ -345,11 +349,11 @@
             </span>
             <div class="prompt" id="btm-prompt">
                 <p class="hidden" id="msg"></p>
-                <button class="click hidden" id="reject"><i class="fa-solid fa-circle-xmark"></i></button>
-                <button class="click hidden" id="knock"><i class=" fa-solid fa-bell" id="icon-knock"></i><span
+                <button class="click hidden" id="reject" aria-label="reject card picked"><i class="fa-solid fa-circle-xmark"></i></button>
+                <button class="click hidden" id="knock" aria-label="3 seconds to knock to lock your hand"><i class=" fa-solid fa-bell" id="icon-knock"></i><span
                         id="knock-count"></span></button>
                 <button class="click btns bg-btns" id="done">DONE</button>
-                <button class="click hidden" id="accept"><i class="fa-solid fa-circle-check"></i></button>
+                <button class="click hidden" id="accept" aria-label="accept card picked"><i class="fa-solid fa-circle-check"></i></button>
             </div>
         </div>
     </div>
