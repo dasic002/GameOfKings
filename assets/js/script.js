@@ -1013,6 +1013,42 @@ function picked(action, data) {
 
 }
 
+// function to toggle add bot buttons appearance and action on text field to the left
+function addBot(number) {
+    let field;
+    let button = document.getElementsByTagName('td');
+    let value;
+    switch (number) {
+        case 2:
+            field = 'P2-name';
+            button = button[3].children[0];
+            value = '_BOT 1 ,2';
+            break;
+        case 3:
+            field = 'P3-name';
+            button = button[5].children[0];
+            value = '_BOT 2 ,2';
+            break;
+        case 4:
+            field = 'P4-name';
+            button = button[7].children[0];
+            value = '_BOT 3 ,2';
+            break;
+    }
+    if (document.getElementById(field).value != value) {
+        document.getElementById(field).value = value;
+        button.classList.replace('add-bot','close-bot');
+        button.children[0].classList.add('hidden');
+        button.children[1].classList.remove('hidden');
+    } else {
+        document.getElementById(field).value = '';
+        document.getElementById(field).focus();
+        button.classList.replace('close-bot','add-bot');
+        button.children[1].classList.add('hidden');
+        button.children[0].classList.remove('hidden');
+    }
+}
+
 // Captures the data for bot players, including the skill level, and presumes standard level 2 bot if the fields are left empty
 function logBot(strg1) {
     let x;
