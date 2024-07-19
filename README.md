@@ -2,7 +2,7 @@
 For my second portfolio project with Code Institute I built a game based on a game I play often with friends called **Kings**.
 
 **Kings** is a simple, fun (and addictive) card game suitable for all ages. Exercises the player's memory and strategy skills. 
-This project will develop my skills in Javascript, currently building it as a single player VS Robot players or multiple players using the same device.
+This project will develop my skills in JavaScript, currently building it as a single player VS Robot players or multiple players using the same device.
 
 The objective of the game is to score as low as possible, with Kings being worth zero points, the remainder as their numerical value (Jacks and Queens are worth 10pts).
 
@@ -25,9 +25,8 @@ The objective of the game is to score as low as possible, with Kings being worth
 - What happens if there are no more cards in the draw stack?
   - collect all but the top card from the discard stack and shuffle to use this as the new draw stack.
 - Scoring example.
-  - If the knocking player had 2x kings, 1x 3 and 1x 4. This totals to 7 in that round.
+  - If the knocking player had 2x kings, 1x 3 and 1x 4. This totals to 7 points in that round.
   - Should another player on this round score 7 points or lower, the knocking player's score doubles to 14.
-
 
 The goals of this website are:
 - To entertain visitors
@@ -35,43 +34,51 @@ The goals of this website are:
 
 [View the deployed website here](https://dasic002.github.io/GameOfKings/)
 
-<!-- ![Responsive design mockup](documentation/ResponsiveDesign.PNG) -->
-
+![Responsive design mockup](documentation/ResponsiveDesign.PNG)
 
 ## UX - User Experience
 
 ### User stories
 #### First time player
-1) Upon visiting the site the first time I don't want to be overloaded with a lot of information. I want the option to simply proceed to the game rather than be prompted with the instructions.
-2) I want to be able to start the game with the least amount of clicks necessary.
-3) I want to be able to refer to the instructions mid play without losing the current state of my game.
-
-#### Returning player
-1) I want to be able to play the game on any device, be it a desktop PC or my mobile.
+- Upon visiting the site the first time I don't want to be overloaded with a lot of information. I want the option to simply proceed to the game rather than be prompted with the instructions.
+- I want to be able to start the game with the least amount of clicks necessary.
+- I want to be able to refer to the instructions mid play without losing the current state of my game.
 
 #### Real life player introduced to the digital version
-1) I want the gameplay to be as accurate to the real life game, being able to knock on first sight of my hand and being able to see what the other players have done as I would playing around the table. They give me clues as to how well their game is going.
+- I want the gameplay to be as accurate to the real-life game, this means:
+  1) being able to knock (lock my hand) on first sight of my hand.
+  2) being able to see what the other players have done as I would playing around the table. They give me clues as to how well their game is going.
+
+#### Returning player
+- I want to be able to play the game on any device, be it a desktop PC or my mobile.
+- Want to share the game with friends and play against them.
 
 ### Strategy
 
-<!-- Build a simple and sophisticated looking website that showcases enough of my work in a seamless and intuitive format that encourages the visitor to reach out. -->
+Build a minimalist website that keeps the focus of the player on current step of the game and provides the information as succinctly and intuitively as possible.
 
 ### Scope
 
-<!-- I want to give the visitor, be a prospective Client/Employer or Recruiter a brief example of projects I've taken part of and my skillset. Leaving them wanting to explore my profiles and get in touch with me. -->
+Give the visitor a fun game to play that provides as much of the real life fun the game of kings provides when playing with friends.
 
 ### Structure
 
-<!-- Simply 3 sections in one single page:
+A single page that reveals different sections with game play or menu items. The page is composed of the following sections:
+- **Header** - Contains title of the page, visible always.
 
-  1) **Welcome/introduction**
-    Welcoming the visitor with a friendly face and brief introduction to me.
+- **Menu** - the hamburger/bars icon visible always.
 
-  2) **Projects**
-    A short description of projects I've undertaken with a photo of each.
+- **How to play** - hidden until selected in menu or ? icon button clicked. This section is composed of several subsections for step-by-step instructions on how to play the game. Navigation buttons become available to go through the steps.
 
-  3) **Contact Us**
-    A contact form and other platforms available for the visitor to choose from in how to reach out. -->
+-  **Credits** - hidden until selected in menu. It will hold credits pertaining to the site composition and inspiration and a link to the gitHub repository.
+
+- **Game-area** - visible on loading of page, whenever How to play or Credits section is hidden. Composed of other subsections to navigate through the game:
+  - Welcome - visible on page load.
+  - Player form - visible on clicking the start button or New Game in the Menu. Players can enter their name, in the absence of names, the website presumes those fields as bot players.
+  - Other players - displays the other players' information.
+  - Decks area - presents the draw and discard stacks to pick from.
+  - Main player - presents the current player's information.
+  The Game-area is manipulated by JavaScript to present the live game information and prompt actions from the human player.
 
 ### Skeleton
 
@@ -113,7 +120,6 @@ The goals of this website are:
 - [Tiny PNG](https://tinypng.com/) - to compress images for faster page loading.
 - [W3C HTML Validator](https://validator.w3.org/) - to validate the HTML code.
 - [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) - to validate the CSS code. -->
-
 
 ## Features 
 
@@ -164,7 +170,6 @@ The goals of this website are:
 - Make the navigation menu collapse on clicking a link that redirects to section on page.
 - Create a projects page that includes a lot more detail on the projects described in the project section. When a visitor expands a project there could be a link for "More >>" which redirects to the section in the projects page that shows more information.
 - A "thank you" message to replace the contact form when the form gets submitted successfully and that the form contents get forwarded to my email address to contact back. -->
-
 
 ## Testing 
 
@@ -241,7 +246,6 @@ The goals of this website are:
 
  -->
 
-
 ### Unfixed Bugs
 
 <!-- - __Nav Bar - turning fully black on expanding__<br>
@@ -253,7 +257,6 @@ Using Section IDs for the navigation of the site means the menu does not toggle 
   - wrapping the anchor with the label, navigates but does toggle the checkbox.
 
   Seems this requires some javascript to do this. Even the alternative of having the hamburger/bars icon replaced with a X icon when the menu is expanded seems to require javascript. -->
-
 
 ## Deployment
 
@@ -267,7 +270,6 @@ The site was deployed to GitHub pages following the steps outlined below:
 The page will be automatically refreshed and a link to the deployed site will be available on a ribbon display just at the top of the GitHub Pages webpage.
 
 The deployed page can be found [here.](https://dasic002.github.io/GameOfKings/)
-
 
 ## Credits 
 
@@ -309,3 +311,4 @@ The deployed page can be found [here.](https://dasic002.github.io/GameOfKings/)
   - [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html#General)
 
 Getting started with your Portfolio Projects can be daunting, planning your project can make it a lot easier to tackle, take small steps to reach the final outcome and enjoy the process!  -->
+
