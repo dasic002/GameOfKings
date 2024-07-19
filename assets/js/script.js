@@ -48,16 +48,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 menu();
             } else if (this.innerHTML === 'New Game') {
                 menu();
+                document.getElementById('how-to').style.display = '';
+                document.getElementById('game-area').style.display = '';
+                document.getElementById('credits').style.display = '';
                 runGame('newGame');
             } else if (this.getAttribute('id') === 'htp-btn') {
                 menu();
                 howToNav();
                 document.getElementById('how-to').style.display = 'block';
                 document.getElementById('game-area').style.display = 'none';
+                document.getElementById('credits').style.display = '';
             } else if (this.getAttribute('id') === 'sound-state') {
                 let state = this.innerText;
                 state = state === 'OFF' ? 'ON' : 'OFF';
                 this.innerHTML = state;
+            } else if (this.getAttribute('id') === 'credits-btn') {
+                menu();
+                document.getElementById('how-to').style.display = '';
+                document.getElementById('game-area').style.display = 'none';
+                document.getElementById('credits').style.display = 'block';
             } else {
                 // alert me of any clickable element that has not got an action assigned yet
                 let item = this.getAttribute('id') === null ? this.innerText : this.getAttribute('id');
@@ -79,6 +88,13 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('cls-how-to').addEventListener('click', function () {
         document.getElementById('how-to').style.display = '';
         document.getElementById('game-area').style.display = '';
+        document.getElementById('credits').style.display = '';
+    });
+
+    document.getElementById('cls-credits').addEventListener('click', function () {
+        document.getElementById('how-to').style.display = '';
+        document.getElementById('game-area').style.display = '';
+        document.getElementById('credits').style.display = '';
     });
 
     let clickButtons = document.getElementById('game-area').getElementsByClassName("click"); // event listener will look clickable elements by the class "click"
@@ -1037,13 +1053,13 @@ function addBot(number) {
     }
     if (document.getElementById(field).value != value) {
         document.getElementById(field).value = value;
-        button.classList.replace('add-bot','close-bot');
+        button.classList.replace('add-bot', 'close-bot');
         button.children[0].classList.add('hidden');
         button.children[1].classList.remove('hidden');
     } else {
         document.getElementById(field).value = '';
         document.getElementById(field).focus();
-        button.classList.replace('close-bot','add-bot');
+        button.classList.replace('close-bot', 'add-bot');
         button.children[1].classList.add('hidden');
         button.children[0].classList.remove('hidden');
     }
