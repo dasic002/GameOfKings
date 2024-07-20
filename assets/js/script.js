@@ -196,6 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     alert('select a deck to pick from first!');
                 }
             } else if (this.getAttribute('id').includes('-stack')) {
+                document.getElementById('reject').removeAttribute('disabled');
                 if (this.getAttribute('id').includes('draw')) {
                     picked('draw');
                 } else if (this.getAttribute('id').includes('discard')) {
@@ -207,10 +208,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     pickCard.splice(0);
                 } else {
                     actStrg += ` drew and discarded`;
+                    this.setAttribute('disabled', true);
                     drawStack('discard');
                     cardFace('', discardDeck[0]);  // fetch the name of the card, since it is visible in the discard deck on discarding
                     timedIdx = 3;
-                    timer = setTimeout(timedFunctions, 1000);
+                    timer = setTimeout(timedFunctions, 100);
                 }
             } else if (this.getAttribute('id') === 'accept') {
                 let card;
@@ -248,6 +250,7 @@ function timedFunctions() {
     let x = document.getElementById('knock-count');
     let btm = document.getElementById('btm-prompt');
     btm = btm.getElementsByTagName('p')[0];
+    let cards = document.getElementById('main-player').getElementsByClassName('card');
     switch (timedIdx) {
         case (0):
             clearTimeout(timer);
@@ -258,6 +261,9 @@ function timedFunctions() {
         case (2):
             switch (btm.innerHTML) {
                 case '':
+                    for (card of cards) {
+                        card.setAttribute('disabled', true);
+                    }
                     btm.classList.remove('hidden');
                     btm.innerHTML = '3, ';
                     timer = setTimeout(timedFunctions, 1000);
@@ -294,12 +300,18 @@ function timedFunctions() {
                     if (newRound > 0) {
                         break;
                     } else if (knocker != 4) {
+                        for (card of cards) {
+                            card.setAttribute('disabled', true);
+                        }
                         picked('swapout');
                         x.innerHTML = ' 1';
                         document.getElementById('knock').classList.add('no-knock');
                         timer = setTimeout(timedFunctions, 1000);
                         break;
                     } else {
+                        for (card of cards) {
+                            card.setAttribute('disabled', true);
+                        }
                         picked('swapout');
                         x.innerHTML = ' 3';
                         timer = setTimeout(timedFunctions, 1000);
@@ -868,6 +880,7 @@ function hand(action, data) {
         for (let card of cards) {
             card.classList.add('deck');
             card.classList.remove('selected');
+            card.removeAttribute('disabled');
         }
         // presents main-player name, score and message
         document.getElementById('p1').innerHTML = playerData[turnIndex].playerName;
@@ -907,7 +920,7 @@ function hand(action, data) {
         }
     } else if (action === 'swapout') {
         for (let card of cards) {
-            card.setAttribute('action', 'swapout');
+            card.removeAttribute('disabled');
         }
     } else if (action === 'close') {
         for (let card of cards) {
