@@ -487,11 +487,13 @@ function runGame(action, data) {
         // display up player entry form
         document.getElementById('welcome').style.display = 'none';
         document.getElementById('player-form').style.display = 'block';
-        // prefill names and bots of last game
-        document.getElementById('P1-name').value = playerData[0].playerName;
-        document.getElementById('P2-name').value = `${playerData[1].playerName} ,${playerData[1].botSkill}`;
-        document.getElementById('P3-name').value = `${playerData[2].playerName} ,${playerData[2].botSkill}`;
-        document.getElementById('P4-name').value = `${playerData[3].playerName} ,${playerData[3].botSkill}`;
+        // prefill names and bots of last game if there is data to display
+        if (playerData != '') {
+            document.getElementById('P1-name').value = playerData[0].playerName;
+            document.getElementById('P2-name').value = `${playerData[1].playerName} ,${playerData[1].botSkill}`;
+            document.getElementById('P3-name').value = `${playerData[2].playerName} ,${playerData[2].botSkill}`;
+            document.getElementById('P4-name').value = `${playerData[3].playerName} ,${playerData[3].botSkill}`;
+        }
         // clear playerData
         playerData.splice(0);
         // reset values for new round

@@ -34,17 +34,11 @@
     <!-- div for the menu that will be fixed at the top left corner inline with the heading -->
     <nav id="menu">
         <button class="click" id="menu-btn" aria-label="Menu toggle"><i class="fa-solid fa-bars"></i><i class="fa-solid fa-xmark hidden"></i></button>
-        <ul id="menu-list">
-            <li class="click" aria-label="New Game">New Game</li>
-            <li class="click" id="htp-btn" aria-label="How to play">How to Play</li>
-            <!-- <li>Settings</li>
-            <ul>
-                <li>Sound: <span class="click" id="sound-state">OFF</span></li>
-                <li class="click" action="theme">Colour theme</li>
-            </ul> -->
-            <!-- <li class="click" action="scores">Current Scores</li> -->
-            <li class="click" id="credits-btn" aria-label="Credits">Credits</li>
-        </ul>
+        <div id="menu-list">
+            <button class="click" type="button" aria-label="New Game">New Game</button>
+            <button class="click" type="button" id="htp-btn" aria-label="How to play">How to Play</button>
+            <button class="click" type="button" id="credits-btn" aria-label="Credits">Credits</button>
+        </div>
     </nav>
 
     <div class="hidden" id="how-to">

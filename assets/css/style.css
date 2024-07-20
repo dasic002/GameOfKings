@@ -51,12 +51,16 @@ body {
     margin: 0;
 }
 
-#menu-list li,
-#menu-list ul {
+#menu-list button {
     list-style-type: none;
     text-align: left;
     margin: .8rem 0;
     font-size: 1.2rem;
+    display: block;
+    background-color: transparent;
+    color: inherit;
+    font-family: inherit;
+    border-width: 0;
 }
 
 #menu-list ul {
