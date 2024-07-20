@@ -6,8 +6,8 @@ html {
 /* global styling */
 
 body {
-    background-color: hsl(120, 50%, 34%);
-    color: whitesmoke;
+    background-color: #2b822b;
+    color: #f5f5f5;
     font-family: 'Bree Serif', serif;
     text-align: center;
     margin: 0;
@@ -75,7 +75,6 @@ body {
 .container {
     height: 80vh;
     position: relative;
-    /* border: 3px solid green; */
 }
 
 .center,
@@ -100,7 +99,7 @@ body {
 #credit-nav button {
     font-size: 3rem;
     color: inherit;
-    background-color: rgb(0 0 0);
+    background-color: #000000;
     border-width: 0;
     border-radius: 2rem;
     padding: 0.16rem .3rem 0rem;

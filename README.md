@@ -82,23 +82,25 @@ A single page that reveals different sections with game play or menu items. The 
 
 ### Skeleton
 
-<!-- [Landing Page](documentation/Folio-landing_page.jpg)
+[Landing Page](documentation/PP2-GameofKings-LandingPg.jpg)
 
-[Welcome section](documentation/Folio-welcome_section.jpg)
+[Nav Menu](documentation/PP2-GameofKings-navMenu.jpg)
 
-[Project snippets](documentation/Folio-project_snippet_section.jpg)
+[Player entry form](documentation/PP2-GameofKings-playerEntryForm.jpg)
 
-[Footer](documentation/Folio-footer_section.jpg)
+[Player Prompt](documentation/PP2-GameofKings-playerPrompt.jpg)
 
-[Projects page](documentation/Folio-Projects_page.jpg) (planned feature only)
+[Card hand setup for first reveal](documentation/PP2-GameofKings-cardHandSetup.jpg)
 
-[Contact us page](documentation/Folio-ContactUs_Page.jpg) (planned feature only) -->
+[Table Setup](documentation/PP2-GameofKings-tableSetup.jpg)
+
+[Game play](documentation/PP2-GameofKings-gamePlay.jpg)
 
 ### Surface
 #### Colour theme
-<!-- For the minimalistic modern style, a monochromatic palette composed of virtually full Black and light greys with simply and dark red colour for an accent. This palette was used to create a comfortable viewing experience and draw more attention to the subject elements, namely my work and how to get hold of me.
+For the Classic card game look, palette made up of 2 greens and a deep purple and off white and black. The dusty (lighter green) used to mimic the sort of matte finish of felted card tables, whilst the dark green offers better contrast for information pertaining to the players. The deep purple was selected on buttons so it compliemented the greens chosen and offered plenty of contrast to its labels in the off white colour. This palette was used to create a fun and reminiscient feel of card games whilst still offering a comfortable viewing experience.
 
-![Colour theme produced using Adobe Color tool](documentation/adobe-color_folio-theme.PNG) -->
+![Colour theme produced using Adobe Color tool](documentation/AdobeColor-Kings_theme.PNG)
 
 <!-- #### Typography -->
 
@@ -106,6 +108,7 @@ A single page that reveals different sections with game play or menu items. The 
 - Languages used:
   - [HTML5](https://en.wikipedia.org/wiki/HTML5)
   - [CSS3](https://en.wikipedia.org/wiki/CSS)
+  - [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
 - [GitPod](https://www.gitpod.io/) - Cloud-based IDE to edit code and Git version control.
 - [Github](https://github.com/) - to store and publish the project.
 - [Google Fonts](https://fonts.google.com/) - to import fonts "Comfortaa" and "Dosis" into the website's CSS.
@@ -120,6 +123,7 @@ A single page that reveals different sections with game play or menu items. The 
 <!-- - [Tiny PNG](https://tinypng.com/) - to compress images for faster page loading. -->
 - [W3C HTML Validator](https://validator.w3.org/) - to validate the HTML code.
 - [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) - to validate the CSS code.
+- [JS hint](https://jshint.com/) - to validate the JS code.
 
 ## Features 
 
@@ -175,12 +179,15 @@ A single page that reveals different sections with game play or menu items. The 
 
 ### Validator Testing 
 
-<!-- - HTML
-  - No errors were returned when passing through the official [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fdasic002.github.io%2FCarlos-Da-Silva-Folio%2Findex.html)<br>
+- HTML
+  - No errors were returned when passing through the official, just warnings on use of aria-labels on list and span elements [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fdasic002.github.io%2FCarlos-Da-Silva-Folio%2Findex.html)<br>
   ![HTML valid screenshot](documentation/Test-HTML_Valid.PNG)
 - CSS
-  - No errors were found when passing through the official [(Jigsaw) validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fdasic002.github.io%2FCarlos-Da-Silva-Folio%2Findex.html&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)<br>
-  ![CSS valid screenshot](documentation/Test-CSS_valid.PNG) 
+  - No errors were found when passing through the official [(Jigsaw) validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fdasic002.github.io%2FGameOfKings%2Findex.html&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)<br>
+  ![CSS valid screenshot](documentation/Test-CSS_Valid.PNG) 
+- JavaScript
+  - No errors were found when passing through [JS hint error checker](https://jshint.com/)<br>
+  ![JS error free screenshot](documentation/Test-JS_Validation.PNG)
 - Accessibility
   - Running the site through lighthouse analysis confirms the colours and fonts used legible and accessible on either:
     - Mobile:<br>
@@ -189,8 +196,8 @@ A single page that reveals different sections with game play or menu items. The 
     - Desktop:<br>
   ![Lighthouse desktop analysis](documentation/Lighthouse_analysis-Desktop.PNG)
 
-  - Running the site through [WAVE accessibility tool](https://wave.webaim.org/report#/https://dasic002.github.io/Carlos-Da-Silva-Folio/index.html) showed no obvious errors after some improvements were made.<br>
-  ![Wave accessibility evaluation results](documentation/Test-wave-accessibility.PNG) -->
+  - Running the site through [WAVE accessibility tool](https://wave.webaim.org/report#/https://dasic002.github.io/GameOfKings/index.html) showed no obvious errors after some improvements were made.<br>
+  ![Wave accessibility evaluation results](documentation/Test-wave-accessibility.PNG)
 
 ### Manual Testing
 
@@ -284,6 +291,27 @@ The deployed page can be found [here.](https://dasic002.github.io/GameOfKings/)
 ### Code
 
 - Media Query based on aspect ratio found in this article [The Complete guide to CSS Media Queries by PolyPane](https://polypane.app/blog/the-complete-guide-to-css-media-queries/#:~:text=taller%20than%201600px.-,Aspect%20ratio,%2Daspect%2Dratio%20media%20features.).
+
+- Guidance on creating a nav menu toggle [using JavaScript](https://www.w3schools.com/howto/howto_js_mobile_navbar.asp).
+
+- Reference on methods to distinguish clickable elements in the eventListener. [getAttribute()](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute) and [includes()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes).
+
+- References on finding and manipulating array entries using [indexOf()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf), as well as pop(), push(), shift(), unshift(), slice() and splice().
+
+- JavaScript guidance for [moving an array entry to another position](https://www.geeksforgeeks.org/how-to-move-an-array-element-from-one-array-position-to-another-in-javascript/?ref=lbp), used for manipulating player's card hand when shuffling their position at the start or when they are swapped for something picked from the table.
+
+- JavaScript code to find duplicates in an array, copied from [Checking for duplicate strings in JavaScript array](https://stackoverflow.com/questions/49215358/checking-for-duplicate-strings-in-javascript-array).
+
+- JavaScript guidance on [setTimout()](https://www.w3schools.com/js/js_timing.asp) function to create the countdown to reveal and for the bell/knocking button.
+
+- How to prevent buttons placed inside a form element from refreshing the page using [type="button"](https://stackoverflow.com/questions/7803814/how-can-i-prevent-refresh-of-page-when-button-inside-form-is-clicked) attribute in button HTML element.
+
+- Inspiration for the function of the add Bot player buttons, using the [onclick attribute](https://www.w3schools.com/howto/howto_html_clear_input.asp) to trigger a function.
+
+- Guidance to position the navigation buttons in How To Play section [using CSS](https://www.w3schools.com/howto/howto_css_center_button.asp).
+
+- Guidance to generate the CSS to style the elements as cards, using multiple backgrounds and transforming them to build the look of the cards to minimise the image file size [MDN background](https://developer.mozilla.org/en-US/docs/Web/CSS/background).
+
 
 <!-- - CSS and HTML code for the nav bar in the header was originally taken from the [Love Running walkthrough project](https://github.com/dasic002/Love-Running), then CSS was altered for the intended look.
 - CSS and HTML code for the function of expanding and collapsing of project snippets sourced from [Web mdn docs references for the pseudo :checked](https://developer.mozilla.org/en-US/docs/Web/CSS/:checked).
