@@ -149,24 +149,16 @@ For the Classic card game look, palette made up of 2 greens and a deep purple an
   - The steps are provided in subsections that are navigated using the left and right arrow buttons at the bottom. Whilst the "X" button returns to the game area, this is so the player can refer to the instructions at any time and easily resume their game.<br>
   ![How To Play navigation](documentation/Feat-htp_nav.PNG) 
 
-<!-- - __Credits__
+- __Credits__
   - Includes mentions to those that taught me the game, a link to the repository and a link to contact via my business (Studio Silva) whatsapp.<br>
-  ![Credits section](documentation/Feat-ContactForm.PNG)
-
-- __The Footer__ 
-  - The footer contains links to my company's instagram page, my personal Linkedin profile, my company's whatsapp contact and etsy shop.
-  - Should the visitor prefer to contact outside of the form, they are welcome to reach out via these means.<br>
-  ![Footer links](documentation/Feat-Footer.PNG)
+  ![Credits section](documentation/Feat-Credits.PNG)
 
 - __Error 404 Page__
-  - A page in keeping with the style of the main page of the site to indicate the visitor as stumbles upon an non-existent URL of our site and to point them back to our homepage.<br>
-  ![Error 404 page](documentation/Feat-404_page.PNG) -->
+  - A page in keeping with the style of the main page of the site to indicate the visitor has stumbled upon an non-existent URL of our site and to point them back to our homepage.<br>
+  ![Error 404 page](documentation/Feat-404page.PNG)
 
 ### Features Left to Implement
-<!-- - Navigation hamburger icon to change to a cross when expanded to give a visual clue on how to close the menu.
-- Make the navigation menu collapse on clicking a link that redirects to section on page.
-- Create a projects page that includes a lot more detail on the projects described in the project section. When a visitor expands a project there could be a link for "More >>" which redirects to the section in the projects page that shows more information.
-- A "thank you" message to replace the contact form when the form gets submitted successfully and that the form contents get forwarded to my email address to contact back. -->
+- A more intuitive game would display 
 
 ## Testing 
 
@@ -305,12 +297,6 @@ The deployed page can be found [here.](https://dasic002.github.io/GameOfKings/)
 
 - Guidance to generate the CSS to style the elements as cards, using multiple backgrounds and transforming them to build the look of the cards to minimise the image file size [MDN background](https://developer.mozilla.org/en-US/docs/Web/CSS/background).
 
-
-<!-- - CSS and HTML code for the nav bar in the header was originally taken from the [Love Running walkthrough project](https://github.com/dasic002/Love-Running), then CSS was altered for the intended look.
-- CSS and HTML code for the function of expanding and collapsing of project snippets sourced from [Web mdn docs references for the pseudo :checked](https://developer.mozilla.org/en-US/docs/Web/CSS/:checked).
-- Guidance on how to increase the general font-size viewed on the page as display goes beyond 4K resolution. [Learnt about html{font-size: ;} function here](https://developer.mozilla.org/en-US/docs/Web/CSS/font-size)
-- Guidance on how to prevent the contact form text area from being resized. [Learnt about textarea{resize: none;} function here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea)
-- Guidance on using background function for the images under a division. [background shorthand](https://developer.mozilla.org/en-US/docs/Web/CSS/background) -->
 
 ### Acknowledgement
 - My mentor Brian Macharia for his insight, guidance and words of encouragement.
