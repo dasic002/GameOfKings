@@ -23,6 +23,14 @@ body {
     margin-top: 1.2rem;
 }
 
+.head404 {
+    background-color: #186018;
+    height: 2.5rem;
+    display: block;
+    padding: 1rem 0 0;
+    margin: 0;
+}
+
 #menu {
     position: absolute;
     top: 0;
@@ -31,7 +39,6 @@ body {
     padding: 0 1rem 0.5rem;
     background-color: #186018;
     z-index: 98;
-    height: 3rem;
 }
 
 #menu-btn {
