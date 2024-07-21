@@ -129,36 +129,29 @@ For the Classic card game look, palette made up of 2 greens and a deep purple an
 
 ### Existing Features
 
-<!-- - __Navigation Bar__
-  - The navigation bar sits across the top of the page, it is fixed in position so no matter where the visitor has scrolled down to it is always available.
-  - The links included **Home**, **Projects** and **Contact us** navigate to sections of the page, rather than to separate pages.
-  - Aligned to the top left corner, on narrow displays it features as an expandable "burger" icon menu.<br>
+- __Navigation Menu__
+  - The navigation is set to an absolute position so no matter what content is displayed it is always available at the top of the page.
+  - The buttons included **New Game**, **How To Play** and **Credits** make these sections of the page visible, rather than navigate to separate pages or extend the page length.
+  - Aligned to the top left corner, it is displayed as an expandable "burger" icon menu.<br>
   ![Navigation on Mobile - collapsed](documentation/Feat-navCollapsed.PNG) ![Navigation on Mobile - expanded](documentation/Feat-navExpanded.PNG)
-  - On wider displays, the navigation bar expands to display the links at all times.<br>
-  ![Navigation on wider displays](documentation/Feat-navFixed.PNG)
-  - The virtually white text over the fading black background remains contrasting enough to be legible and giving the sophisticated touch to the site.
+  - On wider displays, the navigation menu remains the same expandable icon.<br>
+  ![Navigation on wider displays](documentation/Feat-navDesktop.PNG)
+  - The virtually white text over the dark green background remains contrasting enough and in keeping with the classic card game look.
 
 - __The landing page - Welcome__
-  - The landing page consists of photograph of myself with my name as text overlay.
-  - On mobile displays, the very next division below contains a message welcoming the visitor to my portfolio and stating my profession and location to help the visitor quickly identify the sites intent.<br>
+  - The landing page consists of a simple Heading "Welcome to Kings", big "PLAY" button and a "?" icon button. 
+  - Just so it offers the main point of focus, to play the game. The "?" icon button is there to offer a support, should the player not know the game, it makes it convenient for the visitor to easily reveal the instructions.<br>
   ![Welcome section mobile](documentation/Feat-WelcomeMobile.PNG)
-  - On displays wider than 600px, the division with the welcome message becomes a floating bubble next to my photo, so there is not too much redundant empty space in the welcome section.<br>
-  ![Welcome section desktop](documentation/Feat-WelcomeDesktop.PNG)
 
-- __Projects Section__
-  - This section contains a photo and brief given to 4 projects I have worked on, that compose the portfolio.
-  - On mobile displays, each project is seen as a short wide section that displays the clipped image in the background with a smoked overlay and title in white text. This is to reduce the need to scroll through a lot of info on a small display before reaching the contact form and footer. Also, provides focus on the project being viewed. On tapping the project title, the section expands to expose the project image, the description of the project below and a closing icon on the top right corner. The visitor does not need to use the closing icon to expand the next project, they can tap the other project title to expand it and it will close the other.<br>
-  ![Project section collapsed](documentation/Feat-ProjMobileCollapsed.PNG)  **>**  ![Project section expanded](documentation/Feat-ProjMobileExpanded.PNG)
-  - For displays 600px wide and greater, the projects are displayed as image to the left and text to the right, getting rid of the collapsible sections. On a display of that size the content is not too long to be able to scroll through easily.<br>
-  ![Project section on 600px wide](documentation/Feat-Proj600pxWd.PNG)
-  - For displays 1500px wide and greater, the projects are displayed across the whole width of the view port, following a format of images in a row and description below. This makes use of the available space to maintain a comfortable reading experience of the website, as a whole viewport wide section per project would seem redundant for the content and harder to follow.<br>
-  ![Project section on 1500px wide](documentation/Feat-Proj1500pxWd.PNG) 
+- __How to Play__
+  - This section revealed on clicking the "How to play" button in the menu or the "?" icon button on the landing page or player prompts, contains various subsections providing instructions with illustrations on how to play the game of kings.<br>
+  ![How To Play pg1 of 10](documentation/Feat-htp1_10.PNG) ![How To Play pg2 of 10](documentation/Feat-htp2_10.PNG) ![How To Play pg3 of 10](documentation/Feat-htp3_10.PNG) 
+  - The steps are provided in subsections that are navigated using the left and right arrow buttons at the bottom. Whilst the "X" button returns to the game area, this is so the player can refer to the instructions at any time and easily resume their game.<br>
+  ![How To Play navigation](documentation/Feat-htp_nav.PNG) 
 
-- __Contact us form__
-  - The contact form offers a means for the visitor to get in touch with myself directly from the website, prompting the visitor to introduce themselves and to describe what project they may be looking to collaborate on. 
-  - The form collects First name, Surname, email address, phone number (not a required field) and body of text for a message.
-  - It includes two buttons replaced with icons, reset form shown as an eraser icon, whilst the submit button is a paper airplane icon.<br>
-  ![Contact form](documentation/Feat-ContactForm.PNG)
+<!-- - __Credits__
+  - Includes mentions to those that taught me the game, a link to the repository and a link to contact via my business (Studio Silva) whatsapp.<br>
+  ![Credits section](documentation/Feat-ContactForm.PNG)
 
 - __The Footer__ 
   - The footer contains links to my company's instagram page, my personal Linkedin profile, my company's whatsapp contact and etsy shop.
@@ -167,8 +160,8 @@ For the Classic card game look, palette made up of 2 greens and a deep purple an
 
 - __Error 404 Page__
   - A page in keeping with the style of the main page of the site to indicate the visitor as stumbles upon an non-existent URL of our site and to point them back to our homepage.<br>
-  ![Error 404 page](documentation/Feat-404_page.PNG)
- -->
+  ![Error 404 page](documentation/Feat-404_page.PNG) -->
+
 ### Features Left to Implement
 <!-- - Navigation hamburger icon to change to a cross when expanded to give a visual clue on how to close the menu.
 - Make the navigation menu collapse on clicking a link that redirects to section on page.
