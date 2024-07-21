@@ -31,6 +31,7 @@ body {
     padding: 0 1rem 0.5rem;
     background-color: #186018;
     z-index: 98;
+    height: 3rem;
 }
 
 #menu-btn {
@@ -205,6 +206,7 @@ body {
     border-radius: .7rem;
     font-size: 2rem;
     margin: 1rem;
+    text-decoration: none;
 }
 
 .title {
