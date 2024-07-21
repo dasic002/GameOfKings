@@ -158,7 +158,14 @@ For the Classic card game look, palette made up of 2 greens and a deep purple an
   ![Error 404 page](documentation/Feat-404page.PNG)
 
 ### Features Left to Implement
-- A more intuitive game would display 
+- A more intuitive game for a single human player would display the game on the table and show the moves the bot players make as you would playing the game in real life. For example, the game depicts the table with the players' cards face down and as a bot makes its moves of drawing a card from the draw stack, a card is animated as being removed from the stack and if swapped it displays that movement too. There it is easier to visualise the game as opposed to having to read the summary of steps between turns where some might find it too disjointed in the gameplay.
+
+- The game is made to play as a multiplayer, the initial idea was to make the game playable over the internet with multiple human players joining a table, but was advised by my mentor that this is a feature outside of the scope of javascript alone and have not learnt about websockets yet.
+
+- More game interactions. Initially planned to include:
+  - the option of having sounds on the game;
+  - customisable colour theme of cards artwork and table appearance;
+  - Illustrated and/or animated reactions on reveals of the cards swapped out, for instance a good swap could display a thumbs up and a "Nice!" text over the card, whereas a bad swap could momentarily turn the image monochrome and display a message of "Oh no!".
 
 ## Testing 
 
