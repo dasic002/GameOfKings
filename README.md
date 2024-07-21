@@ -173,7 +173,7 @@ For the Classic card game look, palette made up of 2 greens and a deep purple an
 ### Validator Testing 
 
 - HTML
-  - No errors were returned when passing through the official, just warnings on use of aria-labels on list and span elements [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fdasic002.github.io%2FCarlos-Da-Silva-Folio%2Findex.html)<br>
+  - No errors were returned when passing through the official, just warnings on use of aria-labels on span elements [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fdasic002.github.io%2FCarlos-Da-Silva-Folio%2Findex.html)<br>
   ![HTML valid screenshot](documentation/Test-HTML_Valid.PNG)
 - CSS
   - No errors were found when passing through the official [(Jigsaw) validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fdasic002.github.io%2FGameOfKings%2Findex.html&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)<br>

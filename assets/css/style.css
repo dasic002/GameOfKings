@@ -119,7 +119,9 @@ body {
 }
 
 #how-to p,
-#how-to li {
+#how-to li,
+#credits p,
+#credits a {
     text-align: justify;
     padding: 0.5rem 1rem;
     margin: 0;
@@ -129,6 +131,18 @@ body {
     text-align: center;
     padding: 0.5rem 1rem 1.5rem;
     margin: 0;
+}
+
+#credits a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background-color: #186018;
+    margin: 0 0 0.5rem;
+}
+
+#credits a i {
+    margin: 0 0.5rem;
 }
 
 #wlcm-msg,
