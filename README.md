@@ -157,6 +157,19 @@ For the Classic card game look, palette made up of 2 greens and a deep purple an
   - A page in keeping with the style of the main page of the site to indicate the visitor has stumbled upon an non-existent URL of our site and to point them back to our homepage.<br>
   ![Error 404 page](documentation/Feat-404page.PNG)
 
+- __Player Prompt__
+  <!-- show player prompt screen, breaking down the information it presents -->
+- __Player card hand - selection to shuffle__
+  <!-- show before selecting, after selecting a card, and how it is reused for swapping a card in hand for the one picked up -->
+- __Player card hand - countdown to bottom card reveal__
+  <!-- show screen with READY... 3, 2, 1!, then screen with bell icon appearing -->
+- __Table view__
+  <!-- Show table view, explain the purple background matching that of buttons, call the user to act on that area -->
+- __Player picked card__
+  <!-- Show picked card view -->
+- __End of Round/Game__
+  <!-- Show the screen of both scenes explaining that it replaces the stacks and brings up icons next to player names -->
+
 ### Features Left to Implement
 - A more intuitive game for a single human player would display the game on the table and show the moves the bot players make as you would playing the game in real life. For example, the game depicts the table with the players' cards face down and as a bot makes its moves of drawing a card from the draw stack, a card is animated as being removed from the stack and if swapped it displays that movement too. There it is easier to visualise the game as opposed to having to read the summary of steps between turns where some might find it too disjointed in the gameplay.
 

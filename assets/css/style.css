@@ -429,7 +429,7 @@ button.picked {
 }
 
 .missing-card {
-    background-color: hsl(120, 50%, 34%);
+    background-color: inherit;
     background-image: none;
     border: .2rem dashed rgba(245, 245, 245, .5);
     box-shadow: none;
@@ -442,6 +442,7 @@ button.picked {
 
 #decks {
     padding-bottom: 1rem;
+    background-color: #61183D;
 }
 
 #decks>span {
@@ -449,6 +450,7 @@ button.picked {
     display: grid;
     height: 6.25rem;
     width: 4.38rem;
+    background-color: #61183D;
 }
 
 #draw-stack,
