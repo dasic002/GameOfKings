@@ -94,13 +94,13 @@ body {
     display: flex;
     margin: 0;
     position: absolute;
-    bottom: 2rem;
+    bottom: 0rem;
     left: 50%;
     transform: translate(-50%, 50%);
 }
 
 .page-of {
-    bottom: 6rem;
+    bottom: 3rem;
 }
 
 .single-btn {
@@ -559,7 +559,7 @@ button.picked {
 }
 
 /* for scaling font size only by height when display is as wide as 56% of the height or wider */
-@media screen and (min-aspect-ratio:2.8/5) {
+@media screen and (min-aspect-ratio:1/2) {
     html {
         font-size: 2.2vh;
     }
