@@ -34,7 +34,7 @@ The goals of this website are:
 
 [View the deployed website here](https://dasic002.github.io/GameOfKings/)
 
-![Responsive design mockup](documentation/ResponsiveDesign.PNG)
+![Responsive design mock-up](documentation/ResponsiveDesign.PNG)
 
 ## UX - User Experience
 
@@ -70,7 +70,7 @@ A single page that reveals different sections with game play or menu items. The 
 
 - **How to play** - hidden until selected in menu or ? icon button clicked. This section is composed of several subsections for step-by-step instructions on how to play the game. Navigation buttons become available to go through the steps.
 
--  **Credits** - hidden until selected in menu. It will hold credits pertaining to the site composition and inspiration and a link to the gitHub repository.
+-  **Credits** - hidden until selected in menu. It will hold credits pertaining to the site composition and inspiration and a link to the GitHub repository.
 
 - **Game-area** - visible on loading of page, whenever How to play or Credits section is hidden. Composed of other subsections to navigate through the game:
   - Welcome - visible on page load.
@@ -98,7 +98,7 @@ A single page that reveals different sections with game play or menu items. The 
 
 ### Surface
 #### Colour theme
-For the Classic card game look, palette made up of 2 greens and a deep purple and off white and black. The dusty (lighter green) used to mimic the sort of matte finish of felted card tables, whilst the dark green offers better contrast for information pertaining to the players. The deep purple was selected on buttons so it compliemented the greens chosen and offered plenty of contrast to its labels in the off white colour. This palette was used to create a fun and reminiscient feel of card games whilst still offering a comfortable viewing experience.
+For the Classic card game look, palette made up of 2 greens and a deep purple and off white and black. The dusty (lighter green) used to mimic the sort of matte finish of felted card tables, whilst the dark green offers better contrast for information pertaining to the players. The deep purple was selected on buttons so it complimented the greens chosen and offered plenty of contrast to its labels in the off white colour. This palette was used to create a fun and reminiscent feel of card games whilst still offering a comfortable viewing experience.
 
 ![Colour theme produced using Adobe Color tool](documentation/AdobeColor-Kings_theme.PNG)
 
@@ -110,8 +110,8 @@ For the Classic card game look, palette made up of 2 greens and a deep purple an
   - [CSS3](https://en.wikipedia.org/wiki/CSS)
   - [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
 - [GitPod](https://www.gitpod.io/) - Cloud-based IDE to edit code and Git version control.
-- [Github](https://github.com/) - to store and publish the project.
-- [Google Fonts](https://fonts.google.com/) - to import fonts "Comfortaa" and "Dosis" into the website's CSS.
+- [GitHub](https://github.com/) - to store and publish the project.
+- [Google Fonts](https://fonts.google.com/) - to import fonts "Bree Serif" and "Patua One" into the website's CSS.
 - [Font Awesome](https://fontawesome.com/) - to import icons for more recognizable action buttons. It has been used in:
   - The expandable Nav bar on narrow displays.
   - The X icon in expandable projects section.
@@ -150,7 +150,7 @@ For the Classic card game look, palette made up of 2 greens and a deep purple an
   ![How To Play navigation](documentation/Feat-htp_nav.PNG) 
 
 - __Credits__
-  - Includes mentions to those that taught me the game, a link to the repository and a link to contact via my business (Studio Silva) whatsapp.<br>
+  - Includes mentions to those that taught me the game, a link to the repository and a link to contact via my business (Studio Silva) WhatsApp.<br>
   ![Credits section](documentation/Feat-Credits.PNG)
 
 - __Error 404 Page__
@@ -158,22 +158,67 @@ For the Classic card game look, palette made up of 2 greens and a deep purple an
   ![Error 404 page](documentation/Feat-404page.PNG)
 
 - __Player Prompt__
-  <!-- show player prompt screen, breaking down the information it presents -->
-- __Player card hand - selection to shuffle__
-  <!-- show before selecting, after selecting a card, and how it is reused for swapping a card in hand for the one picked up -->
-- __Player card hand - countdown to bottom card reveal__
-  <!-- show screen with READY... 3, 2, 1!, then screen with bell icon appearing -->
+  The player prompt screen prompts the human player(s) that it is their turn, particularly useful when more than one human is playing on the same device, to help keep the player's hand and picks a secret. The prompt includes a section with last actions taken by each player. The prompt will always include the button "READY" for the player to move on to their next action and the "?" icon button as a shortcut to review the instructions.
+
+  - __Initial prompt__ - At the start of the game or round this section will have an entry of "New Game!" or "New Round!" and any actions by players that have taken their turn. Mostly indicating that the players have had a turn to look at their bottom 2 cards and if any of them have decided knock already. The button "READY" will move the player to see their hand, allow shuffling and reveal the bottom 2 cards when done.<br>
+  ![Early player prompt](documentation/Feat-player_prompt.PNG)
+
+  - __Mid round prompt__ - After all players have had a chance to see their bottom 2 cards, the "READY" button brings the player to the table view where they can opt to take the card from the discard stack or draw from the draw stack. Hence, the first difference in the prompt is the addition of "Pick a card!" on the heading. The players' actions should also describe them as the player would view on the table. For example:
+      - If a player has picked the top card from the discard stack and used it to swap with another in their hand, the syntax will follow <br>
+      __"[playerName]__ took the __[name of card on discard stack]__ for their __[position of card in hand]__ , __[name of card discarded from their hand]"__<br>
+      This is useful in gameplay to get an idea of how good the other players are doing and for the intriguing moment the player may have lost a good card from their hand.
+      - If a player has drawn a new card and swapped a card in their hand, the syntax becomes <br>
+      __"[playerName]__ drew for their __[position of card in hand]__ , __[name of card discarded from their hand]"__<br>
+      The difference being that it omits the name of the card drawn as in real life no other player would have visibility of what was picked up.
+      - If a player has drawn and discarded a card, presumably because the value was too high.<br>
+      __"[playerName]__ drew and discarded __[name of card discarded]"__<br>
+  ![Mid Round player prompt](documentation/Feat-player_prompt2.PNG)
+
+  - __Last playing prompt of the round__ - After a player has opted to knock on their cards, all players thereafter will see the prompt with the heading changed to "last card!" and see the text "**KNOCKED!**" added at the end of that player's action. This is to offer the others a chance to have their last turn of the round.<br>
+  ![last playing prompt of the round](documentation/Feat-player_prompt3.PNG)
+
+  - __End of round prompt__ - Only visible to the knocking player (if human) or to the next human player. This triggers the scoring of all players' cards and the "READY" button will reveal the table view with the scores, players' cards and outcome of the round or game.<br>
+  ![end of round prompt](documentation/Feat-player_prompt4.PNG)
+
+- __Player card hand__
+  - __Selecting to shuffle and countdown to reveal__
+  After the player has gone through the initial prompt, the game displays the player's card hand as they'd see on the table. The player can opt to shuffle 2 cards at a time on their hand in the hope it may reveal higher values on the bottom 2 cards. On clicking "Done" the cards can no longer be selected and the game counts down to reveal these bottom cards.<br>
+  ![before selecting to shuffle](documentation/Feat-card_to_shuffle.PNG) 
+  ![selecting cards to shuffle](documentation/Feat-card_to_selected_pair.PNG)
+  ![Countdown to reveal](documentation/Feat-card_to_btm_reveal.PNG)
+  
+  - __Selecting a card to swap with picked__
+  After the player as picked a card from either stack on the table and accepted to swap that card with one in their hand, the game reuses the same player card hand display to show the player's hand so the player can select which to swap it with. On selection of the card, the game will reveal the card being discarded and countdown the knocking button before moving on to the next player.<br>
+  ![selecting cards to shuffle](documentation/Feat-card_to_swap.PNG)
+  
+- __Knocking - bell icon button__
+Available after the player has viewed their bottom 2 cards or swapped or discarded a card, the button for knocking appears with a 3 seconds countdown to allow the player to lock in their hand if they believe they have the winning hand.<br>
+![knock after viewing hand for first time](documentation/Feat-knock_on_start.PNG)
+![knock after discarding a card](documentation/Feat-knock_after_pick.PNG)<br>
+If no other player has knocked yet, the button is enabled still and the icon will appear in the deep purple and contrast well with the background. After another player has knocked, the button is disabled, the content is shown in grey and the countdown is shortened to 1 second as it the player cannot act any longer on it.<br>
+![enabled knocking button](documentation/Feat-Knock_enabled.PNG) 
+![disabled knocking button](documentation/Feat-Knock_disabled.PNG)<br>
+
 - __Table view__
-  <!-- Show table view, explain the purple background matching that of buttons, call the user to act on that area -->
+  - __To pick a card__ - shown after the player has been prompted to pick up a card, this screen displays the table with the other players above, the stacks to pick from in the middle and the player's hand below. In this view, the stacks section has the deep purple background to indicate to the player that their next action involves making a selection here. Should another player have knocked for their hand, a bell icon will appear next to their name.<br>
+  ![picking a card from a stack](documentation/Feat-table-cards-dealt.PNG)
+  ![knocking player indicated by icon](documentation/Feat-table_knocked.PNG)
+  
+  - __End of Round/Game__ - shown after the human player has been prompted with end of round, the same view is displayed, except this time the players' cards are all revealed, scores assigned and in place of the stacks of cards in the middle, the round or game outcome is announced and a button prompting the player to move on to the next round or a new game. Also visible at this stage are icons next to the players' names, the winner of the round or game will have a trophy icon. Should the winner not be the player that knocked the icon "2X" is assigned to the knocking player to indicate their score of this round has been doubled. All other players are assigned an "X" icon.<br>
+  ![end of round table](documentation/Feat-end_of_round.PNG)
+  ![end of round table, knocking player lost](documentation/Feat-end_of_round_doubled.PNG)
+  ![end of game table](documentation/Feat-end_of_game.PNG)
+
 - __Player picked card__
-  <!-- Show picked card view -->
-- __End of Round/Game__
-  <!-- Show the screen of both scenes explaining that it replaces the stacks and brings up icons next to player names -->
+This view is displayed when the player has made a selection of picking the card from either stack. It present the picked card in a larger format and offers a reject and an accept button to make their decision. Accepting the card will display the player's hand to select the position in their hand that they are swapping it with. Should the card be picked from the discard stack, rejecting this card will simply return to the table, whilst picking from the draw stack it will discard the card. This is because the player's turn must always end with discarding a card, be it from the draw stack or from their hand.<br>
+![view of picked card](documentation/Feat-picked_card.PNG)
 
 ### Features Left to Implement
 - A more intuitive game for a single human player would display the game on the table and show the moves the bot players make as you would playing the game in real life. For example, the game depicts the table with the players' cards face down and as a bot makes its moves of drawing a card from the draw stack, a card is animated as being removed from the stack and if swapped it displays that movement too. There it is easier to visualise the game as opposed to having to read the summary of steps between turns where some might find it too disjointed in the gameplay.
 
-- The game is made to play as a multiplayer, the initial idea was to make the game playable over the internet with multiple human players joining a table, but was advised by my mentor that this is a feature outside of the scope of javascript alone and have not learnt about websockets yet.
+- To make the game play as accurate to real life, knocking on viewing of the bottom 2 cards of the player's hand should record time taken by the player from the moment the knock button appears and compare that to whoever has knocked too, whoever was quickest to knock after viewing their cards gets the status. However, this is rare for players to want to knock this early and even more so for more than one player to feel confident enough to knock this early and would only be necessary if the game remains played on one single device.
+
+- The game is made to play as a multiplayer, the initial idea was to make the game playable over the internet with multiple human players joining a table, but was advised by my mentor that this is a feature outside of the scope of JavaScript alone and have not learnt about WebSocket yet.
 
 - More game interactions. Initially planned to include:
   - the option of having sounds on the game;
@@ -268,12 +313,12 @@ Using Section IDs for the navigation of the site means the menu does not toggle 
   - wrapping the visible text of the anchor with the label toggles the checkbox, but does not navigate to their section at the same time.
   - wrapping the anchor with the label, navigates but does toggle the checkbox.
 
-  Seems this requires some javascript to do this. Even the alternative of having the hamburger/bars icon replaced with a X icon when the menu is expanded seems to require javascript. -->
+  Seems this requires some JavaScript to do this. Even the alternative of having the hamburger/bars icon replaced with a X icon when the menu is expanded seems to require JavaScript. -->
 
 ## Deployment
 
 The site was deployed to GitHub pages following the steps outlined below:
-- Log in to GitHub and navigate to the Github Repository.
+- Log in to GitHub and navigate to the GitHub Repository.
 - On the Repository page, select the settings icon just above the Repository title.
 - In the sidebar to the left, select "Pages" under the "Code and automation" section.
 - Under **Source**, select the "Deploy from a branch" from the dropdown menu, then under **Root** select "Main branch" from that dropdown menu.
@@ -317,7 +362,6 @@ The deployed page can be found [here.](https://dasic002.github.io/GameOfKings/)
 
 - Guidance to generate the CSS to style the elements as cards, using multiple backgrounds and transforming them to build the look of the cards to minimise the image file size [MDN background](https://developer.mozilla.org/en-US/docs/Web/CSS/background).
 
-
 ### Acknowledgement
 - My mentor Brian Macharia for his insight, guidance and words of encouragement.
 
@@ -337,4 +381,5 @@ The deployed page can be found [here.](https://dasic002.github.io/GameOfKings/)
   - [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html#General)
 
 Getting started with your Portfolio Projects can be daunting, planning your project can make it a lot easier to tackle, take small steps to reach the final outcome and enjoy the process!  -->
+
 
