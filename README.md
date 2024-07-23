@@ -120,7 +120,6 @@ For the Classic card game look, palette made up of 2 greens and a deep purple an
 - [FavIcon generator](https://favicon.io/) - used to create the favicons to embed on our site.
 - [Am I Responsive](https://ui.dev/amiresponsive) - to visualise the website in various display sizes.
 - [Adobe Color](https://color.adobe.com/create/color-wheel) - to generate the colour palette and Accessibility tools checking for contrast for legibility and colour-blind viewing.
-<!-- - [Tiny PNG](https://tinypng.com/) - to compress images for faster page loading. -->
 - [W3C HTML Validator](https://validator.w3.org/) - to validate the HTML code.
 - [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) - to validate the CSS code.
 - [JS hint](https://jshint.com/) - to validate the JS code.
@@ -252,68 +251,83 @@ This view is displayed when the player has made a selection of picking the card 
 ### Manual Testing
 
 #### Devices and browsers used
-<!-- - iPhone 12 Pro - iOS 17.4.1
-  - Safari (v17.4.1)
-  - Chrome (v126)
-  - Google (v319)
+- iPhone 12 Pro - iOS 17.5.1
+  - Safari (v17.5.1)
+  - Chrome (v127)
+  - Google (v325)
 
-- iPad Pro (12.9 inch - 4th Gen) - iPadOS 17.4.1
-  - Safari (v17.4.1)
-  - Chrome (v125)
+- iPad Pro (12.9 inch - 4th Gen) - iPadOS 17.5.1
+  - Safari (v17.5.1)
+  - Chrome (v127)
 
 - Dell Precision 3510 laptop - Windows 10 Pro (2H22)
-  - Chrome (v125)
-  - Firefox (v126)
-  - Microsoft Edge (v125) -->
+  - Chrome (v126)
+  - Firefox (v127)
+  - Microsoft Edge (v126)
 
 #### Manual testing checklist
 
-<!-- | Feature | Action | Expected Behaviour | Pass/Fail | Notes |
+| Feature | Action | Expected Behaviour | Pass/Fail | Notes |
 |-|-|-|-|-|
 |Google fonts|Loading the page|Google fonts load|PASS|
 |Font awesome icons|Loading the page|Icons appear as intended|PASS|
 |Images|Loading the page|images appear as intended|PASS|
 |content text |Loading the page|text appears as intended|PASS|
-|Nav bar appearance|Loading the page|Nav bar appears as expected, collapsed hamburger icon for narrow displays, expanded along the width for medium and wider displays.|PASS|
-|nav bar hamburger icon|Click Hamburger icon|hamburger icon expands to reveal nav menu|PASS|
-|Nav link - Home|Click link "Home"|link navigates to welcome section / landing page|PASS|
-|Nav link - Projects|Click link "Projects"|link navigates to projects section of site|PASS|
-|nav link - Contact Us|Click link "Contact Us"|link navigates to contact us section|PASS|
-|Projects - mobile|Click to expand|Project div expands to reveal image and project brief.|PASS|
-|Projects - mobile|Click others to expand|Previously expanded project closes when other expands.|PASS|
-|Projects - mobile|Click X icon to close|Current expanded project closes.|PASS|
-|Projects - 600px wide|page load|Projects are expanded with text to the side of the image.|PASS|
-|Projects - 1500px wide|page load|Projects are expanded with text below images and lined up in a row across the width of the page.|PASS|
-|Contact form - visual|page load|Contact form maintains intended appearance, with no additional controls.|PASS|
-|Contact form|Submit form without entering First name|Form prompts user to fill in field.|PASS|
-|Contact form|Submit form without entering Surname|Form prompts user to fill in field.|PASS|
-|Contact form|Submit form without entering email|Form prompts user to enter an email address in field.|PASS|
-|Contact form|Submit form without entering an "@" sign in the email field|Form prompts user to enter an email address in field.|PASS|
-|Contact form|Submit form without entering a message in the textarea field|Form prompts user to fill in field.|PASS|
-|Contact form|Submit form upon entering valid data|Page loads CI's formdump with data received.|PASS|
-|Contact form|Click on eraser icon|Form fields are cleared.|PASS|
-|Footer - hover|hover the cursor over link icons|Icons should be surrounded with black circular background|PASS|
-|Footer - links|Click Instagram icon|Opens Studio Silva's instagram page on new tab.|PASS|
-|Footer - links|Click Linked in icon|Opens Carlos Da Silva's Linked In profile|PASS|
-|Footer - links|Click Whatsapp icon|Opens Studio Silva's WhatsApp contact|PASS|
-|Footer - links|Click Etsy icon|Opens Carlos' Etsy page|PASS|
-|Error 404 page|Enter non-existing URL for the site|Calls up custom 404.html|PASS|
-|Error 404 page|on page loading|Footer is fixed at the bottom of the display, there is no length to scroll unless content is longer than viewport height.|PASS|
+|Nav bar appearance|Loading the page|Nav bar appears as expected, collapsed hamburger icon for narrow displays|PASS|
+|Nav Button - hamburger icon|Click Hamburger icon|hamburger icon expands to reveal nav menu|PASS|
+|Nav Button - hamburger icon|Click Hamburger icon|hamburger icon is replaced with an X icon|PASS|
+|Nav Button - X icon|Click X icon|X icon is replaced with the hamburger/bars icon and menu collapses|PASS|
+|Nav button - New Game|Click button "New Game" just after loading the site|X icon is replaced with the hamburger/bars icon and menu collapses|PASS|
+|Nav button - New Game|Click button "New Game" just after loading the site|button brings up the empty player form|PASS|
+|Nav button - New Game|Click button "New Game" after starting a game|button brings up the player form prefilled with players' name|PASS|
+|Nav Button - How To Play|Click button "How To Play"|X icon is replaced with the hamburger/bars icon and menu collapses|PASS|
+|Nav Button - How To Play|Click button "How To Play"|button brings up the instructions section|PASS|
+|Nav Button - Credits|Click button "Credits"|X icon is replaced with the hamburger/bars icon and menu collapses|PASS|
+|Nav Button - Credits|Click button "Credits"|button brings up the credits section|PASS|
+|Page scaling - mobile|Viewing the page on mobile display in portrait|Font size is legible and the page does not require scrolling on timed buttons. No overlapping text or images.|PASS|
+|Page scaling - mobile|Viewing the page on mobile display in landscape|Font size scales down to fit in the height of the display. Page includes left and right margins to keep content in the centre still.|PASS|
+|Page scaling - desktop|Viewing the page on a desktop/laptop display in landscape with the browser taking the width of the display|Font size scales down to fit in the height of the display. Page includes left and right margins to keep content in the centre still.|PASS|
+|Page scaling - desktop|Viewing the page on a desktop/laptop display in landscape with the browser taking the width of the display|Font size scales down to fit in the height of the display. Page includes left and right margins to keep content in the centre still.|PASS|
+|PLAY button - Landing page|Click button "PLAY"|button brings up the blank Player form. Blank form fields display placeholders.|PASS|
+|? Button - Landing page|Click button "?"|If menu is expanded, X icon is replaced with the hamburger/bars icon and menu collapses|PASS|
+|? Button - Landing page|Click button "?"|button brings up the instructions section|PASS|
+|Add bots - player form|Click add bot buttons|Adds automated bot player names and skill level, whether field is blank or got a value. Button converts to X icon.|PASS|
+|Clear bot - player form|Click the X button in place of add bot button|Clears the adjacent field and bring it to focus ready to type a name.|PASS|
+|Gameplay - "Start Game" - player form|Click "Start Game" button with empty fields|Sets up game with assumed values, 1 human player ("player 1") and 3 bot players. Prompts first human player and presents bot player actions.|PASS|
+|Gameplay - "Start Game" - player form|Click "Start Game" button with human names in fields|Sets up game limiting the player names to 8 characters long. Prompts next human players and presents actions from any bot players included.|PASS|
+|Gameplay - "READY" - player prompts at start of round|Click "READY" button with on player prompt|Brings player to shuffle hand|PASS|
+|Gameplay - Selecting to shuffle hand - player hand|click one card|Highlights the card|PASS|
+|Gameplay - Selecting to shuffle hand - player hand|click another card|Highlights the 2nd card for a brief moment and removes all highlights|PASS|
+|Gameplay - Selecting to shuffle hand - player hand|click another pair of cards|repeats the same highlighting behaviour indefinitely until player presses done|PASS|
+|Gameplay - Selecting to shuffle hand - player hand|click one card and then select "Done"|Highlights the card, but clicking Done removes highlight and ignores it|PASS|
+|Gameplay - Count down to reveal bottom 2 cards - player hand|Click "DONE"|Page displays text "Ready…" and adds "3," "2," and "1!" revealling the bottom 2 cards for 1 second. Once cards are face down again, the knock button appears and counts down before disappearing and prompting the next human player again.|PASS|
+|Gameplay - "READY" - player prompts mid round play|Click "READY" button with on player prompt|Brings player to pick a card|PASS|
+|Gameplay - Picking a card from table view|select from discard stack or from draw stack|Isolates and enlarges card selected and offer reject and accept buttons|PASS|
+|Gameplay - Rejecting a picked card|after picking a card, reject the card|if from discard stack, display returns to regular table view. If from draw stack, displays message saying the card is being discarded and presents the knock button with countdown before prompting the next human player.|PASS|
+|Gameplay - Accepting a picked card|after picking a card, accept the card|displays player's card hand to select the card swapping out.|PASS|
+|Gameplay - selecting a card from hand to swap out|select a card from hand to swap with|displays card face of selection with heading of card being discarded,  and presents the knock button with countdown before prompting the next human player.|PASS|
+|Gameplay - Last action by player displayed in player prompt|result from discarding or swapping a card|The action taken is displayed correctly in the next player prompt|PASS|
+|Gameplay - Bell icon next to knocking player name|click the knock button on a mid round turn|Provided there is a human player before it reaches the knocking player's turn, a bell icon is visible next to the knocking player's name. |PASS|
+|Gameplay - Ending the round on first turns|click the knock button on a first turn|A human player knocking on their first turn of the game ends the round immediately, presents the table with all cards revealled and scoring added. A Bot player knocking on their first turn should still prompt the human player to have their first turn before prompting again that for the end of round.|PASS|
+|Gameplay - "READY" - player prompts at end of round|Click "READY" button on player prompt|Brings player to table view with cards revealed, scores, icons and round outcome. If any of the players have reached 200pts or more, it should announce the end of the game, otherwise it’s end of round.|PASS|
+|Gameplay - "Next Round" - end of Round|Click "next round" button|Prompts next human player as normal, displaying any actions taken by bot players that follow the dealer player of the round. The game remember the names and scores from the last round, but the cards have been freshly shuffled and dealt.|PASS|
+|Gameplay - "Next Game" - end of Game|Click "next game" button|Brings player back to the player form prefilled with player names|PASS|
+|Instructions - Navigating|Click left or right|Will navigate back and forth through the pages. Clicking left on pg 1 or right on the last page should roll around to the other end (1 backwards to 10 or 10 forwards to 1)|PASS|
+|Instructions - closing|Click the X between the arrows|How to play section closes and resumes to whatever stage the gameplay is at.|PASS|
+|Credits - closing|Click the X button near the bottom|Credits section closes and resumes to whatever stage the gameplay is at.|PASS|
+|Credits - links|Click links for the GitHub repository or the WhatsApp Business|Either links will open in a new tab or open the relevant app should the visitor have the app on their phone whilst visiting from their phone.|PASS|
+|Error 404 page|Enter non-existing url for the site|Calls up custom 404.html|PASS|
 |Error 404 page|Click on the Home button|Brings viewer back to main page|PASS|
 
- -->
+
 
 ### Unfixed Bugs
 
-<!-- - __Nav Bar - turning fully black on expanding__<br>
-The intended look was to have this floating hamburger icon that when clicked the menu expands with a black to clear gradient from the top. The checkbox input to toggle open the menu works, but does not seem to accept addressing the whole header section to create this effect. The current compromise created is to have a permanent black to clear gradient from the top that extends as high as the section is, i.e.: when collapsed it is only as high as necessary for the hamburger icon and has high as the list menu when it is expanded. 
+- __KeyDown Enter/Carriage return on player Form - refreshes page__
+Whilst a form field is in focus pressing the enter key refreshes the page. Need to make it so this keyDown starts the game with what information has been entered, the same way clicking on start game button does. A few attempts have been made, but have only brought up more errors. It has not been prioritised since the game is primarily designed to play on touchscreen.
 
-- __Nav Bar - using section IDs on nav list__<br>
-Using Section IDs for the navigation of the site means the menu does not toggle off on clicking them. Tried using the label element to wrap the anchors to trigger the checkbox that expands the nav menu:
-  - wrapping the visible text of the anchor with the label toggles the checkbox, but does not navigate to their section at the same time.
-  - wrapping the anchor with the label, navigates but does toggle the checkbox.
-
-  Seems this requires some JavaScript to do this. Even the alternative of having the hamburger/bars icon replaced with a X icon when the menu is expanded seems to require JavaScript. -->
+- __No card in discard stack at the start of the game__
+When testing the game on the phone sometimes the discard stack does not show a card and if picked from, it presents an undefined value. The only correlation leading to this error is selecting the cards to shuffle in the player's hand so fast that it does not seem to register the second selection properly. It will highlight it, but not remove the highlight after the timeOut which could mean it is also not running all functions necessary to swap those 2 cards. Select a 3rd card and it clears the highlight, but of course, we don't know which 2 were actually swapped. I've tested the game after adding a code that disabled the card buttons from the moment one is selected until the last function has run its course in registering the last selection, that prevented selecting more that 2 cards at a time, but the error was still seen. It's difficult to replicate this error on a desktop or laptop with mouse clicks, to able to diagnose what is happening via the console. Either there is a way of linking my phone to the computer to view the errors or perhaps I can use a mouse control app to program rapid clicks to mimic that of taps on the touchscreen.
 
 ## Deployment
 

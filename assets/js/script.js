@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     timedIdx = 3;
                     timer = setTimeout(timedFunctions, 200);
                 } else if (this.getAttribute('class').includes('picked')) {
-                    // do nothing
+                    return; // do nothing
                 } else {
                     alert('select a deck to pick from first!');
                 }
@@ -1091,6 +1091,7 @@ function logBot(strg1) {
             x = parseInt(strg1.slice(x + 1, x + 2)); // get number for skill level after comma
 
         } else {
+            y = strg1.slice(0, 7);
             x = 2; // else assume skill level of 2
         }
         strg1 = [y, x];
