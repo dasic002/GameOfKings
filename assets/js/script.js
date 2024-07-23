@@ -261,7 +261,7 @@ function timedFunctions() {
         case (2):
             switch (btm.innerHTML) {
                 case '':
-                    for (card of cards) {
+                    for (let card of cards) {
                         card.setAttribute('disabled', true);
                     }
                     btm.classList.remove('hidden');
@@ -300,7 +300,7 @@ function timedFunctions() {
                     if (newRound > 0) {
                         break;
                     } else if (knocker != 4) {
-                        for (card of cards) {
+                        for (let card of cards) {
                             card.setAttribute('disabled', true);
                         }
                         picked('swapout');
@@ -309,7 +309,7 @@ function timedFunctions() {
                         timer = setTimeout(timedFunctions, 1000);
                         break;
                     } else {
-                        for (card of cards) {
+                        for (let card of cards) {
                             card.setAttribute('disabled', true);
                         }
                         picked('swapout');
