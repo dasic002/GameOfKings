@@ -191,6 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (this.getAttribute('class').includes('deck')) {
                     pickCard.push(parseInt(this.getAttribute('id').slice(-1)) - 1);
                     this.classList.add('selected');
+                    // disables cards being selected until selection is registered, once registered the cards are enabled again.
                     let cards = document.getElementById('main-player').getElementsByClassName('card');
                     for (let card of cards) {
                         card.setAttribute('disabled', true);
@@ -304,6 +305,8 @@ function timedFunctions() {
                         hand('swap', pickCard[0]);
                     }
                     pickCard.splice(0);
+                    // wait for the last selection of card hand to register and pickCard to be cleared before accepting another selection. 
+                    // Prevents fast selection on touchscreen that can cause more than 1 card being highlighted spite only 1 selection being registered.
                     for (let card of cards) {
                         card.removeAttribute('disabled');
                     }
