@@ -351,7 +351,7 @@ The deployed page can be found [here.](https://dasic002.github.io/GameOfKings/)
 
 ### Branching
 
-This current branch, used as an archive of the project just before submission, contains debug code that will make it easy to debug when I resume the project post-assessment. The main branch will have this debug code removed.
+This current branch, is the main branch being submitted for grading, it only differs from the pre-submission-archive branch in that it holds no debug code in the JavaScript file.
 
 ## Credits 
 

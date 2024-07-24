@@ -760,7 +760,6 @@ function drawStack(action, data) {
         for (let i = 0; i < freshDeck.length; i++) {
             drawDeck.push(freshDeck[i]);
         }
-        console.log(drawDeck);
         if (dealerIndex === oldDealerIndex) {
             shiftTurns('dealer');
             turnIndex = dealerIndex;
@@ -794,7 +793,6 @@ function drawStack(action, data) {
         for (let i = 0; i < data.length; i++) {
             drawDeck.push(data[i]);
         }
-        console.log(drawDeck);
     }
 }
 
@@ -834,7 +832,6 @@ function plrPrompt() {
 
     if (newRound > 1) {
         if (playerData[turnIndex].botSkill === 0) {
-            console.log(`${playerData[turnIndex].playerName} is a human player! on newRound ${newRound}`);
             document.getElementById('wlcm-msg').innerHTML = `${playerData[turnIndex].playerName}`;
             document.getElementById('play').innerHTML = 'READY';
             document.getElementById('play').setAttribute('action', 'new-hand');
@@ -855,7 +852,6 @@ function plrPrompt() {
     } else {
         newRound = 0;
         if (playerData[turnIndex].botSkill === 0) {
-            console.log(`${playerData[turnIndex].playerName} is a human player!`);
             if (endRound === 2) {
                 document.getElementById('wlcm-msg').innerHTML = `${playerData[turnIndex].playerName}!<br>last card!`;
             } else if (endRound === 1) {
@@ -921,10 +917,8 @@ function hand(action, data) {
                 pair.splice(0);
                 hand('open');
             } else {
-                console.log(`${playerData[turnIndex].playerName} 's card hand ${playerData[turnIndex].cardHand}`);
                 let b = playerData[turnIndex].cardHand.splice(y, 1)[0];
                 playerData[turnIndex].cardHand.splice(y, 0, x);
-                console.log(playerData[turnIndex].cardHand);
                 hand('wordPlace', y);  // fetch the wording of the player's card place in their hand
                 actStrg += `, `;
                 cardFace('', b);  // fetch the name of the card, since it is visible in the discard deck on discarding
@@ -1241,10 +1235,8 @@ function scoreVal() {
             lowest += x;
         }
         scores.push(lowest);
-        console.log(`${playerData[i].playerName} scored ${scores[i]}`);
     }
     lowest = Math.min(scores[0], scores[1], scores[2], scores[3]);
-    console.log(`Lowest score = ${lowest}`);
 
     // copied from https://stackoverflow.com/questions/49215358/checking-for-duplicate-strings-in-javascript-array
     let findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) !== index);
@@ -1252,7 +1244,6 @@ function scoreVal() {
 
     if (scores[knocker] === lowest && findDuplicates(scores).includes(lowest) === false) {
         msg = `${playerData[knocker].playerName} won this round!`;
-        console.log(msg);
         for (let i = 0; i < 4; i++) {
             if (knocker === i) {
                 playerData[i].roundState = 'w';
@@ -1263,7 +1254,6 @@ function scoreVal() {
     } else {
         scores[knocker] = 2 * scores[knocker];
         msg = `${playerData[knocker].playerName} lost! Score doubled to ${scores[knocker]}.<br>${playerData[scores.indexOf(lowest)].playerName} scored ${lowest}!`;
-        console.log(msg);
         for (let i = 0; i < 4; i++) {
             if (knocker === i) {
                 playerData[i].roundState = 'd';
