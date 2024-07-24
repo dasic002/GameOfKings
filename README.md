@@ -219,6 +219,8 @@ This view is displayed when the player has made a selection of picking the card 
 
 - The game is made to play as a multiplayer, the initial idea was to make the game playable over the internet with multiple human players joining a table, but was advised by my mentor that this is a feature outside of the scope of JavaScript alone and have not learnt about WebSocket yet.
 
+- The original intent with the BotSkill value, was to mimic a bot player that might have poorer memory for remembering the cards accurately. So 1 - as novice, might be a bot that remembers a particular card as being in another position or have thought it's value was higher and risk losing good cards. Whilst level 3 - expert, might remember the cards it has seen with great accuracy or that it employs a very discerning tactic of wanting for only the best cards to be picked up before "knocking", locking their hand.
+
 - More game interactions. Initially planned to include:
   - the option of having sounds on the game;
   - customisable colour theme of cards artwork and table appearance;
@@ -229,7 +231,7 @@ This view is displayed when the player has made a selection of picking the card 
 ### Validator Testing 
 
 - HTML
-  - No errors were returned when passing through the official, just warnings on use of aria-labels on span elements [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fdasic002.github.io%2FCarlos-Da-Silva-Folio%2Findex.html)<br>
+  - No errors were returned when passing through the official, just warnings on use of aria-labels on span elements. These span elements are the cards in the first step of the "How To Play" breaking down the value each card has, aria labels were added to make the site more accessible with the ability to describe the value of the card. [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fdasic002.github.io%2FCarlos-Da-Silva-Folio%2Findex.html)<br>
   ![HTML valid screenshot](documentation/Test-HTML_Valid.PNG)
 - CSS
   - No errors were found when passing through the official [(Jigsaw) validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fdasic002.github.io%2FGameOfKings%2Findex.html&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)<br>
@@ -328,6 +330,11 @@ Whilst a form field is in focus pressing the enter key refreshes the page. Need 
 
 - __No card in discard stack at the start of the game__
 When testing the game on the phone sometimes the discard stack does not show a card and if picked from, it presents an undefined value. The only correlation leading to this error is selecting the cards to shuffle in the player's hand so fast that it does not seem to register the second selection properly. It will highlight it, but not remove the highlight after the timeOut which could mean it is also not running all functions necessary to swap those 2 cards. Select a 3rd card and it clears the highlight, but of course, we don't know which 2 were actually swapped. I've tested the game after adding a code that disabled the card buttons from the moment one is selected until the last function has run its course in registering the last selection, that prevented selecting more that 2 cards at a time, but the error was still seen. It's difficult to replicate this error on a desktop or laptop with mouse clicks, to able to diagnose what is happening via the console. Either there is a way of linking my phone to the computer to view the errors or perhaps I can use a mouse control app to program rapid clicks to mimic that of taps on the touchscreen.
+ - __May be fixed now__
+ After further testing, it seems the error appeared when the human player makes a single card selection to shuffle but does not complete the move with a second selection, and when the next player is a bot it seems to run a function to swap cards and when the values the variable holds at that time are not compatible and produces an undefined entry.
+ After adding some code that on clicking "DONE" it clears the variables that would retain the values for the card hand selection, this issue has not appeared again since.
+
+ Also, to remove the ambiguity of the card selection, code has also been added to disable the card buttons from the moment one is clicked until the script is done registering the card selection.
 
 ## Deployment
 
@@ -341,6 +348,10 @@ The site was deployed to GitHub pages following the steps outlined below:
 The page will be automatically refreshed and a link to the deployed site will be available on a ribbon display just at the top of the GitHub Pages webpage.
 
 The deployed page can be found [here.](https://dasic002.github.io/GameOfKings/)
+
+### Branching
+
+This current branch, used as an archive of the project just before submission, contains debug code that will make it easy to debug when I resume the project post-assessment. The main branch will have this debug code removed.
 
 ## Credits 
 
