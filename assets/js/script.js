@@ -161,6 +161,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     hand('open');
                     document.getElementById('done').classList.add('hidden');
                     document.getElementById('top-prompt').innerHTML = 'Ready...';
+                    // clear values of any cards selected to shuffle so it is not stored and affecting the next player's turn
+                    pickCard.splice(0);
+                    pair.splice(0);
                     timedIdx = 2;
                     timedFunctions();
                     newRound--;
@@ -188,6 +191,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (this.getAttribute('class').includes('deck')) {
                     pickCard.push(parseInt(this.getAttribute('id').slice(-1)) - 1);
                     this.classList.add('selected');
+                    let cards = document.getElementById('main-player').getElementsByClassName('card');
+                    for (let card of cards) {
+                        card.setAttribute('disabled', true);
+                    }
                     timedIdx = 3;
                     timer = setTimeout(timedFunctions, 200);
                 } else if (this.getAttribute('class').includes('picked')) {
@@ -297,6 +304,9 @@ function timedFunctions() {
                         hand('swap', pickCard[0]);
                     }
                     pickCard.splice(0);
+                    for (let card of cards) {
+                        card.removeAttribute('disabled');
+                    }
                     if (newRound > 0) {
                         break;
                     } else if (knocker != 4) {
