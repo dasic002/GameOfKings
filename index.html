@@ -33,11 +33,14 @@
 
     <!-- div for the menu that will be fixed at the top left corner inline with the heading -->
     <nav id="menu">
-        <button class="click" id="menu-btn" aria-label="Menu toggle"><i class="fa-solid fa-bars"></i><i class="fa-solid fa-xmark hidden"></i></button>
-        <div id="menu-list">
-            <button class="click" type="button" aria-label="New Game">New Game</button>
-            <button class="click" type="button" id="htp-btn" aria-label="How to play">How to Play</button>
-            <button class="click" type="button" id="credits-btn" aria-label="Credits">Credits</button>
+        <div class="menu-contain">
+            <button class="click" id="menu-btn" aria-label="Menu toggle"><i class="fa-solid fa-bars"></i><i
+                    class="fa-solid fa-xmark hidden"></i></button>
+            <div id="menu-list">
+                <button class="click" type="button" aria-label="New Game">New Game</button>
+                <button class="click" type="button" id="htp-btn" aria-label="How to play">How to Play</button>
+                <button class="click" type="button" id="credits-btn" aria-label="Credits">Credits</button>
+            </div>
         </div>
     </nav>
 
@@ -145,14 +148,18 @@
                 <p>If the knocking player had 2x 6, 1x 3 and 1x 4. This totals to 19 points in that round.</p>
                 <p>Should another player on this round score 19 points or lower, the knocking player's score doubles to
                     38.</p>
-                <img src="assets/images/htp-scoring-example.png" alt="example of card hand scored and points doubled" id="htp9-img">
+                <img src="assets/images/htp-scoring-example.png" alt="example of card hand scored and points doubled"
+                    id="htp9-img">
                 <p class="page-of">10 of 10</p>
             </div>
 
             <nav class="center" id="how-to-nav">
-                <button class="click" id="left-how-to" aria-label="Navigate back through how to play"><i class="fa-solid fa-circle-arrow-left"></i></button>
-                <button class="click" id="cls-how-to" aria-label="Close how to play"><i class="fa-solid fa-circle-xmark"></i></button>
-                <button class="click" id="right-how-to" aria-label="Navigate forward through how to play"><i class="fa-solid fa-circle-arrow-right"></i></button>
+                <button class="click" id="left-how-to" aria-label="Navigate back through how to play"><i
+                        class="fa-solid fa-circle-arrow-left"></i></button>
+                <button class="click" id="cls-how-to" aria-label="Close how to play"><i
+                        class="fa-solid fa-circle-xmark"></i></button>
+                <button class="click" id="right-how-to" aria-label="Navigate forward through how to play"><i
+                        class="fa-solid fa-circle-arrow-right"></i></button>
             </nav>
         </div>
 
@@ -161,14 +168,20 @@
 
     <div class="hidden" id="credits">
         <h2>Credits</h2>
-        <p>Thank you to my partner for introducing me to the game. Asides from it being a very fun and addictive game, it has lovely memories for me of spending time with his family.</p>
+        <p>Thank you to my partner for introducing me to the game. Asides from it being a very fun and addictive game,
+            it has lovely memories for me of spending time with his family.</p>
         <p>Love you. <i class="fa-solid fa-heart"></i> </p>
         <br>
         <p>The site was developed by Carlos Da Silva, for more details feel free to</p>
-        <a href="https://github.com/dasic002/GameOfKings" target="_blank" rel="noopener" aria-label="Visit the gitHub repository for Game of Kings (opens in a new tab)"><i class="fa-brands fa-github"></i> Visit this site's GitHub Repository</a>
-        <a href="https://wa.me/message/EIXA56OBKRILB1" target="_blank" rel="noopener" aria-label="Contact me on my Business WhatsApp (opens in a new tab)"><i class="fa-brands fa-whatsapp"></i> Reach out to the developper</a>
+        <a href="https://github.com/dasic002/GameOfKings" target="_blank" rel="noopener"
+            aria-label="Visit the gitHub repository for Game of Kings (opens in a new tab)"><i
+                class="fa-brands fa-github"></i> Visit this site's GitHub Repository</a>
+        <a href="https://wa.me/message/EIXA56OBKRILB1" target="_blank" rel="noopener"
+            aria-label="Contact me on my Business WhatsApp (opens in a new tab)"><i class="fa-brands fa-whatsapp"></i>
+            Reach out to the developper</a>
         <nav class="center single-btn" id="credit-nav">
-            <button class="click" id="cls-credits" aria-label="Close credits page"><i class="fa-solid fa-circle-xmark"></i></button>
+            <button class="click" id="cls-credits" aria-label="Close credits page"><i
+                    class="fa-solid fa-circle-xmark"></i></button>
         </nav>
     </div>
 
@@ -184,7 +197,8 @@
                 <p></p>
             </div>
             <button class="click btns bg-btns" id="play">PLAY</button><br>
-            <button class="click" id="help" aria-label="How to play"><i class="fa-solid fa-circle-question"></i></button>
+            <button class="click" id="help" aria-label="How to play"><i
+                    class="fa-solid fa-circle-question"></i></button>
         </div>
         <div class="hidden" id="player-form">
             <div>
@@ -206,7 +220,8 @@
                                     <button class="click lvl-3" aria-label="Bot 1 level 3">Lvl 3</button>
                                 </span>
                             </td>
-                            <td><button class="add-bot btns" type="button" onclick="addBot(2)" aria-label="Add bot 1"><i class="fa-solid fa-robot"></i>
+                            <td><button class="add-bot btns" type="button" onclick="addBot(2)" aria-label="Add bot 1"><i
+                                        class="fa-solid fa-robot"></i>
                                     <i class="fa-solid fa-xmark hidden"></i></button></td>
                         </tr>
                         <tr>
@@ -219,7 +234,8 @@
                                     <button class="click lvl-3" aria-label="Bot 2 level 3">Lvl 3</button>
                                 </span>
                             </td>
-                            <td><button class="add-bot btns" type="button" onclick="addBot(3)" aria-label="Add bot 2"><i class="fa-solid fa-robot"></i>
+                            <td><button class="add-bot btns" type="button" onclick="addBot(3)" aria-label="Add bot 2"><i
+                                        class="fa-solid fa-robot"></i>
                                     <i class="fa-solid fa-xmark hidden"></i></button></td>
                         </tr>
                         <tr>
@@ -232,7 +248,8 @@
                                     <button class="click lvl-3" aria-label="Bot 3 level 3">Lvl 3</button>
                                 </span>
                             </td>
-                            <td><button class="add-bot btns" type="button" onclick="addBot(4)" aria-label="Add bot 3"><i class="fa-solid fa-robot"></i>
+                            <td><button class="add-bot btns" type="button" onclick="addBot(4)" aria-label="Add bot 3"><i
+                                        class="fa-solid fa-robot"></i>
                                     <i class="fa-solid fa-xmark hidden"></i></button></td>
                         </tr>
                     </table>
@@ -317,7 +334,8 @@
                 </span>
                 <span>
                     <!-- card stack to discard cards to -->
-                    <button class="deck click" id="discard-stack" aria-label="Pick a card from the discard stack">A</button>
+                    <button class="deck click" id="discard-stack"
+                        aria-label="Pick a card from the discard stack">A</button>
                     <!-- the line below will indicate when the stack has 2 cards -->
                     <span class="deck" id="discard-stack-1">B</span>
                     <!-- the line below will indicate when the stack has 3 or more cards -->
@@ -357,11 +375,13 @@
             </span>
             <div class="prompt" id="btm-prompt">
                 <p class="hidden" id="msg"></p>
-                <button class="click hidden" id="reject" aria-label="reject card picked"><i class="fa-solid fa-circle-xmark"></i></button>
-                <button class="click hidden" id="knock" aria-label="3 seconds to knock to lock your hand"><i class=" fa-solid fa-bell" id="icon-knock"></i><span
-                        id="knock-count"></span></button>
+                <button class="click hidden" id="reject" aria-label="reject card picked"><i
+                        class="fa-solid fa-circle-xmark"></i></button>
+                <button class="click hidden" id="knock" aria-label="3 seconds to knock to lock your hand"><i
+                        class=" fa-solid fa-bell" id="icon-knock"></i><span id="knock-count"></span></button>
                 <button class="click btns bg-btns" id="done">DONE</button>
-                <button class="click hidden" id="accept" aria-label="accept card picked"><i class="fa-solid fa-circle-check"></i></button>
+                <button class="click hidden" id="accept" aria-label="accept card picked"><i
+                        class="fa-solid fa-circle-check"></i></button>
             </div>
         </div>
     </main>

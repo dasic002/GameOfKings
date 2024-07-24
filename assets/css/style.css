@@ -32,6 +32,7 @@ body {
 }
 
 #menu {
+    display: flex;
     position: absolute;
     top: 0;
     left: 0;
@@ -39,6 +40,15 @@ body {
     padding: 0 1rem 0.5rem;
     background-color: #186018;
     z-index: 98;
+    justify-content: center;
+}
+
+.menu-contain {
+    width: 100vw;
+    max-width: 1800px;
+    margin: 0;
+    bottom: 0rem;
+    left: 50%;
 }
 
 #menu-btn {
